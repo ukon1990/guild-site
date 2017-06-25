@@ -1,6 +1,7 @@
 # GuildSite
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.2.
+The project is mainly created for the sake of making something. You may feel free to use the code as you wish and alter it in any way you'd like. It allows you to browse your guild data, available through blizzards API. Currently it's set to a spesific realm and guild.
 
 ## Development server
 
