@@ -53,12 +53,12 @@
 		<div class="col-md-12">
 			<h3>
 				<button class="btn btn-default" 
-					(click)="changePage(-1, 'raid')" *ngIf="pages.raid.current > 1">
+					(click)="changePage(-1, 'raid')" [disabled]="pages.raid.current === 1">
 					<i class="fa fa-chevron-left" aria-hidden="true"></i>
 					Previous 3
 				</button>
 				Raid progression
-				<button class="btn btn-default"
+				<button class="btn btn-default" [disabled]="pages.raid.current === pages.raid.count"
 					(click)="changePage(1, 'raid')">
 					Next 3
 					<i class="fa fa-chevron-right" aria-hidden="true"></i>
