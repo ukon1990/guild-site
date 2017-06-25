@@ -1,0 +1,7 @@
+.list-group-item {
+	background-color: rgba(0, 0, 0, .3) !important;
+}
+
+.list-group-item.transmogged {
+	background-color: orange;
+}

@@ -1,0 +1,23 @@
+.card-block {
+	background-size: cover;
+}
+
+.thumbnail-icon {
+	float: left;
+	padding: 0 0.5em 0.5em 0;
+}
+
+.thumbnail-icon-spec {
+	    position: absolute;
+		width: 2.5em;
+		bottom: 1em;
+}
+
+.mini-icon {
+	width: 16px;
+    height: 16px;
+}
+
+.Icon-svg:not(.Icon--color) {
+    fill: currentColor;
+}

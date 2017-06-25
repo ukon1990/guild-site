@@ -1,0 +1,19 @@
+.challenge-img {
+	height:10em;
+	background-size: cover;
+}
+
+.challenge-img .card-title {
+	color: white;
+	text-align: center;
+	text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000; 
+}
+
+.challenge-card {
+	padding-top: 0.5em;
+	padding-bottom: 0.5em;
+}

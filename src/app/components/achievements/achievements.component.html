@@ -1,0 +1,10 @@
+<h3 class="card-title">Achievements</h3>
+<div class="card-text">
+
+  <ul>
+    <li *ngFor="let achievement of achievements | slice: 0:19">
+		<a href="https://www.wowhead.com/achievement={{ achievement.id }}" target="_blank" 
+			rel="achievement={{ achievement.id }}">{{ achievement.id }}</a> - {{ achievement.timestamp | date }}
+	</li>
+  </ul>
+</div>

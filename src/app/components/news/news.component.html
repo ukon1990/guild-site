@@ -1,0 +1,28 @@
+<h3 class="card-title">News</h3>
+<div class="card-text">
+  <ul>
+    <li *ngFor="let n of news | slice: 0:50">
+		<span [ngSwitch]="n.type">
+			{{ n.character }} got 
+			<a *ngSwitchCase="'playerAchievement'"
+				href="https://www.wowhead.com/achievement={{ n.achievement.id }}"
+				rel="achievement={{ n.achievement.id }}">{{ n.achievement.title }}
+			</a>
+			<a *ngSwitchCase="'itemLoot'"
+				href="https://www.wowhead.com/item={{ n.itemId }}"
+				rel="item={{ n.itemId }}, bonus={{ bonusList(n.bonusLists) }}">{{ n.context }}
+			</a>
+			<a *ngSwitchCase="'itemPurchase'"
+				href="https://www.wowhead.com/item={{ n.itemId }}"
+				rel="item={{ n.itemId }}, bonus={{ bonusList(n.bonusLists) }}">{{ n.context }}
+			</a>
+			<a *ngSwitchCase="'itemCraft'"
+				href="https://www.wowhead.com/item={{ n.itemId }}"
+				rel="item={{ n.itemId }}, bonus={{ bonusList(n.bonusLists) }}">{{ n.context }}
+			</a>
+			<p *ngSwitchDefault>{{ n.type }}</p>
+			 at {{ (n.timestamp) | date:'dd.MMM-yy HH:mm'}}
+		</span>
+	</li>
+  </ul>
+</div>

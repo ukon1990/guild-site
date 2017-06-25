@@ -1,0 +1,49 @@
+<div class="character character-bg" [style.background-image]="getBackgroundImage()">
+	<!-- Basic data -->
+	<span *ngIf="character.items">
+		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" class="Icon-svg mini-icon">
+			<use xlink:href="assets/images/icons/Icon.svg#achievement-shield"></use>
+		</svg> {{ character.achievementPoints }}
+
+		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" class="Icon-svg mini-icon">
+			<use xlink:href="assets/images/icons/Icon.svg#swords"></use>
+		</svg> {{ character.items.averageItemLevelEquipped }} / {{ character.items.averageItemLevel }}
+	</span>
+  <h3 class="card-title">{{ character.name }}</h3>
+  <h6 class="card-subtitle mb-2">{{ character.level }} Spec Class {{ character.realm }}</h6>
+  <div class="card-text">
+	  <!-- Equipment -->
+		<div class="col-md-5 float-left">
+			<ul class="list-group" *ngIf="character.items">
+				<app-character-item [item]="character?.items?.head"></app-character-item>
+				<app-character-item [item]="character?.items?.neck"></app-character-item>
+				<app-character-item [item]="character?.items?.shoulder"></app-character-item>
+				<app-character-item [item]="character?.items?.back"></app-character-item>
+				<app-character-item [item]="character?.items?.chest"></app-character-item>
+				<app-character-item [item]="character?.items?.wrist"></app-character-item>
+				<app-character-item [item]="character?.items?.trinket1"></app-character-item>
+				<app-character-item [item]="character?.items?.mainHand"></app-character-item>
+				<app-character-item [item]="character?.items?.offHand"></app-character-item>
+			</ul>
+		</div>
+		<div class="col-md-5 float-right">
+			<ul class="list-group" *ngIf="character.items">
+				<app-character-item [item]="character?.items?.hands"></app-character-item>
+				<app-character-item [item]="character?.items?.waist"></app-character-item>
+				<app-character-item [item]="character?.items?.legs"></app-character-item>
+				<app-character-item [item]="character?.items?.feet"></app-character-item>
+				<app-character-item [item]="character?.items?.finger1"></app-character-item>
+				<app-character-item [item]="character?.items?.finger2"></app-character-item>
+				<app-character-item [item]="character?.items?.trinket1"></app-character-item>
+				<app-character-item [item]="character?.items?.trinket2"></app-character-item>
+			</ul>
+		</div>
+
+		<!-- Raid progress -->
+		<div class="col-md-12" *ngIf="character.progression">
+			<div *ngFor="let raid of character?.progression?.raids | slice: 0: 6" class="col-md-4 float-left">
+				<app-character-progress [raid]="raid"></app-character-progress>
+			</div>
+		</div>
+	</div>
+</div>

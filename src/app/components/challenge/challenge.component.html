@@ -1,0 +1,27 @@
+<h3 class="card-title">Challenges</h3>
+<div class="card-text">
+	<!-- https://blzmedia-a.akamaihd.net/wow/zones/the-emerald-nightmare-small.jpg -->
+</div>
+
+<div class="row">
+  <div *ngFor="let challenge of challenges" class="challenge-card col-md-4" [hidden]="challenge.groups.length === 0">
+    <div class="card" style="width: 20rem;">
+      <div class="card-block card-img-top challenge-img" [style.background-image]="getImageUrl(challenge.map.slug)">
+        <h4 class="card-title">{{ challenge.map.name }}</h4>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li *ngFor="let group of challenge.groups" class="list-group-item">
+          1st - {{ group?.time.hours }}:{{ group?.time.minutes }}:{{ group?.time.seconds }} - 
+          {{ hasBeatenChallenge(challenge.map, group) }} <br>
+          {{ getGuildies(group?.members) }}
+			<!--<ul class="list-group list-group-flush">
+				<li *ngFor="let member of group.members" class="list-group-item">
+					{{ member?.character?.name }} <br>
+					{{ member?.character?.guild }}
+				</li>
+			</ul>-->
+		</li>
+      </ul>
+    </div>
+  </div>
+</div>
