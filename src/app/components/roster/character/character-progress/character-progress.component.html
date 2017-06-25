@@ -2,7 +2,8 @@
   <div class="card-block">
     <h4 class="card-title">{{ raid.name }}</h4>
   </div>
-  <div>
+  <div class="col-md-12">
+    <app-raid-progress-bar [bosses]="raid.bosses" difficulty="lfr"></app-raid-progress-bar>
     <app-raid-progress-bar [bosses]="raid.bosses" difficulty="normal"></app-raid-progress-bar>
     <app-raid-progress-bar [bosses]="raid.bosses" difficulty="heroic"></app-raid-progress-bar>
     <app-raid-progress-bar [bosses]="raid.bosses" difficulty="mythic"></app-raid-progress-bar>

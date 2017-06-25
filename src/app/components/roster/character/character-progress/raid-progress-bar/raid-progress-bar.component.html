@@ -1,6 +1,7 @@
 <div class="clearfix" *ngIf="counts.sumBosses >= 0">
   {{ difficulty }}
   <div class="progress">
-    <div class="progress-bar" role="progressbar" [style.width]="counts.percent" aria-valuenow="counts.percent" aria-valuemin="0" aria-valuemax="100"></div>
+    <div class="progress-bar" role="progressbar" [style.width]="counts.percent"
+		aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">{{ counts.killed }} / {{ counts.sumBosses }}</div>
   </div>
 </div>
