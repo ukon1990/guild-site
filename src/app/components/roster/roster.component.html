@@ -28,7 +28,6 @@
               <use xlink:href="assets/images/icons/Icon.svg#achievement-shield"></use>
             </svg> {{ member.character.achievementPoints }}
           </span>
-        </div>
       </div>
     </div>
   </div>
@@ -53,13 +52,13 @@
       <li class="page-item active">
         <a class="page-link">{{ pagignation.current }}</a>
       </li>
-      <li class="page-item">
+      <li class="page-item" *ngIf="pagignation.pageCount > 1">
         <a class="page-link" (click)="changePage(1)">{{ pagignation.current + 1 }}</a>
       </li>
-      <li class="page-item">
+      <li class="page-item" *ngIf="pagignation.pageCount > 2">
         <a class="page-link" (click)="changePage(2)">{{ pagignation.current + 2 }}</a>
       </li>
-      <li class="page-item">
+      <li class="page-item" *ngIf="pagignation.pageCount > 3">
         <a class="page-link" (click)="changePage(3)">{{ pagignation.current + 3 }}</a>
       </li>
       <li class="page-item">

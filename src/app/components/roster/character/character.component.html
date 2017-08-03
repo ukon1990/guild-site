@@ -17,6 +17,7 @@
 			<use xlink:href="assets/images/icons/Icon.svg#swords"></use>
 		</svg> {{ character.items.averageItemLevelEquipped }} / {{ character.items.averageItemLevel }}
 	</span>
+	{{ character.lastModified | date:'HH:mm dd.MMM, yyyy' }}
   <h3 class="card-title">{{ character.name }}</h3>
   <h6 class="card-subtitle mb-2">{{ character.level }} Spec Class {{ character.realm }}</h6>
   <div class="card-text">

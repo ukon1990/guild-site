@@ -25,7 +25,7 @@ export class RosterComponent implements OnInit {
 				this.members = response.json().members;
 
 				this.pagignation.pageCount = this.members.length / this.pagignation.pageLimit;
-				console.log(this.members);
+				console.log(response.json());
 				this.members.sort((a, b) =>
 					a.character.achievementPoints > b.character.achievementPoints ? -1 : 1);
 			})
