@@ -1,13 +1,16 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { Http, HttpModule } from '@angular/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MaterialModule } from './modules/material.module';
 import 'hammerjs';
+
 import { AppComponent } from './app.component';
 import { GuildService } from './services/guild.service';
 import { CharacterService } from './services/character.service';
+import { AchievementsService } from './services/achievements.service';
 import { RosterComponent } from './components/roster/roster.component';
 import { NewsComponent } from './components/news/news.component';
 import { AchievementsComponent } from './components/achievements/achievements.component';
@@ -45,6 +48,7 @@ import { ArtifactComponent } from './components/roster/character/character-item/
 		BrowserModule,
 		FormsModule,
 		HttpModule,
+		HttpClientModule,
 		MaterialModule,
 		RouterModule.forRoot([
 			{path: '', component: NewsComponent},
@@ -58,7 +62,8 @@ import { ArtifactComponent } from './components/roster/character/character-item/
 	],
 	providers: [
 		GuildService,
-		CharacterService
+		CharacterService,
+		AchievementsService
 	],
 	bootstrap: [AppComponent]
 })

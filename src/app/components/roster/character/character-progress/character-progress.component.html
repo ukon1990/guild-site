@@ -1,8 +1,8 @@
-<div class="card card-raid" style="width: 20rem;" [style.background-image]="getBGImageUrl()">
+<div class="card card-raid" [style.background-image]="getBGImageUrl()">
   <div class="card-block">
     <h4 class="card-title">{{ raid.name }}</h4>
   </div>
-  <div class="col-md-12">
+  <div class="card-raid-progress">
     <app-raid-progress-bar [bosses]="raid.bosses" difficulty="lfr"></app-raid-progress-bar>
     <app-raid-progress-bar [bosses]="raid.bosses" difficulty="normal"></app-raid-progress-bar>
     <app-raid-progress-bar [bosses]="raid.bosses" difficulty="heroic"></app-raid-progress-bar>

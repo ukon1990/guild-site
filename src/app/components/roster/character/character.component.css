@@ -22,3 +22,11 @@
 .Icon-svg:not(.Icon--color) {
     fill: currentColor;
 }
+
+.mat-paginator {
+	background-color: transparent;
+	color: white;
+}
+.mat-paginator .mat-select-value-text {
+	color: white;
+}

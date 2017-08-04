@@ -51,33 +51,36 @@
       </div>
     </md-tab>
     <md-tab label="Raiding">
+      <div class="col-md-12">
+        <md-paginator [length]="character?.progression?.raids?.length" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions"
+          (page)="pageEvent = $event">
+        </md-paginator>
+      </div>
       <div class="clearfix" *ngIf="character.progression">
         <div *ngFor="let raid of character?.progression?.raids |
 				slice: 
 					(pageEvent.pageSize * (pageEvent.pageIndex + 1)) - pageEvent.pageSize:
-					pageEvent.pageSize * (pageEvent.pageIndex + 1)" class="col-md-4 float-left">
-          <app-character-progress [raid]="raid"></app-character-progress>
+					pageEvent.pageSize * (pageEvent.pageIndex + 1)">
+          <app-character-progress [raid]="raid" class="col-md-4 float-left"></app-character-progress>
         </div>
       </div>
       <div class="col-md-12">
-        <md-paginator [length]="character?.progression?.raids?.length"
-              [pageSize]="page.pageSize"
-			  [pageSizeOptions]="page.pageSizeOptions"
-			  (page)="pageEvent = $event">
-		</md-paginator>
+        <md-paginator [length]="character?.progression?.raids?.length" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions"
+          (page)="pageEvent = $event">
+        </md-paginator>
       </div>
     </md-tab>
     <md-tab label="Artifact & talents">
-		Yoda
+      Yoda
     </md-tab>
     <md-tab label="Achievements">
-		Yoda
+      Yoda
     </md-tab>
     <md-tab label="Pvp">
-		Yoda
+      Yoda
     </md-tab>
     <md-tab label="Statistics">
-		Yoda
+      Yoda
     </md-tab>
   </md-tab-group>
 </div>
