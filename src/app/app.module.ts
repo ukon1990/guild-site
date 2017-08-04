@@ -3,7 +3,8 @@ import { NgModule } from '@angular/core';
 import { Http, HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
+import { MaterialModule } from './modules/material.module';
+import 'hammerjs';
 import { AppComponent } from './app.component';
 import { GuildService } from './services/guild.service';
 import { CharacterService } from './services/character.service';
@@ -20,6 +21,7 @@ import { StreamsComponent } from './components/streams/streams.component';
 import { CharacterItemComponent } from './components/roster/character/character-item/character-item.component';
 import { CharacterProgressComponent } from './components/roster/character/character-progress/character-progress.component';
 import { RaidProgressBarComponent } from './components/roster/character/character-progress/raid-progress-bar/raid-progress-bar.component';
+import { ArtifactComponent } from './components/roster/character/character-item/artifact/artifact.component';
 
 @NgModule({
 	declarations: [
@@ -36,12 +38,14 @@ import { RaidProgressBarComponent } from './components/roster/character/characte
 		StreamsComponent,
 		CharacterItemComponent,
 		CharacterProgressComponent,
-		RaidProgressBarComponent
+		RaidProgressBarComponent,
+		ArtifactComponent
 	],
 	imports: [
 		BrowserModule,
 		FormsModule,
 		HttpModule,
+		MaterialModule,
 		RouterModule.forRoot([
 			{path: '', component: NewsComponent},
 			{path: 'roster', component: RosterComponent},

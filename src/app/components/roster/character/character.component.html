@@ -1,14 +1,12 @@
-<div class="character character-bg clearfix"
-	[style.background-image]="getBackgroundImage()"
-	[style.background-color]="getBackgroundColor()">
-	<!-- Basic data -->
-	<div class="clearfix">
-		<a routerLink="/roster">
+<div class="character character-bg clearfix" [style.background-image]="getBackgroundImage()" [style.background-color]="getBackgroundColor()">
+  <!-- Basic data -->
+  <div class="clearfix">
+    <a routerLink="/roster">
 			<i class="fa fa-chevron-left" aria-hidden="true"></i>
 			Back to guild roster
 		</a>
-	</div>
-	<span *ngIf="character.items">
+  </div>
+  <span *ngIf="character.items">
 		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" class="Icon-svg mini-icon">
 			<use xlink:href="assets/images/icons/Icon.svg#achievement-shield"></use>
 		</svg> {{ character.achievementPoints }}
@@ -17,61 +15,69 @@
 			<use xlink:href="assets/images/icons/Icon.svg#swords"></use>
 		</svg> {{ character.items.averageItemLevelEquipped }} / {{ character.items.averageItemLevel }}
 	</span>
-	{{ character.lastModified | date:'HH:mm dd.MMM, yyyy' }}
+  <span class="pull-right">
+		Last updated {{ character.lastModified | date:'HH:mm dd.MMM, yyyy' }}
+	</span>
   <h3 class="card-title">{{ character.name }}</h3>
   <h6 class="card-subtitle mb-2">{{ character.level }} Spec Class {{ character.realm }}</h6>
-  <div class="card-text">
-		<!-- Equipment -->
-		<div class="clearfix">
-			<div class="col-md-5 float-left">
-				<ul class="list-group" *ngIf="character.items">
-					<app-character-item [item]="character?.items?.head"></app-character-item>
-					<app-character-item [item]="character?.items?.neck"></app-character-item>
-					<app-character-item [item]="character?.items?.shoulder"></app-character-item>
-					<app-character-item [item]="character?.items?.back"></app-character-item>
-					<app-character-item [item]="character?.items?.chest"></app-character-item>
-					<app-character-item [item]="character?.items?.wrist"></app-character-item>
-					<app-character-item [item]="character?.items?.mainHand"></app-character-item>
-					<app-character-item [item]="character?.items?.offHand"></app-character-item>
-				</ul>
-			</div>
-			<div class="col-md-5 float-right">
-				<ul class="list-group" *ngIf="character.items">
-					<app-character-item [item]="character?.items?.hands"></app-character-item>
-					<app-character-item [item]="character?.items?.waist"></app-character-item>
-					<app-character-item [item]="character?.items?.legs"></app-character-item>
-					<app-character-item [item]="character?.items?.feet"></app-character-item>
-					<app-character-item [item]="character?.items?.finger1"></app-character-item>
-					<app-character-item [item]="character?.items?.finger2"></app-character-item>
-					<app-character-item [item]="character?.items?.trinket1"></app-character-item>
-					<app-character-item [item]="character?.items?.trinket2"></app-character-item>
-				</ul>
-			</div>
-		</div>
 
-		<!-- Raid progress -->
-		<div class="col-md-12">
-			<h3>
-				<button class="btn btn-default" 
-					(click)="changePage(-1, 'raid')" [disabled]="pages.raid.current === 1">
-					<i class="fa fa-chevron-left" aria-hidden="true"></i>
-					Previous 3
-				</button>
-				Raid progression
-				<button class="btn btn-default" [disabled]="pages.raid.current === pages.raid.count"
-					(click)="changePage(1, 'raid')">
-					Next 3
-					<i class="fa fa-chevron-right" aria-hidden="true"></i>
-				</button>
-			</h3>
-		</div>
-		<div class="clearfix" *ngIf="character.progression">
-			<div *ngFor="let raid of character?.progression?.raids |
+  <md-tab-group>
+    <md-tab label="Equipment">
+      <div class="clearfix">
+        <div class="col-md-5 float-left">
+          <ul class="list-group" *ngIf="character.items">
+            <app-character-item [item]="character?.items?.head"></app-character-item>
+            <app-character-item [item]="character?.items?.neck"></app-character-item>
+            <app-character-item [item]="character?.items?.shoulder"></app-character-item>
+            <app-character-item [item]="character?.items?.back"></app-character-item>
+            <app-character-item [item]="character?.items?.chest"></app-character-item>
+            <app-character-item [item]="character?.items?.wrist"></app-character-item>
+            <app-character-item [item]="character?.items?.mainHand"></app-character-item>
+            <app-character-item [item]="character?.items?.offHand"></app-character-item>
+          </ul>
+        </div>
+        <div class="col-md-5 float-right">
+          <ul class="list-group" *ngIf="character.items">
+            <app-character-item [item]="character?.items?.hands"></app-character-item>
+            <app-character-item [item]="character?.items?.waist"></app-character-item>
+            <app-character-item [item]="character?.items?.legs"></app-character-item>
+            <app-character-item [item]="character?.items?.feet"></app-character-item>
+            <app-character-item [item]="character?.items?.finger1"></app-character-item>
+            <app-character-item [item]="character?.items?.finger2"></app-character-item>
+            <app-character-item [item]="character?.items?.trinket1"></app-character-item>
+            <app-character-item [item]="character?.items?.trinket2"></app-character-item>
+          </ul>
+        </div>
+      </div>
+    </md-tab>
+    <md-tab label="Raiding">
+      <div class="clearfix" *ngIf="character.progression">
+        <div *ngFor="let raid of character?.progression?.raids |
 				slice: 
-					(pages.raid.perPage * pages.raid.current) - pages.raid.perPage:
-					pages.raid.perPage * pages.raid.current" class="col-md-4 float-left">
-				<app-character-progress [raid]="raid"></app-character-progress>
-			</div>
-		</div>
-	</div>
+					(pageEvent.pageSize * (pageEvent.pageIndex + 1)) - pageEvent.pageSize:
+					pageEvent.pageSize * (pageEvent.pageIndex + 1)" class="col-md-4 float-left">
+          <app-character-progress [raid]="raid"></app-character-progress>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <md-paginator [length]="character?.progression?.raids?.length"
+              [pageSize]="page.pageSize"
+			  [pageSizeOptions]="page.pageSizeOptions"
+			  (page)="pageEvent = $event">
+		</md-paginator>
+      </div>
+    </md-tab>
+    <md-tab label="Artifact & talents">
+		Yoda
+    </md-tab>
+    <md-tab label="Achievements">
+		Yoda
+    </md-tab>
+    <md-tab label="Pvp">
+		Yoda
+    </md-tab>
+    <md-tab label="Statistics">
+		Yoda
+    </md-tab>
+  </md-tab-group>
 </div>

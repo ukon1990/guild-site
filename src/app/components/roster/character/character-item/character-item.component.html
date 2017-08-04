@@ -4,6 +4,6 @@
 				{{ item.name }}
 		</a><br>
 	<div class="col-md-12">
-		{{ item.itemLevel }}
+		{{ item.itemLevel }} <app-artifact *ngIf="item.artifactId" [artifact]="item"></app-artifact>
 	</div>
 </li>

@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { PageEvent } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { CharacterService } from '../../../services/character.service';
 
@@ -12,7 +13,12 @@ declare const $WowheadPower: any;
 export class CharacterComponent implements OnInit, OnDestroy {
 	private sub: any;
 	character: any = {name: '', realm: ''};
-	pages: any = {raid: {count: 0, current: 1, perPage: 3}};
+	page = {
+		pageSize: 6,
+		pageSizeOptions: [6, 12]
+	}
+	// pages: any = {raid: {count: 0, current: 1, perPage: 3}};
+	pageEvent: PageEvent = { pageIndex: 0, pageSize: this.page.pageSize, length: 1 };
 	classBgColor: any  = {
 		1: '#1a0407', // Warrior
 		2: '#13040a', // Paladin
@@ -40,8 +46,8 @@ export class CharacterComponent implements OnInit, OnDestroy {
 					this.character = c.json();
 					console.log(this.character);
 					this.character.progression.raids.reverse();
-					this.pages.raid.count =
-						this.character.progression.raids.length / this.pages.raid.perPage;
+					/*this.pages.raid.count =
+						this.character.progression.raids.length / this.pages.raid.perPage;*/
 					$WowheadPower.init();
 				})
 				.catch(error => console.log(error));
@@ -52,11 +58,12 @@ export class CharacterComponent implements OnInit, OnDestroy {
 		this.sub.unsubscribe();
 	}
 
+	/*
 	changePage(change: number, type: string): void {
 		if (this.pages[type].current + change > 0) {
 			this.pages[type].current += change;
 		}
-	}
+	}*/
 
 	getBackgroundImage() {
 		if (this.character.thumbnail) {
