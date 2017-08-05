@@ -73,7 +73,8 @@
       </div>
     </md-tab>
     <md-tab label="Warcraft logs" *ngIf="logs">
-      <p>Rankings for the current tier as {{ characterSpecialization }}.</p>
+      <p>Rankings for the current tier as {{ characterSpecialization }}. If your logs are not up to date, follow 
+        <a href="https://www.warcraftlogs.com/character/eu/{{ slugifyName(character.realm) }}/{{ character.name }}" target="_blank">this</a> to the warcraft logs profile.</p>
       <app-character-log-item *ngFor="let boss of logs" [boss]="boss" class="col-md-4 float-left"></app-character-log-item>
     </md-tab>
     <md-tab label="Achievements">
