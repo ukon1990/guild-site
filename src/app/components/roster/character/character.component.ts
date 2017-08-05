@@ -13,6 +13,7 @@ declare const $WowheadPower: any;
 export class CharacterComponent implements OnInit, OnDestroy {
 	private sub: any;
 	character: any = {name: '', realm: ''};
+	logs: any[];
 	page = {
 		pageSize: 6,
 		pageSizeOptions: [6, 12]
@@ -46,9 +47,13 @@ export class CharacterComponent implements OnInit, OnDestroy {
 					this.character = c.json();
 					console.log(this.character);
 					this.character.progression.raids.reverse();
-					/*this.pages.raid.count =
-						this.character.progression.raids.length / this.pages.raid.perPage;*/
 					$WowheadPower.init();
+				})
+				.catch(error => console.log(error));
+			this.characterService.getCharacterLogs(this.slugifyName(p['realm']), p['character'], 'hps')
+				.then(logs => {
+					this.logs = logs;
+					console.log(logs);
 				})
 				.catch(error => console.log(error));
 		});
@@ -57,13 +62,6 @@ export class CharacterComponent implements OnInit, OnDestroy {
 	ngOnDestroy() {
 		this.sub.unsubscribe();
 	}
-
-	/*
-	changePage(change: number, type: string): void {
-		if (this.pages[type].current + change > 0) {
-			this.pages[type].current += change;
-		}
-	}*/
 
 	getBackgroundImage() {
 		if (this.character.thumbnail) {
@@ -81,5 +79,9 @@ export class CharacterComponent implements OnInit, OnDestroy {
 
 	bonusList(bonusList: any[]): string {
 		return bonusList.join(':');
+	}
+
+	slugifyName(name: string): string {
+		return name.replace(/[\' ]/i, '-');
 	}
 }

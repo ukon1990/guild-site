@@ -50,7 +50,7 @@
         </div>
       </div>
     </md-tab>
-    <md-tab label="Raiding">
+    <md-tab label="Raid progress">
       <nav class="col-md-12">
         <md-paginator [length]="character?.progression?.raids?.length" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions"
           (page)="pageEvent = $event">
@@ -70,17 +70,18 @@
         </md-paginator>
       </div>
     </md-tab>
-    <md-tab label="Artifact & talents">
-      Yoda
+    <md-tab label="Warcraft logs">
+      <p>Only displaying the last tiers rankings</p>
+      <app-character-log-item *ngFor="let boss of logs" [boss]="boss" class="col-md-4 float-left"></app-character-log-item>
     </md-tab>
     <md-tab label="Achievements">
-      Yoda
+      Achieves inc
     </md-tab>
     <md-tab label="Pvp">
-      Yoda
+      PvP?
     </md-tab>
     <md-tab label="Statistics">
-      Yoda
+      Same as armory stats?
     </md-tab>
   </md-tab-group>
 </div>

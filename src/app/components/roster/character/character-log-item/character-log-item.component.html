@@ -1,0 +1,11 @@
+<div class="card" style="background: transparent;">
+  <div class="card-block">
+    <h4 class="card-title">{{ boss.name }}</h4>
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p *ngFor="let spec of boss.specs" class="card-text">
+        {{ spec.spec }} - {{ spec.best_historical_percent }}%
+      </p>
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>

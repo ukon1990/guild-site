@@ -25,6 +25,7 @@ import { CharacterItemComponent } from './components/roster/character/character-
 import { CharacterProgressComponent } from './components/roster/character/character-progress/character-progress.component';
 import { RaidProgressBarComponent } from './components/roster/character/character-progress/raid-progress-bar/raid-progress-bar.component';
 import { ArtifactComponent } from './components/roster/character/character-item/artifact/artifact.component';
+import { CharacterLogItemComponent } from './components/roster/character/character-log-item/character-log-item.component';
 
 @NgModule({
 	declarations: [
@@ -42,7 +43,8 @@ import { ArtifactComponent } from './components/roster/character/character-item/
 		CharacterItemComponent,
 		CharacterProgressComponent,
 		RaidProgressBarComponent,
-		ArtifactComponent
+		ArtifactComponent,
+		CharacterLogItemComponent
 	],
 	imports: [
 		BrowserModule,
