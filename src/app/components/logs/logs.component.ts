@@ -13,7 +13,7 @@ export class LogsComponent implements OnInit {
 		this.guildService.getGuildLogs('emerald-dream', 'cake or pie')
 		.then( result => {
 			console.log(result);
-			this.reports = result;
+			this.reports = result.sort( (a, b) => a.start < b.start ? 1 : -1 );
 		}
 		).catch( error => console.log(error));
 	}

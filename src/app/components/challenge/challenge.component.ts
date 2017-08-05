@@ -15,7 +15,7 @@ export class ChallengeComponent implements OnInit {
 		this.guildService
 			.getChallenges('Cake or pie')
 			.then(response => {
-				this.challenges = response.json().challenge.sort( (a, b) => a.map.id < b.map.id ? 1 : -1 );
+				this.challenges = response.challenge.sort( (a, b) => a.map.id < b.map.id ? 1 : -1 );
 				console.log(this.challenges);
 			})
 			.catch(error => {

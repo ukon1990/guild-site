@@ -20,9 +20,10 @@ export class AppComponent implements OnInit {
 				console.log(error);
 			});
 		this.achievementsService.getAchievements()
-			.then( response =>
-				{this.achievementsService.achievements = response.achievements; console.log(this.achievementsService.achievements );})
-			.catch( error => console.log(error));
+			.then( response => {
+				this.achievementsService.achievements = response.achievements;
+				console.log(this.achievementsService.achievements );
+			}).catch( error => console.log(error));
 	}
 
 	ngOnInit() {

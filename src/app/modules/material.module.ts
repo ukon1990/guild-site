@@ -7,7 +7,8 @@ import {
 	MdAutocompleteModule, MdToolbarModule,
 	MdListModule, MdTabsModule,
 	MdSidenavModule, MdPaginatorModule,
-	MdSortModule, MdTableModule
+	MdSortModule, MdTableModule,
+	MdCardModule
 } from '@angular/material';
 
 @NgModule({
@@ -25,7 +26,8 @@ import {
 		MdSidenavModule,
 		MdPaginatorModule,
 		MdSortModule,
-		MdTableModule
+		MdTableModule,
+		MdCardModule
 	],
 	imports: [
 	],
