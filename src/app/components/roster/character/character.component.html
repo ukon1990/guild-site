@@ -19,7 +19,9 @@
 		Last updated {{ character.lastModified | date:'HH:mm dd.MMM, yyyy' }}
 	</span>
   <h3 class="card-title">{{ character.name }}</h3>
-  <h6 class="card-subtitle mb-2">{{ character.level }} Spec Class {{ character.realm }}</h6>
+  <h6 class="card-subtitle mb-2">
+    {{ character.level }} {{ characterSpecialization }} {{ character.class }} {{ character.realm }}
+  </h6>
 
   <md-tab-group>
     <md-tab label="Equipment">
@@ -71,7 +73,7 @@
       </div>
     </md-tab>
     <md-tab label="Warcraft logs">
-      <p>Only displaying the last tiers rankings</p>
+      <p>Rankings for the current tier as {{ characterSpecialization }}.</p>
       <app-character-log-item *ngFor="let boss of logs" [boss]="boss" class="col-md-4 float-left"></app-character-log-item>
     </md-tab>
     <md-tab label="Achievements">

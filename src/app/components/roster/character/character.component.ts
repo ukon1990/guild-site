@@ -14,6 +14,8 @@ export class CharacterComponent implements OnInit, OnDestroy {
 	private sub: any;
 	character: any = {name: '', realm: ''};
 	logs: any[];
+	metric: string;
+	characterSpecialization: string;
 	page = {
 		pageSize: 6,
 		pageSizeOptions: [6, 12]
@@ -47,13 +49,14 @@ export class CharacterComponent implements OnInit, OnDestroy {
 					this.character = c.json();
 					console.log(this.character);
 					this.character.progression.raids.reverse();
+					this.characterService.getCharacterLogs(this.slugifyName(p['realm']), p['character'], 'hps')
+						.then(logs => {
+							this.logs = logs;
+							console.log(logs);
+							this.setMetricForSpec();
+						})
+						.catch(error => console.log(error));
 					$WowheadPower.init();
-				})
-				.catch(error => console.log(error));
-			this.characterService.getCharacterLogs(this.slugifyName(p['realm']), p['character'], 'hps')
-				.then(logs => {
-					this.logs = logs;
-					console.log(logs);
 				})
 				.catch(error => console.log(error));
 		});
@@ -83,5 +86,24 @@ export class CharacterComponent implements OnInit, OnDestroy {
 
 	slugifyName(name: string): string {
 		return name.replace(/[\' ]/i, '-');
+	}
+
+	setMetricForSpec(): void {
+		this.character.talents.forEach(spec => {
+			if (spec.selected) {
+				this.characterSpecialization = spec.spec.name;
+				switch (spec.role) {
+					case 'TANK':
+						this.metric = '';
+						break;
+					case 'HEALING':
+						this.metric = 'hps';
+						break;
+					default:
+						this.metric = 'dps';
+						break;
+				}
+			}
+		});
 	}
 }
