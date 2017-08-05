@@ -11,6 +11,7 @@ export class ArtifactComponent implements OnInit {
 	constructor() { }
 
 	ngOnInit() {
+		this.traitCount -= this.artifact.relics.length;
 		this.artifact.artifactTraits.forEach(t => {
 			this.traitCount += t.rank;
 		});
