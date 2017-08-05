@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GuildService } from '../../services/guild.service';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { PageEvent } from '@angular/material';
+
+import { GuildService } from '../../services/guild.service';
 
 @Component({
 	selector: 'app-rooster',
@@ -16,7 +18,11 @@ export class RosterComponent implements OnInit {
 		'Core raider', 'Raider trial', 'Social'];
 
 	queryParams = { character: '', rank: '-1' };
-	pagignation = { current: 1, pageCount: 0, pageLimit: 12 };
+	page = {
+		pageSize: 12,
+		pageSizeOptions: [6, 12, 24, 36, 48]
+	};
+	pageEvent: PageEvent = { pageIndex: 0, pageSize: this.page.pageSize, length: 1 };
 
 	constructor(private guildService: GuildService, private sanitizer: DomSanitizer, private router: Router) {
 		this.guildService
@@ -24,7 +30,6 @@ export class RosterComponent implements OnInit {
 			.then(response => {
 				this.members = response.json().members;
 
-				this.pagignation.pageCount = this.members.length / this.pagignation.pageLimit;
 				console.log(response.json());
 				this.members.sort((a, b) =>
 					a.character.achievementPoints > b.character.achievementPoints ? -1 : 1);
@@ -61,13 +66,6 @@ export class RosterComponent implements OnInit {
 			return `https://blzmedia-a.akamaihd.net/wow/icons/56/${member.character.spec.icon}.jpg`;
 		}
 		return '';
-	}
-
-	changePage(change) {
-		if ((this.pagignation.current + change) >= 1 &&
-			this.pagignation.pageCount > (this.pagignation.current + change)) {
-			this.pagignation.current += change;
-		}
 	}
 
 	getMembers() {
