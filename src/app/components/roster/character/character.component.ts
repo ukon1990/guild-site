@@ -16,7 +16,7 @@ export class CharacterComponent implements OnInit, OnDestroy {
 	page = {
 		pageSize: 6,
 		pageSizeOptions: [6, 12]
-	}
+	};
 	// pages: any = {raid: {count: 0, current: 1, perPage: 3}};
 	pageEvent: PageEvent = { pageIndex: 0, pageSize: this.page.pageSize, length: 1 };
 	classBgColor: any  = {

@@ -51,11 +51,11 @@
       </div>
     </md-tab>
     <md-tab label="Raiding">
-      <div class="col-md-12">
+      <nav class="col-md-12">
         <md-paginator [length]="character?.progression?.raids?.length" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions"
           (page)="pageEvent = $event">
         </md-paginator>
-      </div>
+      </nav>
       <div class="clearfix" *ngIf="character.progression">
         <div *ngFor="let raid of character?.progression?.raids |
 				slice: 

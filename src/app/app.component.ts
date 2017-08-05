@@ -9,10 +9,10 @@ declare const GuildTabard: any;
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-	guildName = 'Cake or Pie';
+	guildName = 'Cake or pie';
 	guild: any;
 
-	constructor(private guildService: GuildService, private achievementsService) {
+	constructor(private guildService: GuildService, private achievementsService: AchievementsService) {
 		this.guildService
 			.getAllGuildData(this.guildName)
 			.then(response => this.guild = response.json())

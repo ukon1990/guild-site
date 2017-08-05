@@ -19,6 +19,6 @@ export class AchievementsService {
 	constructor(private _http: HttpClient) { }
 
 	getAchievements(): Promise<any> {
-		return this._http.get(this.baseUrl).toPromise();
+		return this._http.get('assets/mock/achievements.json').toPromise();
 	}
 }
