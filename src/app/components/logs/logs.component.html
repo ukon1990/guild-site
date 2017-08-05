@@ -1,8 +1,7 @@
-The guilds warcraft logs.
-
-<md-card class="example-card" *ngFor="let r of reports">
+<div *ngIf="reports; else none">
+  <md-card *ngFor="let r of reports">
   <md-card-header>
-    <div md-card-avatar class="example-header-image"></div>
+    <div md-card-avatar></div>
     <md-card-title>{{ r.start | date:'dd.MMM, yyyy'}} - {{ r.title }}</md-card-title>
     <md-card-subtitle>
       {{ r.start | date:'HH:mm' }} - {{ r.end | date:'HH:mm' }} Logged by:{{ r.owner }} 
@@ -10,3 +9,9 @@ The guilds warcraft logs.
     </md-card-subtitle>
   </md-card-header>
 </md-card>
+</div>
+<ng-template #none>
+  <p>
+    There are no logs available. This can be caused by an issue at WarcraftLogs API's end or it's still downloading data.
+  </p>
+</ng-template>
