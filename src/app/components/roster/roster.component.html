@@ -27,7 +27,7 @@
             pageEvent.pageSize * (pageEvent.pageIndex + 1)">
       <div class="card">
         <div class="card-block" (click)="goToCharacter(member.character.realm, member.character.name)"
-			      [style.background-image]="getBGImageUrl(member.character.spec.backgroundImage)">
+			      [style.background-image]="getBGImageUrl(member?.character?.spec?.backgroundImage)">
           <img class="thumbnail-icon-spec  rounded-circle" [src]="getSpecIcon(member)" />
           <img class="thumbnail-icon rounded-circle" [src]="getThumbnail(member)" />
 

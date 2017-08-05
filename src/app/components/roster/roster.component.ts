@@ -20,7 +20,7 @@ export class RosterComponent implements OnInit {
 	queryParams = { character: '', rank: '-1' };
 	page = {
 		pageSize: 12,
-		pageSizeOptions: [6, 12, 24, 36, 48]
+		pageSizeOptions: [1, 6, 12, 24, 36, 48]
 	};
 	pageEvent: PageEvent = { pageIndex: 0, pageSize: this.page.pageSize, length: 1 };
 
