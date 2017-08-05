@@ -26,6 +26,7 @@ import { CharacterProgressComponent } from './components/roster/character/charac
 import { RaidProgressBarComponent } from './components/roster/character/character-progress/raid-progress-bar/raid-progress-bar.component';
 import { ArtifactComponent } from './components/roster/character/character-item/artifact/artifact.component';
 import { CharacterLogItemComponent } from './components/roster/character/character-log-item/character-log-item.component';
+import { LogsComponent } from './components/logs/logs.component';
 
 @NgModule({
 	declarations: [
@@ -44,7 +45,8 @@ import { CharacterLogItemComponent } from './components/roster/character/charact
 		CharacterProgressComponent,
 		RaidProgressBarComponent,
 		ArtifactComponent,
-		CharacterLogItemComponent
+		CharacterLogItemComponent,
+		LogsComponent
 	],
 	imports: [
 		BrowserModule,
@@ -58,6 +60,7 @@ import { CharacterLogItemComponent } from './components/roster/character/charact
 			{path: 'roster/:realm/:character', component: CharacterComponent},
 			{path: 'achievements', component: AchievementsComponent},
 			{path: 'challenges', component: ChallengeComponent},
+			{path: 'logs', component: LogsComponent},
 			{path: 'streams', component: StreamsComponent},
 			{path: '**', component: NewsComponent}
 		])
