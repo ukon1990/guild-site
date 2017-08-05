@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { PageEvent } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment-timezone';
 import { CharacterService } from '../../../services/character.service';
 
 declare const $WowheadPower: any;
@@ -48,7 +49,9 @@ export class CharacterComponent implements OnInit, OnDestroy {
 				.then(c => {
 					this.character = c.json();
 					console.log(this.character);
-					this.character.progression.raids.reverse();
+					this.character.progression.raids.reverse();/*
+					this.character.lastModified = moment
+						.tz(this.character.lastModified, 'UTC');*/
 					this.characterService.getCharacterLogs(this.slugifyName(p['realm']), p['character'], 'hps')
 						.then(logs => {
 							this.logs = logs;
