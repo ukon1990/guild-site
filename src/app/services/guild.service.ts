@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
@@ -10,7 +11,7 @@ export class GuildService {
 	private baseUrl = `https://${this.region}.api.battle.net/wow/guild/${this.realm}/`;
 	private urlEnd = `?locale=en_GB&apikey=${this.apiKey}`;
 
-	constructor (private http: Http) { }
+	constructor (private http: Http, private httpClient: HttpClient) { }
 
 	getAllGuildData(guildName: string): Promise<any> {
 		return this.http
@@ -80,5 +81,16 @@ export class GuildService {
 	getGuildRank(guildName: string): Promise<any> {
 		return this.http
 			.get(`https://www.wowprogress.com/guild/${this.region}/${this.realm}/${guildName}/json_rank`).toPromise();
+	}
+
+	getGuildLogs(realm: string, guild: string): Promise<any> {
+		return this.httpClient
+			.get(
+				`https://www.warcraftlogs.com:443/v1/reports/guild/${
+					guild
+				}/${
+					realm
+				}/eu?api_key=4508059150144d5b3159184e77c51070`// ,quests,professions
+			).toPromise();
 	}
 }
