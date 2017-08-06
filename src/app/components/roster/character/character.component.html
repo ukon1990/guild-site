@@ -23,7 +23,7 @@
     {{ character.level }} {{ characterSpecialization }} {{ character.class }} {{ character.realm }}
   </h6>
 
-  <md-tab-group>
+  <md-tab-group (selectChange)="onTabChanged($event)">
     <md-tab label="Equipment">
       <div class="clearfix">
         <div class="col-md-5 float-left">

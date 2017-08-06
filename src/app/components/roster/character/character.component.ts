@@ -110,4 +110,10 @@ export class CharacterComponent implements OnInit, OnDestroy {
 			}
 		});
 	}
+
+	onTabChanged(event): void {
+		if ($WowheadPower) {
+			$WowheadPower.init();
+		}
+	}
 }

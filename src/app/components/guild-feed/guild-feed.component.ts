@@ -16,7 +16,6 @@ export class GuildFeedComponent implements OnInit {
 	}
 
 	onTabChanged(event): void {
-		console.log('Changed');
 		if ($WowheadPower) {
 			$WowheadPower.init();
 		}
