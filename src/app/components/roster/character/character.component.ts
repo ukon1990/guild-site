@@ -38,32 +38,34 @@ export class CharacterComponent implements OnInit, OnDestroy {
 	};
 
 	constructor(private activatedRoute: ActivatedRoute,
-		private sanitizer: DomSanitizer, private characterService: CharacterService) { }
+		private sanitizer: DomSanitizer, private characterService: CharacterService) {
+			this.sub = this.activatedRoute.params.subscribe(p => {
+				this.character.realm = p['realm'];
+				this.character.name = p['character'];
+				this.characterService.getCharacter(p['realm'], p['character'])
+					.then(c => {
+						this.character = c.json();
+						console.log(this.character);
+						this.character.progression.raids.reverse();
+						/*
+						this.character.lastModified = moment
+							.tz(this.character.lastModified, 'UTC');
+						*/
+						this.characterService.getCharacterLogs(this.slugifyName(p['realm']), p['character'], 'hps')
+							.then(logs => {
+								this.logs = logs;
+								console.log(logs);
+								this.setMetricForSpec();
+							})
+							.catch(error => console.log(error));
+						$WowheadPower.init();
+					})
+					.catch(error => console.log(error));
+			});
+		}
 
 	ngOnInit() {
-		this.sub = this.activatedRoute.params.subscribe(p => {
-			this.character.realm = p['realm'];
-			this.character.name = p['character'];
-			this.characterService.getCharacter(p['realm'], p['character'])
-				.then(c => {
-					this.character = c.json();
-					console.log(this.character);
-					this.character.progression.raids.reverse();
-					/*
-					this.character.lastModified = moment
-						.tz(this.character.lastModified, 'UTC');
-					*/
-					this.characterService.getCharacterLogs(this.slugifyName(p['realm']), p['character'], 'hps')
-						.then(logs => {
-							this.logs = logs;
-							console.log(logs);
-							this.setMetricForSpec();
-						})
-						.catch(error => console.log(error));
-					$WowheadPower.init();
-				})
-				.catch(error => console.log(error));
-		});
+		// this.onTabChanged(null);
 	}
 
 	ngOnDestroy() {
@@ -114,6 +116,7 @@ export class CharacterComponent implements OnInit, OnDestroy {
 	onTabChanged(event): void {
 		if ($WowheadPower) {
 			$WowheadPower.init();
+			setTimeout( () => $WowheadPower.hideTooltip(), 5);
 		}
 	}
 }

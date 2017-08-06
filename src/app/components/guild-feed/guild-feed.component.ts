@@ -18,6 +18,7 @@ export class GuildFeedComponent implements OnInit {
 	onTabChanged(event): void {
 		if ($WowheadPower) {
 			$WowheadPower.init();
+			setTimeout( () => $WowheadPower.hideTooltip(), 5);
 		}
 	}
 }

@@ -34,6 +34,9 @@ export class CharacterItemComponent {
 
 			// Gems
 			if (this.item.tooltipParams) {
+				if (this.item.tooltipParams.set) {
+					result.push('pcs=' + this.item.tooltipParams.set.join(':'));
+				}
 				if (this.item.tooltipParams.gem0) {
 					relics.push(this.item.tooltipParams.gem0);
 				}
