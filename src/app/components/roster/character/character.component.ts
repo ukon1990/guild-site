@@ -21,7 +21,6 @@ export class CharacterComponent implements OnInit, OnDestroy {
 		pageSize: 6,
 		pageSizeOptions: [6, 12]
 	};
-	// pages: any = {raid: {count: 0, current: 1, perPage: 3}};
 	pageEvent: PageEvent = { pageIndex: 0, pageSize: this.page.pageSize, length: 1 };
 	classBgColor: any  = {
 		1: '#1a0407', // Warrior
@@ -49,9 +48,11 @@ export class CharacterComponent implements OnInit, OnDestroy {
 				.then(c => {
 					this.character = c.json();
 					console.log(this.character);
-					this.character.progression.raids.reverse();/*
+					this.character.progression.raids.reverse();
+					/*
 					this.character.lastModified = moment
-						.tz(this.character.lastModified, 'UTC');*/
+						.tz(this.character.lastModified, 'UTC');
+					*/
 					this.characterService.getCharacterLogs(this.slugifyName(p['realm']), p['character'], 'hps')
 						.then(logs => {
 							this.logs = logs;

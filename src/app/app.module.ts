@@ -12,8 +12,8 @@ import { GuildService } from './services/guild.service';
 import { CharacterService } from './services/character.service';
 import { AchievementsService } from './services/achievements.service';
 import { RosterComponent } from './components/roster/roster.component';
-import { NewsComponent } from './components/news/news.component';
-import { AchievementsComponent } from './components/achievements/achievements.component';
+import { NewsComponent } from './components/guild-feed/news/news.component';
+import { AchievementsComponent } from './components/guild-feed/achievements/achievements.component';
 import { ChallengeComponent } from './components/challenge/challenge.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -27,6 +27,7 @@ import { RaidProgressBarComponent } from './components/roster/character/characte
 import { ArtifactComponent } from './components/roster/character/character-item/artifact/artifact.component';
 import { CharacterLogItemComponent } from './components/roster/character/character-log-item/character-log-item.component';
 import { LogsComponent } from './components/logs/logs.component';
+import { GuildFeedComponent } from './components/guild-feed/guild-feed.component';
 
 @NgModule({
 	declarations: [
@@ -46,7 +47,8 @@ import { LogsComponent } from './components/logs/logs.component';
 		RaidProgressBarComponent,
 		ArtifactComponent,
 		CharacterLogItemComponent,
-		LogsComponent
+		LogsComponent,
+		GuildFeedComponent
 	],
 	imports: [
 		BrowserModule,
@@ -55,7 +57,7 @@ import { LogsComponent } from './components/logs/logs.component';
 		HttpClientModule,
 		MaterialModule,
 		RouterModule.forRoot([
-			{path: '', component: NewsComponent},
+			{path: '', component: GuildFeedComponent},
 			{path: 'roster', component: RosterComponent},
 			{path: 'roster/:realm/:character', component: CharacterComponent},
 			{path: 'achievements', component: AchievementsComponent},

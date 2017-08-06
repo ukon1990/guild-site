@@ -10,6 +10,8 @@ export class GuildService {
 	private apiKey = 'ugwc5qde7n5svga5yh7fwwxsjqtsdcws';
 	private baseUrl = `https://${this.region}.api.battle.net/wow/guild/${this.realm}/`;
 	private urlEnd = `?locale=en_GB&apikey=${this.apiKey}`;
+
+	// Statics
 	logs: Promise<any>;
 	achievments: Promise<any>;
 	roster: Promise<any>;

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { GuildService } from '../../services/guild.service';
+import { PageEvent } from '@angular/material';
+
+import { GuildService } from '../../../services/guild.service';
 
 declare const $WowheadPower: any;
 @Component({
@@ -9,6 +11,11 @@ declare const $WowheadPower: any;
 })
 export class NewsComponent implements OnInit {
 	news: any;
+	page = {
+		pageSize: 12,
+		pageSizeOptions: [12, 24, 36, 48]
+	};
+	pageEvent: PageEvent = { pageIndex: 0, pageSize: this.page.pageSize, length: 1 };
 
 	constructor(private guildService: GuildService) {
 		this.guildService
@@ -28,5 +35,10 @@ export class NewsComponent implements OnInit {
 
 	bonusList(bonusList: any[]): string {
 		return bonusList.join(':');
+	}
+
+	changePage(event: PageEvent) {
+		this.pageEvent = event;
+		$WowheadPower.init();
 	}
 }

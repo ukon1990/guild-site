@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GuildService } from '../../services/guild.service';
+import { GuildService } from '../../../services/guild.service';
 
 declare const $WowheadPower: any;
 @Component({
