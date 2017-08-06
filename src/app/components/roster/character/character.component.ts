@@ -15,6 +15,7 @@ declare const $WowheadPower: any;
 export class CharacterComponent implements OnInit, OnDestroy {
 	private sub: any;
 	character: any = {name: '', realm: ''};
+	selectedAchivementGroupIndex = -1;
 	logs: any[];
 	metric: string;
 	characterSpecialization: string;
@@ -119,5 +120,9 @@ export class CharacterComponent implements OnInit, OnDestroy {
 			$WowheadPower.init();
 			setTimeout( () => $WowheadPower.hideTooltip(), 5);
 		}
+	}
+
+	selectAchievementGroup(index: number) {
+		this.selectedAchivementGroupIndex = index;
 	}
 }

@@ -1,16 +1,21 @@
 <md-card class="col-md-3 float-left">
   <md-card-content>
     <div class="progress-label">
-      {{ achievementCategory.progress }}%
+      {{ achievementGroup.progress }}%
     </div>
     <md-progress-spinner
         [color]="primary"
         [mode]="determinate"
-        [value]="achievementCategory.progress">
+        [value]="achievementGroup.progress">
     </md-progress-spinner>
   </md-card-content>
   <md-card-header>
-    <md-card-title>{{ achievementCategory.name }}</md-card-title>
-    <md-card-subtitle>{{ getCompletedCount() }}/{{ achievementCategory.achievements.length }}</md-card-subtitle>
+    <md-card-title>{{ achievementGroup.name }}</md-card-title>
+    <md-card-subtitle>
+      {{ getCompletedCount() }}/
+      {{ 
+        achievementGroup.achievements.length + this.achievementGroup.categoryAchievementCount
+      }}
+    </md-card-subtitle>
   </md-card-header>
 </md-card>

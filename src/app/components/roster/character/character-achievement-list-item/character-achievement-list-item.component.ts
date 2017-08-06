@@ -7,29 +7,44 @@ import { AchievementListItem } from '../../../../models/achievement';
 	styleUrls: ['./character-achievement-list-item.component.css']
 })
 export class CharacterAchievementListItemComponent implements OnInit {
-	@Input() achievementCategory: AchievementListItem;
+	@Input() achievementGroup: AchievementListItem;
 	@Input() completedAchievements: any;
 	map = [];
 	constructor() { }
 
 	ngOnInit() {
-		console.log('achievementCategory', this.achievementCategory);
-		console.log('completedAchievements', this.completedAchievements);
 		this.completedAchievements.forEach( a => {
 			this.map[a] = a;
 		});
-		this.achievementCategory
+		this.achievementGroup.categoryAchievementCount = 0;
+		if (this.achievementGroup.categories) {
+			this.achievementGroup.categories.forEach( c => {
+				this.achievementGroup.categoryAchievementCount += c.achievements.length;
+			});
+		}
+		this.achievementGroup
 			.progress = Math
-				.round((this.getCompletedCount() / this.achievementCategory.achievements.length * 100));
+				.round((this.getCompletedCount() /
+				(this.achievementGroup.achievements.length + this.achievementGroup.categoryAchievementCount) * 100));
 	}
 
 	getCompletedCount(): number {
 		let completed = 0;
-		this.achievementCategory.achievements.forEach(a => {
+		this.achievementGroup.achievements.forEach(a => {
 			if (this.map[a.id + '']) {
 				completed++;
 			}
 		});
+
+		if (this.achievementGroup.categories) {
+			this.achievementGroup.categories.forEach(c => {
+				c.achievements.forEach(a => {
+					if (this.map[a.id + '']) {
+						completed++;
+					}
+				});
+			});
+		}
 		return completed;
 	}
 }

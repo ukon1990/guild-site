@@ -77,9 +77,18 @@
         <a href="https://www.warcraftlogs.com/character/eu/{{ slugifyName(character.realm) }}/{{ character.name }}" target="_blank">this</a> to the warcraft logs profile.</p>
       <app-character-log-item *ngFor="let boss of logs" [boss]="boss" class="col-md-4 float-left"></app-character-log-item>
     </md-tab>
-    <md-tab label="Achievements">
-      <app-character-achievement-list-item *ngFor="let a of achievementsService?.achievements"
-        [achievementCategory]="a" [completedAchievements]="character?.achievements?.achievementsCompleted"></app-character-achievement-list-item>
+    <md-tab label="Achievements" *ngIf="achievementsService !== null">
+      <div *ngIf="selectedAchivementGroupIndex === -1; else achivementGroup">
+        <app-character-achievement-list-item (click)="selectAchievementGroup(i)"
+          *ngFor="let a of achievementsService?.achievements; let i = index" 
+          [achievementGroup]="a"
+          [completedAchievements]="character?.achievements?.achievementsCompleted"></app-character-achievement-list-item>
+      </div>
+      <ng-template #achivementGroup>
+        <app-character-achievement *ngIf="achievementsService?.achievements"
+          [completedAchievements]="character?.achievements?.achievementsCompleted"
+          [achievementGroup]="achievementsService?.achievements[selectedAchivementGroupIndex]"></app-character-achievement>
+      </ng-template>
     </md-tab>
     <md-tab label="Pvp">
       PvP?
