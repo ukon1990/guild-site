@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material';
 import { GuildService } from '../../../services/guild.service';
 
 declare const $WowheadPower: any;
@@ -9,6 +10,11 @@ declare const $WowheadPower: any;
 })
 export class AchievementsComponent implements OnInit {
 	achievements: any[] = [];
+	page = {
+		pageSize: 12,
+		pageSizeOptions: [12, 24, 36, 48]
+	};
+	pageEvent: PageEvent = { pageIndex: 0, pageSize: this.page.pageSize, length: 1 };
 
 	constructor(private guildService: GuildService) {
 		this.guildService
@@ -31,6 +37,11 @@ export class AchievementsComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		$WowheadPower.init();
 	}
 
+	changePage(event: PageEvent) {
+		this.pageEvent = event;
+		$WowheadPower.init();
+	}
 }

@@ -10,20 +10,15 @@ declare const $WowheadPower: any;
 export class GuildFeedComponent implements OnInit {
 	guild: any;
 
-	constructor(private guildService: GuildService) {
-		/*
-		this.guildService
-			.getNews('Cake or pie')
-			.then(response => {
-				this.guild = response;
-				$WowheadPower.init();
-			})
-			.catch(error => {
-				console.log(error);
-			});*/
-	}
+	constructor(private guildService: GuildService) {}
 
 	ngOnInit() {
 	}
 
+	onTabChanged(event): void {
+		console.log('Changed');
+		if ($WowheadPower) {
+			$WowheadPower.init();
+		}
+	}
 }

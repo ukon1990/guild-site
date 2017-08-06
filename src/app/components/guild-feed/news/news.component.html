@@ -2,37 +2,37 @@
 </md-paginator>
 
 <article class="col-md-12">
-	<md-card class="col-md-4 float-left" *ngFor="let n of news |
+  <md-card class="col-md-4 float-left" *ngFor="let n of news |
 	slice: 
 		(pageEvent.pageSize * (pageEvent.pageIndex + 1)) - pageEvent.pageSize:
 		pageEvent.pageSize * (pageEvent.pageIndex + 1)">
-		<md-card-header>
-			<md-card-title>
-				<span [ngSwitch]="n.type">
-		<a *ngSwitchCase="'playerAchievement'"
-			href="https://www.wowhead.com/achievement={{ n.achievement.id }}"
-			rel="achievement={{ n.achievement.id }}">{{ n.achievement.title }}
-		</a>
-		<a *ngSwitchCase="'itemLoot'"
-			href="https://www.wowhead.com/item={{ n.itemId }}"
-			rel="item={{ n.itemId }}, bonus={{ bonusList(n.bonusLists) }}">{{ n.context }}
-		</a>
-		<a *ngSwitchCase="'itemPurchase'"
-			href="https://www.wowhead.com/item={{ n.itemId }}"
-			rel="item={{ n.itemId }}, bonus={{ bonusList(n.bonusLists) }}">{{ n.context }}
-		</a>
-		<a *ngSwitchCase="'itemCraft'"
-			href="https://www.wowhead.com/item={{ n.itemId }}"
-			rel="item={{ n.itemId }}, bonus={{ bonusList(n.bonusLists) }}">{{ n.context }}
-		</a>
-		<p *ngSwitchDefault>{{ n.type }}</p>
-	</span>
-			</md-card-title>
-			<md-card-subtitle>
-				{{ n.character }} {{ (n.timestamp) | date:'dd.MMM-yy HH:mm'}}
-			</md-card-subtitle>
-		</md-card-header>
-	</md-card>
+    <md-card-header>
+      <md-card-title>
+        <span [ngSwitch]="n.type">
+				<a *ngSwitchCase="'playerAchievement'"
+					href="https://www.wowhead.com/achievement={{ n.achievement.id }}"
+					rel="achievement={{ n.achievement.id }}">{{ n.achievement.title }}
+				</a>
+				<a *ngSwitchCase="'itemLoot'"
+					href="https://www.wowhead.com/item={{ n.itemId }}"
+					rel="item={{ n.itemId }}, bonus={{ bonusList(n.bonusLists) }}">{{ n.context }}
+				</a>
+				<a *ngSwitchCase="'itemPurchase'"
+					href="https://www.wowhead.com/item={{ n.itemId }}"
+					rel="item={{ n.itemId }}, bonus={{ bonusList(n.bonusLists) }}">{{ n.context }}
+				</a>
+				<a *ngSwitchCase="'itemCraft'"
+					href="https://www.wowhead.com/item={{ n.itemId }}"
+					rel="item={{ n.itemId }}, bonus={{ bonusList(n.bonusLists) }}">{{ n.context }}
+				</a>
+				<p *ngSwitchDefault>{{ n.type }}</p>
+			</span>
+      </md-card-title>
+      <md-card-subtitle>
+        {{ n.character }} {{ (n.timestamp) | date:'dd.MMM-yy HH:mm'}}
+      </md-card-subtitle>
+    </md-card-header>
+  </md-card>
 </article>
 
 <md-paginator [length]="news?.length" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions" (page)="changePage($event)">

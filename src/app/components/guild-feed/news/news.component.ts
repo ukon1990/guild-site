@@ -31,6 +31,7 @@ export class NewsComponent implements OnInit {
 	}
 
 	ngOnInit() {
+		$WowheadPower.init();
 	}
 
 	bonusList(bonusList: any[]): string {

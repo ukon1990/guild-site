@@ -1,4 +1,4 @@
-<md-tab-group>
+<md-tab-group [selectedIndex]="1" (selectChange)="onTabChanged($event)">
   <md-tab label="Player news" style="color:blue !important;">
     <app-news></app-news>
   </md-tab>
