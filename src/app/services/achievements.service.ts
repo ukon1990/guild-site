@@ -14,7 +14,7 @@ export class AchievementsService {
 	private baseUrl = `https://${
 		this.region}.api.battle.net/wow/data/character/achievements?locale=en_GB&apikey=${this.apiKey}`;
 
-	achievements: AchievementListItem[];
+	achievements: AchievementListItem[] = [];
 
 	constructor(private _http: HttpClient) { }
 

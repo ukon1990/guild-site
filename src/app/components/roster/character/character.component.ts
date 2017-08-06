@@ -4,6 +4,7 @@ import { PageEvent } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment-timezone';
 import { CharacterService } from '../../../services/character.service';
+import { AchievementsService } from '../../../services/achievements.service';
 
 declare const $WowheadPower: any;
 @Component({
@@ -14,6 +15,7 @@ declare const $WowheadPower: any;
 export class CharacterComponent implements OnInit, OnDestroy {
 	private sub: any;
 	character: any = {name: '', realm: ''};
+	selectedAchivementGroupIndex = -1;
 	logs: any[];
 	metric: string;
 	characterSpecialization: string;
@@ -37,7 +39,7 @@ export class CharacterComponent implements OnInit, OnDestroy {
 		12: '#000900' // Demon hunter
 	};
 
-	constructor(private activatedRoute: ActivatedRoute,
+	constructor(private activatedRoute: ActivatedRoute, private achievementsService: AchievementsService,
 		private sanitizer: DomSanitizer, private characterService: CharacterService) {
 			this.sub = this.activatedRoute.params.subscribe(p => {
 				this.character.realm = p['realm'];
@@ -118,5 +120,13 @@ export class CharacterComponent implements OnInit, OnDestroy {
 			$WowheadPower.init();
 			setTimeout( () => $WowheadPower.hideTooltip(), 5);
 		}
+	}
+
+	unselectAchievementGroup(event): void {
+		this.selectedAchivementGroupIndex = -1;
+	}
+
+	selectAchievementGroup(index: number) {
+		this.selectedAchivementGroupIndex = index;
 	}
 }
