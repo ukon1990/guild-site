@@ -1,22 +1,22 @@
 <md-tab-group [selectedIndex]="index">
   <md-tab label="General">
-    <div *ngFor="achievementGroup.achievements">
+    <div *ngFor="let a of achievementGroup.achievements">
       <md-card class="col-md-6 float-left">
       <md-card-header>
-        <div md-card-avatar class="example-header-image"></div>
-        <md-card-title>SSS</md-card-title>
-        <md-card-subtitle>Dog Breed</md-card-subtitle>
+        <div md-card-avatar [style.background-image]="getIcon(a)"></div>
+        <md-card-title [ngClass]="{'uncompleted': !map[a.id]}">{{ a.title }}</md-card-title>
+        <md-card-subtitle [ngClass]="{'uncompleted': !map[a.id]}">{{ a.description }}</md-card-subtitle>
       </md-card-header>
     </md-card>
     </div>
   </md-tab>
   <md-tab *ngFor="let category of achievementGroup.categories" [label]="category.name">
-    <div *ngFor="category.achievements">
+    <div *ngFor="let a of category.achievements">
       <md-card class="col-md-6 float-left">
       <md-card-header>
-        <div md-card-avatar class="example-header-image"></div>
-        <md-card-title>SSSS</md-card-title>
-        <md-card-subtitle>Dog Breed</md-card-subtitle>
+        <div md-card-avatar [style.background-image]="getIcon(a)"></div>
+        <md-card-title [ngClass]="{'uncompleted': !map[a.id]}">{{ a.title }}</md-card-title>
+        <md-card-subtitle [ngClass]="{'uncompleted': !map[a.id]}">{{ a.description }}</md-card-subtitle>
       </md-card-header>
     </md-card>
     </div>

@@ -8,11 +8,20 @@ app-guild-feed .mat-tab-label {
 	color: black !important;
 }
 
-app-character-achievement-list-item .mat-card {
+app-character-achievement-list-item .mat-card,
+app-character-achievement .mat-card{
 	background-color: transparent;
 }
+
 app-character-achievement-list-item .mat-card .mat-card-content,
 app-character-achievement-list-item .mat-card .mat-card-header-text,
-app-character-achievement-list-item .mat-card .mat-card-subtitle {
+app-character-achievement-list-item .mat-card .mat-card-subtitle,
+app-character-achievement .mat-card .mat-card-content,
+app-character-achievement .mat-card .mat-card-header-text,
+app-character-achievement .mat-card .mat-card-subtitle {
 	color: white;
+}
+
+.uncompleted {
+	color: lightslategrey;
 }
