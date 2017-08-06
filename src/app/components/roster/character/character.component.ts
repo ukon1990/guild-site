@@ -15,6 +15,7 @@ declare const $WowheadPower: any;
 export class CharacterComponent implements OnInit, OnDestroy {
 	private sub: any;
 	character: any = {name: '', realm: ''};
+	achievementsService: AchievementsService;
 	selectedAchivementGroupIndex = -1;
 	logs: any[];
 	metric: string;
@@ -39,8 +40,10 @@ export class CharacterComponent implements OnInit, OnDestroy {
 		12: '#000900' // Demon hunter
 	};
 
-	constructor(private activatedRoute: ActivatedRoute, private achievementsService: AchievementsService,
+	constructor(private activatedRoute: ActivatedRoute, achievementsService: AchievementsService,
 		private sanitizer: DomSanitizer, private characterService: CharacterService) {
+			this.achievementsService = achievementsService;
+
 			this.sub = this.activatedRoute.params.subscribe(p => {
 				this.character.realm = p['realm'];
 				this.character.name = p['character'];
@@ -60,7 +63,7 @@ export class CharacterComponent implements OnInit, OnDestroy {
 								this.setMetricForSpec();
 							})
 							.catch(error => console.log(error));
-						$WowheadPower.init();
+						this.init();
 					})
 					.catch(error => console.log(error));
 			});
@@ -116,10 +119,7 @@ export class CharacterComponent implements OnInit, OnDestroy {
 	}
 
 	onTabChanged(event): void {
-		if ($WowheadPower) {
-			$WowheadPower.init();
-			setTimeout( () => $WowheadPower.hideTooltip(), 5);
-		}
+		this.init();
 	}
 
 	unselectAchievementGroup(event): void {
@@ -128,5 +128,16 @@ export class CharacterComponent implements OnInit, OnDestroy {
 
 	selectAchievementGroup(index: number) {
 		this.selectedAchivementGroupIndex = index;
+	}
+
+	init(): void {
+		try {
+			if ($WowheadPower) {
+				$WowheadPower.init();
+				setTimeout( () => $WowheadPower.hideTooltip(), 5);
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	}
 }

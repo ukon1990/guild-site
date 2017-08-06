@@ -2,7 +2,7 @@
   <i class="fa fa-chevron-left" aria-hidden="true"></i>
   Back to overview
 </button>
-<md-tab-group [selectedIndex]="index">
+<md-tab-group>
   <md-tab label="General">
     <div *ngFor="let a of achievementGroup.achievements">
       <md-card class="col-md-6 float-left" [ngClass]="{'uncompleted': !map[a.id]}">

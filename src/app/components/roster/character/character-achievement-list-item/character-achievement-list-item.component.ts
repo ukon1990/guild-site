@@ -13,19 +13,21 @@ export class CharacterAchievementListItemComponent implements OnInit {
 	constructor() { }
 
 	ngOnInit() {
-		this.completedAchievements.forEach( a => {
-			this.map[a] = a;
-		});
-		this.achievementGroup.categoryAchievementCount = 0;
-		if (this.achievementGroup.categories) {
-			this.achievementGroup.categories.forEach( c => {
-				this.achievementGroup.categoryAchievementCount += c.achievements.length;
+		if (this.completedAchievements && this.completedAchievements !== null) {
+			this.completedAchievements.forEach( a => {
+				this.map[a] = a;
 			});
+			this.achievementGroup.categoryAchievementCount = 0;
+			if (this.achievementGroup.categories && this.achievementGroup.categories !== null) {
+				this.achievementGroup.categories.forEach( c => {
+					this.achievementGroup.categoryAchievementCount += c.achievements.length;
+				});
+			}
+			this.achievementGroup
+				.progress = Math
+					.round((this.getCompletedCount() /
+					(this.achievementGroup.achievements.length + this.achievementGroup.categoryAchievementCount) * 100));
 		}
-		this.achievementGroup
-			.progress = Math
-				.round((this.getCompletedCount() /
-				(this.achievementGroup.achievements.length + this.achievementGroup.categoryAchievementCount) * 100));
 	}
 
 	getCompletedCount(): number {

@@ -69,7 +69,7 @@ export class RosterComponent implements OnInit {
 	}
 
 	getMembers() {
-		console.log(this.queryParams);
+		// console.log(this.queryParams);
 		if (this.queryParams.character.length === 0) {
 			if (this.queryParams.rank !== '-1') {
 				// this.pagignation.current = 1;

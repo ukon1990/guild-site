@@ -28,7 +28,7 @@ export class AchievementsComponent implements OnInit {
 					});
 				}
 				this.achievements.sort( (a: any, b: any) => a.timestamp < b.timestamp ? 1 : -1 );
-				$WowheadPower.init();
+				this.init();
 				console.log(tmp);
 			})
 			.catch(error => {
@@ -37,11 +37,21 @@ export class AchievementsComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		$WowheadPower.init();
+		this.init();
 	}
 
 	changePage(event: PageEvent) {
 		this.pageEvent = event;
-		$WowheadPower.init();
+		this.init();
+	}
+
+	init(): void {
+		try {
+			if ($WowheadPower) {
+				$WowheadPower.init();
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	}
 }

@@ -23,7 +23,7 @@ export class NewsComponent implements OnInit {
 			.then(response => {
 				this.news = response.json().news;
 				console.log(this.news);
-				$WowheadPower.init();
+				this.init();
 			})
 			.catch(error => {
 				console.log(error);
@@ -31,7 +31,7 @@ export class NewsComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		$WowheadPower.init();
+		this.init();
 	}
 
 	bonusList(bonusList: any[]): string {
@@ -40,6 +40,16 @@ export class NewsComponent implements OnInit {
 
 	changePage(event: PageEvent) {
 		this.pageEvent = event;
-		$WowheadPower.init();
+		this.init();
+	}
+
+	init(): void {
+		try {
+			if ($WowheadPower) {
+				$WowheadPower.init();
+			}
+		} catch (error) {
+			console.log(error);
+		}
 	}
 }
