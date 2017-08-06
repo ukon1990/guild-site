@@ -23,5 +23,10 @@ app-character-achievement .mat-card .mat-card-subtitle {
 }
 
 .uncompleted {
-	color: lightslategrey;
+	background-color: rgba(121, 121, 121, 0.1) !important;
+	color: lightskyblue;
+}
+
+.achievement-card {
+	height: 10em;
 }

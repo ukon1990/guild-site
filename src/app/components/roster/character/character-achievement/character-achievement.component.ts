@@ -16,14 +16,14 @@ export class CharacterAchievementComponent implements OnInit {
 	constructor(private sanitizer: DomSanitizer) { }
 
 	ngOnInit() {
-		this.completedAchievements.forEach( a => {
-			this.map[a] = a;
-		});
+		for (let i = 0, x = this.completedAchievements.length; i < x; i++) {
+			this.map[this.completedAchievements[i]] = this.completedAchievementsTimestamp[i];
+		}
 
-		this.achievementGroup.achievements.sort( (a: any, b: any) => this.map[a.id] && !this.map[b.id] ? -1 : 1 );
+		this.achievementGroup.achievements.sort( (a: any, b: any) => this.map[a.id] < !this.map[b.id] ? 1 : -1 );
 		if (this.achievementGroup.categories) {
 			this.achievementGroup.categories.forEach(c => {
-				c.achievements.sort( (a: any, b: any) => this.map[a.id] && !this.map[b.id] ? -1 : 1 );
+				c.achievements.sort( (a: any, b: any) => this.map[a.id] < !this.map[b.id] ? 1 : -1);
 			});
 		}
 	}
