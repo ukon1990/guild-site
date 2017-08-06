@@ -28,6 +28,8 @@ import { ArtifactComponent } from './components/roster/character/character-item/
 import { CharacterLogItemComponent } from './components/roster/character/character-log-item/character-log-item.component';
 import { LogsComponent } from './components/logs/logs.component';
 import { GuildFeedComponent } from './components/guild-feed/guild-feed.component';
+import { CharacterAchievementComponent } from './components/roster/character/character-achievement/character-achievement.component';
+import { CharacterAchievementListItemComponent } from './components/roster/character/character-achievement-list-item/character-achievement-list-item.component';
 
 @NgModule({
 	declarations: [
@@ -48,7 +50,9 @@ import { GuildFeedComponent } from './components/guild-feed/guild-feed.component
 		ArtifactComponent,
 		CharacterLogItemComponent,
 		LogsComponent,
-		GuildFeedComponent
+		GuildFeedComponent,
+		CharacterAchievementComponent,
+		CharacterAchievementListItemComponent
 	],
 	imports: [
 		BrowserModule,

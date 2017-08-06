@@ -4,6 +4,7 @@ import { PageEvent } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import * as moment from 'moment-timezone';
 import { CharacterService } from '../../../services/character.service';
+import { AchievementsService } from '../../../services/achievements.service';
 
 declare const $WowheadPower: any;
 @Component({
@@ -37,7 +38,7 @@ export class CharacterComponent implements OnInit, OnDestroy {
 		12: '#000900' // Demon hunter
 	};
 
-	constructor(private activatedRoute: ActivatedRoute,
+	constructor(private activatedRoute: ActivatedRoute, private achievementsService: AchievementsService,
 		private sanitizer: DomSanitizer, private characterService: CharacterService) {
 			this.sub = this.activatedRoute.params.subscribe(p => {
 				this.character.realm = p['realm'];

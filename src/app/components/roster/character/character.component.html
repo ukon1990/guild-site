@@ -23,7 +23,7 @@
     {{ character.level }} {{ characterSpecialization }} {{ character.class }} {{ character.realm }}
   </h6>
 
-  <md-tab-group (selectChange)="onTabChanged($event)">
+  <md-tab-group (selectChange)="onTabChanged($event)" [selectedIndex]="3">
     <md-tab label="Equipment">
       <div class="clearfix">
         <div class="col-md-5 float-left">
@@ -78,7 +78,8 @@
       <app-character-log-item *ngFor="let boss of logs" [boss]="boss" class="col-md-4 float-left"></app-character-log-item>
     </md-tab>
     <md-tab label="Achievements">
-      Achieves inc
+      <app-character-achievement-list-item *ngFor="let a of achievementsService?.achievements"
+        [achievementCategory]="a" [completedAchievements]="character?.achievements?.achievementsCompleted"></app-character-achievement-list-item>
     </md-tab>
     <md-tab label="Pvp">
       PvP?

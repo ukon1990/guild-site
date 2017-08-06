@@ -3,6 +3,7 @@ export class AchievementListItem {
 	name: string;
 	achievements: Achievement[];
 	categories?: Category[];
+	progress?: number;
 }
 
 export class Achievement {
