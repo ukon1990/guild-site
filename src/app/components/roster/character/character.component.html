@@ -87,7 +87,9 @@
       <ng-template #achivementGroup>
         <app-character-achievement *ngIf="achievementsService?.achievements"
           [completedAchievements]="character?.achievements?.achievementsCompleted"
-          [achievementGroup]="achievementsService?.achievements[selectedAchivementGroupIndex]"></app-character-achievement>
+          [completedAchievementsTimestamp]="character?.achievements?.achievementsCompletedTimestamp"
+          [achievementGroup]="achievementsService?.achievements[selectedAchivementGroupIndex]"
+          (resetIndex)="unselectAchievementGroup($event)"></app-character-achievement>
       </ng-template>
     </md-tab>
     <md-tab label="Pvp">

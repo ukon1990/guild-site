@@ -122,6 +122,10 @@ export class CharacterComponent implements OnInit, OnDestroy {
 		}
 	}
 
+	unselectAchievementGroup(event): void {
+		this.selectedAchivementGroupIndex = -1;
+	}
+
 	selectAchievementGroup(index: number) {
 		this.selectedAchivementGroupIndex = index;
 	}

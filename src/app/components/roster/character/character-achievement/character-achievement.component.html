@@ -1,11 +1,19 @@
+<button (click)="resetIndex.emit()" md-button>
+  <i class="fa fa-chevron-left" aria-hidden="true"></i>
+  Back to overview
+</button>
 <md-tab-group [selectedIndex]="index">
   <md-tab label="General">
     <div *ngFor="let a of achievementGroup.achievements">
       <md-card class="col-md-6 float-left">
       <md-card-header>
         <div md-card-avatar [style.background-image]="getIcon(a)"></div>
-        <md-card-title [ngClass]="{'uncompleted': !map[a.id]}">{{ a.title }}</md-card-title>
-        <md-card-subtitle [ngClass]="{'uncompleted': !map[a.id]}">{{ a.description }}</md-card-subtitle>
+        <md-card-title [ngClass]="{'uncompleted': !map[a.id]}">
+          {{ a.title }} <span *ngIf="map[a.id]"> - {{ completedAchievementsTimestamp[a.id] | date}}</span>
+        </md-card-title>
+        <md-card-subtitle [ngClass]="{'uncompleted': !map[a.id]}">
+          {{ a.description }}
+        </md-card-subtitle>
       </md-card-header>
     </md-card>
     </div>
@@ -15,8 +23,12 @@
       <md-card class="col-md-6 float-left">
       <md-card-header>
         <div md-card-avatar [style.background-image]="getIcon(a)"></div>
-        <md-card-title [ngClass]="{'uncompleted': !map[a.id]}">{{ a.title }}</md-card-title>
-        <md-card-subtitle [ngClass]="{'uncompleted': !map[a.id]}">{{ a.description }}</md-card-subtitle>
+        <md-card-title [ngClass]="{'uncompleted': !map[a.id]}">
+          {{ a.title }} <span *ngIf="map[a.id]"> - {{ completedAchievementsTimestamp[a.id] | date}}</span>
+        </md-card-title>
+        <md-card-subtitle [ngClass]="{'uncompleted': !map[a.id]}">
+          {{ a.description }}
+        </md-card-subtitle>
       </md-card-header>
     </md-card>
     </div>

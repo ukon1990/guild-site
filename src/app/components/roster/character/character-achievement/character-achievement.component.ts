@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 
 @Component({
@@ -8,7 +8,9 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
 })
 export class CharacterAchievementComponent implements OnInit {
 	@Input() completedAchievements: any[];
+	@Input() completedAchievementsTimestamp: any[];
 	@Input() achievementGroup: any;
+	@Output() resetIndex = new EventEmitter();
 	map = [];
 
 	constructor(private sanitizer: DomSanitizer) { }
