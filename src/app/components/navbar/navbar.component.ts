@@ -13,7 +13,9 @@ export class NavbarComponent implements OnInit {
 
 	ngOnInit() {
 		this.guildSerivce.getGuildRank(this.guildName)
-			.then(rank => this.guildRank = rank)
+			.then(rank => {
+				this.guildRank = rank;
+			})
 			.catch(error => console.log(error));
 	}
 

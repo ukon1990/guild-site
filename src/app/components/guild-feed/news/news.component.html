@@ -28,9 +28,15 @@
 				<p *ngSwitchDefault>{{ n.type }}</p>
 			</span>
       </md-card-title>
-      <md-card-subtitle>
-        {{ n.character }} {{ (n.timestamp) | date:'dd.MMM-yy HH:mm'}}
-      </md-card-subtitle>
+      <md-card-subtitle class="clearfix mb-0">
+				<strong>Time:</strong> {{ (n.timestamp) | date:'dd.MMM-yy HH:mm'}}
+			</md-card-subtitle>
+			<md-card-subtitle *ngIf="n.context !== ''" class="clearfix mb-0">
+				<strong>From:</strong> {{ getContext(n) }}
+			</md-card-subtitle>
+			<md-card-subtitle class="clearfix mb-0">
+				<strong>Player:</strong> {{ n.character }}
+			</md-card-subtitle>
     </md-card-header>
   </md-card>
 </article>

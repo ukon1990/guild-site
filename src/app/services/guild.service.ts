@@ -69,7 +69,7 @@ export class GuildService {
 		if (this.news) {
 			return this.news;
 		} else {
-			this.news = this.http
+			this.news = this.httpClient
 				.get(
 					`${
 						this.baseUrl
@@ -97,7 +97,7 @@ export class GuildService {
 	}
 
 	getGuildRank(guildName: string): Promise<any> {
-		return this.http
+		return this.httpClient
 			.get(`http://guild.jonaskf.net/assets/api/GetGuildRank.php`).toPromise();
 	}
 

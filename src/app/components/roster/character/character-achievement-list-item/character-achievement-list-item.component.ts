@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 import { AchievementListItem } from '../../../../models/achievement';
 
 @Component({
@@ -6,13 +6,21 @@ import { AchievementListItem } from '../../../../models/achievement';
 	templateUrl: './character-achievement-list-item.component.html',
 	styleUrls: ['./character-achievement-list-item.component.css']
 })
-export class CharacterAchievementListItemComponent implements OnInit {
+export class CharacterAchievementListItemComponent implements OnInit, OnChanges {
 	@Input() achievementGroup: AchievementListItem;
 	@Input() completedAchievements: any;
 	map = [];
 	constructor() { }
 
 	ngOnInit() {
+		this.processAchievements();
+	}
+
+	ngOnChanges(): void {
+		this.processAchievements();
+	}
+
+	processAchievements(): void {
 		if (this.completedAchievements && this.completedAchievements !== null) {
 			this.completedAchievements.forEach( a => {
 				this.map[a] = a;
@@ -29,7 +37,6 @@ export class CharacterAchievementListItemComponent implements OnInit {
 					(this.achievementGroup.achievements.length + this.achievementGroup.categoryAchievementCount) * 100));
 		}
 	}
-
 	getCompletedCount(): number {
 		let completed = 0;
 		this.achievementGroup.achievements.forEach(a => {
