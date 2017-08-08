@@ -36,7 +36,7 @@ export class NewsComponent implements OnInit {
 						this.init();
 					})
 					.catch(e => console.log(e));
-		}, 10000 );
+		}, 60000 );
 	}
 
 	sortedNews(news: any[]): any[] {
