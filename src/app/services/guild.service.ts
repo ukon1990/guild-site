@@ -98,7 +98,7 @@ export class GuildService {
 
 	getGuildRank(guildName: string): Promise<any> {
 		return this.http
-			.get(`https://www.wowprogress.com/guild/${this.region}/${this.realm}/${guildName}/json_rank`).toPromise();
+			.get(`http://guild.jonaskf.net/assets/api/GetGuildRank.php`).toPromise();
 	}
 
 	getGuildLogs(realm: string, guild: string): Promise<any> {
