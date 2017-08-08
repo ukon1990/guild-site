@@ -21,13 +21,26 @@ export class NewsComponent implements OnInit {
 		this.guildService
 			.getNews('Cake or pie')
 			.then(response => {
-				this.news = response.news.sort((a, b) => a.timestamp > b.timestamp ? -1 : 1);
+				this.news = this.sortedNews(response.news)
 				console.log(this.news);
 				this.init();
 			})
 			.catch(error => {
 				console.log(error);
 			});
+		setInterval( () => {
+			this.guildService
+				.getNews('Cake or pie', true)
+					.then(n => {
+						this.news = this.sortedNews(n.news);
+						this.init();
+					})
+					.catch(e => console.log(e));
+		}, 10000 );
+	}
+
+	sortedNews(news: any[]): any[] {
+		return news.sort((a, b) => a.timestamp > b.timestamp ? -1 : 1);
 	}
 
 	ngOnInit() {

@@ -65,8 +65,8 @@ export class GuildService {
 		}
 	}
 
-	getNews(guildName: string): Promise<any> {
-		if (this.news) {
+	getNews(guildName: string, refresh?: boolean): Promise<any> {
+		if (this.news && (refresh === undefined || !refresh)) {
 			return this.news;
 		} else {
 			this.news = this.httpClient

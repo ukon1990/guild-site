@@ -1,0 +1,8 @@
+md-card {
+    height: 8em;
+}
+
+md-card-title {
+    white-space: nowrap;
+    overflow: hidden;
+}
