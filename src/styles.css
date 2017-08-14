@@ -4,6 +4,15 @@
 app-character .mat-tab-label {
 	color: white !important;
 }
+app-character .mat-select-value-text,
+app-character .mat-select-arrow{
+	color: white;
+}
+
+app-character .mat-select-placeholder {
+	color: lightgray;
+}
+
 app-guild-feed .mat-tab-label {
 	color: black !important;
 }

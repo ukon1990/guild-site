@@ -11,6 +11,8 @@ export class CharacterService {
 	private baseUrl = `https://${this.region}.api.battle.net/wow/character/`;
 	private urlEnd = `?locale=en_GB&apikey=${this.apiKey}`;
 
+	logs: Promise<any>;
+
 	constructor(private http: Http, private httpClient: HttpClient) { }
 
 	getCharacter(realm: string, character: string): Promise<any> {
@@ -28,8 +30,7 @@ export class CharacterService {
 			).toPromise();
 	}
 
-	getCharacterLogs(realm: string, character: string, metric: string): Promise<any> {
-		// https://www.warcraftlogs.com:443/v1/parses/character/stinson/emerald-dream/eu?api_key=4508059150144d5b3159184e77c51070
+	getCharacterLogs(realm: string, character: string, metric: string, zone: string): Promise<any> {
 		return this.httpClient
 			.get(
 				`https://www.warcraftlogs.com:443/v1/parses/character/${
@@ -38,7 +39,16 @@ export class CharacterService {
 					realm
 				}/eu?metric=${
 					metric
-				}&api_key=4508059150144d5b3159184e77c51070`// ,quests,professions
+				}${
+					zone && zone !== ''  ? '&zone=' + zone : ''
+				}&api_key=4508059150144d5b3159184e77c51070`
 			).toPromise();
+	}
+
+	getLogZones(): Promise<any> {
+		if (this.logs) {
+			return this.logs;
+		}
+		return this.httpClient.get('assets/mock/zones.json').toPromise();
 	}
 }

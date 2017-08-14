@@ -17,9 +17,8 @@ export class CharacterComponent implements OnInit, OnDestroy {
 	character: any = {name: '', realm: ''};
 	achievementsService: AchievementsService;
 	selectedAchivementGroupIndex = -1;
-	logs: any[];
-	metric: string;
-	characterSpecialization: string;
+
+
 	page = {
 		pageSize: 6,
 		pageSizeOptions: [6, 12]
@@ -42,32 +41,27 @@ export class CharacterComponent implements OnInit, OnDestroy {
 
 	constructor(private activatedRoute: ActivatedRoute, achievementsService: AchievementsService,
 		private sanitizer: DomSanitizer, private characterService: CharacterService) {
-			this.achievementsService = achievementsService;
 
-			this.sub = this.activatedRoute.params.subscribe(p => {
-				this.character.realm = p['realm'];
-				this.character.name = p['character'];
-				this.characterService.getCharacter(p['realm'], p['character'])
-					.then(c => {
-						this.character = c.json();
-						console.log(this.character);
-						this.character.progression.raids.reverse();
-						/*
-						this.character.lastModified = moment
-							.tz(this.character.lastModified, 'UTC');
-						*/
-						this.characterService.getCharacterLogs(this.slugifyName(p['realm']), p['character'], 'hps')
-							.then(logs => {
-								this.logs = logs;
-								console.log(logs);
-								this.setMetricForSpec();
-							})
-							.catch(error => console.log(error));
-						this.init();
-					})
-					.catch(error => console.log(error));
-			});
-		}
+		this.achievementsService = achievementsService;
+
+		this.sub = this.activatedRoute.params.subscribe(p => {
+			this.character.realm = p['realm'];
+			this.character.name = p['character'];
+			console.log('params', p);
+			this.characterService.getCharacter(p['realm'], p['character'])
+				.then(c => {
+					this.character = c.json();
+					console.log(this.character);
+					this.character.progression.raids.reverse();
+					/*
+					this.character.lastModified = moment
+						.tz(this.character.lastModified, 'UTC');
+					*/
+					this.init();
+				})
+				.catch(error => console.log(error));
+		});
+	}
 
 	ngOnInit() {
 		// this.onTabChanged(null);
@@ -88,35 +82,14 @@ export class CharacterComponent implements OnInit, OnDestroy {
 	}
 
 	getBackgroundColor() {
-		return this.sanitizer.bypassSecurityTrustStyle(this.classBgColor[this.character.class]);
+		return this.sanitizer.bypassSecurityTrustStyle(
+			this.character.class ? this.classBgColor[this.character.class] : 'black');
 	}
 
 	bonusList(bonusList: any[]): string {
 		return bonusList.join(':');
 	}
 
-	slugifyName(name: string): string {
-		return name.replace(/[\' ]/i, '-');
-	}
-
-	setMetricForSpec(): void {
-		this.character.talents.forEach(spec => {
-			if (spec.selected) {
-				this.characterSpecialization = spec.spec.name;
-				switch (spec.role) {
-					case 'TANK':
-						this.metric = '';
-						break;
-					case 'HEALING':
-						this.metric = 'hps';
-						break;
-					default:
-						this.metric = 'dps';
-						break;
-				}
-			}
-		});
-	}
 
 	onTabChanged(event): void {
 		this.init();

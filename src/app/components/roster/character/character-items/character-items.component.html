@@ -1,0 +1,26 @@
+<div class="clearfix">
+  <div class="col-md-5 float-left">
+    <ul class="list-group" *ngIf="items">
+      <app-character-item [item]="items?.head"></app-character-item>
+      <app-character-item [item]="items?.neck"></app-character-item>
+      <app-character-item [item]="items?.shoulder"></app-character-item>
+      <app-character-item [item]="items?.back"></app-character-item>
+      <app-character-item [item]="items?.chest"></app-character-item>
+      <app-character-item [item]="items?.wrist"></app-character-item>
+      <app-character-item [item]="items?.mainHand"></app-character-item>
+      <app-character-item [item]="items?.offHand"></app-character-item>
+    </ul>
+  </div>
+  <div class="col-md-5 float-right">
+    <ul class="list-group" *ngIf="items">
+      <app-character-item [item]="items?.hands"></app-character-item>
+      <app-character-item [item]="items?.waist"></app-character-item>
+      <app-character-item [item]="items?.legs"></app-character-item>
+      <app-character-item [item]="items?.feet"></app-character-item>
+      <app-character-item [item]="items?.finger1"></app-character-item>
+      <app-character-item [item]="items?.finger2"></app-character-item>
+      <app-character-item [item]="items?.trinket1"></app-character-item>
+      <app-character-item [item]="items?.trinket2"></app-character-item>
+    </ul>
+  </div>
+</div>
