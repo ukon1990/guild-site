@@ -16,7 +16,6 @@ export class GuildService {
 	achievments: Promise<any>;
 	roster: Promise<any>;
 	challenges: Promise<any>;
-	news: Promise<any>;
 	zones: Promise<any>;
 
 	constructor (private http: Http, private httpClient: HttpClient) { }
@@ -66,10 +65,7 @@ export class GuildService {
 	}
 
 	getNews(guildName: string, refresh?: boolean): Promise<any> {
-		if (this.news && (refresh === undefined || !refresh)) {
-			return this.news;
-		} else {
-			this.news = this.httpClient
+		return this.httpClient
 				.get(
 					`${
 						this.baseUrl
@@ -79,8 +75,6 @@ export class GuildService {
 						this.urlEnd
 					}&fields=news`
 				).toPromise();
-			return this.news;
-		}
 	}
 
 	getMembers(guildName: string): Promise<any> {
