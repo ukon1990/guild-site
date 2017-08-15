@@ -20,7 +20,7 @@
 	</span>
   <h3 class="card-title">{{ character.name }}</h3>
   <h6 class="card-subtitle mb-2">
-    {{ character.level }} {{ characterSpecialization }} {{ character.class }} {{ character.realm }}
+    {{ character.level }} {{ characterSpecialization }} {{ classes[character.class] }} {{ character.realm }}
   </h6>
 
   <!--
@@ -37,7 +37,7 @@
     <router-outlet></router-outlet>
    -->
 
-  <md-tab-group (selectChange)="onTabChanged($event)"><!-- [selectedIndex]="3" -->
+  <md-tab-group (selectChange)="onTabChanged($event)" [selectedIndex]="page.selectedTabIndex"><!-- [selectedIndex]="3" -->
     <md-tab label="Equipment">
       <app-character-items [items]="character?.items"></app-character-items>
     </md-tab>
@@ -66,7 +66,7 @@
     </md-tab>
     <md-tab label="Achievements" *ngIf="achievementsService !== null && achievementsService?.achievements !== null">
       <div *ngIf="selectedAchivementGroupIndex === -1; else achivementGroup">
-        <app-character-achievement-list-item (click)="selectAchievementGroup(i)"
+        <app-character-achievement-list-item (click)="selectAchievementGroup(i, a.name)"
           *ngFor="let a of achievementsService?.achievements; let i = index" 
           [achievementGroup]="a"
           [completedAchievements]="character?.achievements?.achievementsCompleted"></app-character-achievement-list-item>

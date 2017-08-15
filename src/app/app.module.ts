@@ -67,16 +67,9 @@ import { CharacterLogsComponent } from './components/roster/character/character-
 		RouterModule.forRoot([
 			{path: '', component: GuildFeedComponent},
 			{path: 'roster', component: RosterComponent},
-			{path: 'roster/:realm/:character', component: CharacterComponent, children: [
-				{path: 'progress', component: RosterComponent},
-				{path: 'logs', component: RosterComponent},
-				{path: 'achievements', component: RosterComponent, children: [
-					{path: ':category', component: RosterComponent}
-				]},
-				{path: 'pvp', component: RosterComponent},
-				{path: 'statistics', component: RosterComponent}
-			]},
-			{path: 'achievements', component: AchievementsComponent},
+			{path: 'roster/:realm/:character', component: CharacterComponent},
+			{path: 'roster/:realm/:character/:tab', component: CharacterComponent},
+			{path: 'roster/:realm/:character/:tab/:category', component: CharacterComponent},
 			{path: 'challenges', component: ChallengeComponent},
 			{path: 'logs', component: LogsComponent},
 			{path: 'streams', component: StreamsComponent},
