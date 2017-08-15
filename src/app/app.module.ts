@@ -30,6 +30,8 @@ import { LogsComponent } from './components/logs/logs.component';
 import { GuildFeedComponent } from './components/guild-feed/guild-feed.component';
 import { CharacterAchievementComponent } from './components/roster/character/character-achievement/character-achievement.component';
 import { CharacterAchievementListItemComponent } from './components/roster/character/character-achievement-list-item/character-achievement-list-item.component';
+import { CharacterItemsComponent } from './components/roster/character/character-items/character-items.component';
+import { CharacterLogsComponent } from './components/roster/character/character-logs/character-logs.component';
 
 @NgModule({
 	declarations: [
@@ -52,7 +54,9 @@ import { CharacterAchievementListItemComponent } from './components/roster/chara
 		LogsComponent,
 		GuildFeedComponent,
 		CharacterAchievementComponent,
-		CharacterAchievementListItemComponent
+		CharacterAchievementListItemComponent,
+		CharacterItemsComponent,
+		CharacterLogsComponent
 	],
 	imports: [
 		BrowserModule,
@@ -64,7 +68,8 @@ import { CharacterAchievementListItemComponent } from './components/roster/chara
 			{path: '', component: GuildFeedComponent},
 			{path: 'roster', component: RosterComponent},
 			{path: 'roster/:realm/:character', component: CharacterComponent},
-			{path: 'achievements', component: AchievementsComponent},
+			{path: 'roster/:realm/:character/:tab', component: CharacterComponent},
+			{path: 'roster/:realm/:character/:tab/:category', component: CharacterComponent},
 			{path: 'challenges', component: ChallengeComponent},
 			{path: 'logs', component: LogsComponent},
 			{path: 'streams', component: StreamsComponent},

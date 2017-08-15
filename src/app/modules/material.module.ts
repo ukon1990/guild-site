@@ -8,7 +8,8 @@ import {
 	MdListModule, MdTabsModule,
 	MdSidenavModule, MdPaginatorModule,
 	MdSortModule, MdTableModule,
-	MdCardModule, MdProgressSpinnerModule
+	MdCardModule, MdProgressSpinnerModule,
+	MdSelectModule
 } from '@angular/material';
 
 @NgModule({
@@ -28,7 +29,8 @@ import {
 		MdSortModule,
 		MdTableModule,
 		MdCardModule,
-		MdProgressSpinnerModule
+		MdProgressSpinnerModule,
+		MdSelectModule
 	],
 	imports: [
 	],

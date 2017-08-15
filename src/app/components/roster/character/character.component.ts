@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
 import { PageEvent } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment-timezone';
 import { CharacterService } from '../../../services/character.service';
 import { AchievementsService } from '../../../services/achievements.service';
@@ -17,12 +17,13 @@ export class CharacterComponent implements OnInit, OnDestroy {
 	character: any = {name: '', realm: ''};
 	achievementsService: AchievementsService;
 	selectedAchivementGroupIndex = -1;
-	logs: any[];
-	metric: string;
-	characterSpecialization: string;
+	characterSpecialization = '';
+
+
 	page = {
 		pageSize: 6,
-		pageSizeOptions: [6, 12]
+		pageSizeOptions: [6, 12],
+		selectedTabIndex: 0
 	};
 	pageEvent: PageEvent = { pageIndex: 0, pageSize: this.page.pageSize, length: 1 };
 	classBgColor: any  = {
@@ -39,35 +40,39 @@ export class CharacterComponent implements OnInit, OnDestroy {
 		11: '#04100a', // Druid
 		12: '#000900' // Demon hunter
 	};
+	classes = [
+		'0', 'Warrior', 'Paladin', 'Hunter', 'Rogue',
+		'Priest', 'Death knight', 'Shaman', 'Mage',
+		'Warlock', 'Monk', 'Druid', 'Demon hunter'];
 
-	constructor(private activatedRoute: ActivatedRoute, achievementsService: AchievementsService,
+	constructor(private activatedRoute: ActivatedRoute, private router: Router, achievementsService: AchievementsService,
 		private sanitizer: DomSanitizer, private characterService: CharacterService) {
-			this.achievementsService = achievementsService;
 
-			this.sub = this.activatedRoute.params.subscribe(p => {
-				this.character.realm = p['realm'];
-				this.character.name = p['character'];
-				this.characterService.getCharacter(p['realm'], p['character'])
-					.then(c => {
-						this.character = c.json();
-						console.log(this.character);
-						this.character.progression.raids.reverse();
-						/*
-						this.character.lastModified = moment
-							.tz(this.character.lastModified, 'UTC');
-						*/
-						this.characterService.getCharacterLogs(this.slugifyName(p['realm']), p['character'], 'hps')
-							.then(logs => {
-								this.logs = logs;
-								console.log(logs);
-								this.setMetricForSpec();
-							})
-							.catch(error => console.log(error));
-						this.init();
-					})
-					.catch(error => console.log(error));
-			});
-		}
+		this.achievementsService = achievementsService;
+
+		this.sub = this.activatedRoute.params.subscribe(p => {
+			this.character.realm = p['realm'];
+			this.character.name = p['character'];
+			this.setTabIndexFromRoute(p);
+			this.characterService.getCharacter(p['realm'], p['character'])
+				.then(c => {
+					this.character = c.json();
+					console.log(this.character);
+					this.character.progression.raids.reverse();
+					this.character.talents.forEach(spec => {
+						if (spec.selected) {
+							this.characterSpecialization = spec.spec.name;
+						}
+					});
+					/*
+					this.character.lastModified = moment
+						.tz(this.character.lastModified, 'UTC');
+					*/
+					this.init();
+				})
+				.catch(error => console.log(error));
+		});
+	}
 
 	ngOnInit() {
 		// this.onTabChanged(null);
@@ -88,46 +93,90 @@ export class CharacterComponent implements OnInit, OnDestroy {
 	}
 
 	getBackgroundColor() {
-		return this.sanitizer.bypassSecurityTrustStyle(this.classBgColor[this.character.class]);
+		return this.sanitizer.bypassSecurityTrustStyle(
+			this.character.class ? this.classBgColor[this.character.class] : 'black');
 	}
 
 	bonusList(bonusList: any[]): string {
 		return bonusList.join(':');
 	}
 
-	slugifyName(name: string): string {
-		return name.replace(/[\' ]/i, '-');
-	}
-
-	setMetricForSpec(): void {
-		this.character.talents.forEach(spec => {
-			if (spec.selected) {
-				this.characterSpecialization = spec.spec.name;
-				switch (spec.role) {
-					case 'TANK':
-						this.metric = '';
-						break;
-					case 'HEALING':
-						this.metric = 'hps';
-						break;
-					default:
-						this.metric = 'dps';
-						break;
-				}
-			}
-		});
-	}
-
+	// WTS better practice xD
 	onTabChanged(event): void {
+		const baseUrl = `roster/${this.character.realm}/${this.character.name}/`;
+		switch (event.index) {
+			case 1:
+				this.router.navigateByUrl(baseUrl + 'progress');
+				break;
+			case 2:
+				this.router.navigateByUrl(baseUrl + 'logs');
+				break;
+			case 3:
+				this.router.navigateByUrl(baseUrl + 'achievements');
+				break;
+			case 4:
+				this.router.navigateByUrl(baseUrl + 'pvp');
+				break;
+			case 5:
+				this.router.navigateByUrl(baseUrl + 'statistics');
+				break;
+			default:
+				this.router.navigateByUrl(baseUrl + '');
+				break;
+		}
 		this.init();
+	}
+
+	setTabIndexFromRoute(path): void {
+		console.log('routeIndexSet', path);
+		if (path.tab) {
+			switch (path.tab.toLowerCase()) {
+				case 'progress':
+					this.page.selectedTabIndex = 1;
+					break;
+				case 'logs':
+					this.page.selectedTabIndex = 2;
+					break;
+				case 'achievements':
+					this.page.selectedTabIndex = 3;
+					/* TODO: Soon™
+					if (path.category) {
+						this.selectedAchivementGroupIndex =
+							this.findSelectedAchievementGroupIndex(path.category);
+					}*/
+					break;
+				case 'pvp':
+					this.page.selectedTabIndex = 4;
+					break;
+				case 'statistics':
+					this.page.selectedTabIndex = 5;
+					break;
+				default:
+					this.page.selectedTabIndex = 0;
+					break;
+			}
+		}
 	}
 
 	unselectAchievementGroup(event): void {
 		this.selectedAchivementGroupIndex = -1;
 	}
 
-	selectAchievementGroup(index: number) {
+	selectAchievementGroup(index: number, name: string) {
 		this.selectedAchivementGroupIndex = index;
+		/* Soon ™
+		this.router.navigateByUrl(`roster/${
+			this.character.realm}/${
+				this.character.name}/achievements/${
+					name}`);*/
+	}
+
+	findSelectedAchievementGroupIndex(group: string): number {
+		for (let i = 0, x = this.achievementsService.achievements.length; i < x; i++) {
+			if (this.achievementsService.achievements[i].name.toLowerCase() === group.toLowerCase()) {
+				return i;
+			}
+		}
 	}
 
 	init(): void {

@@ -1,0 +1,43 @@
+<p class="mt-3">
+  <md-select placeholder="Log metric" [(ngModel)]="selection.metric" (change)="getLogs()">
+    <md-option *ngFor="let m of metrics; let i = index" [value]="i">{{ m.name }}</md-option>
+  </md-select>
+  <md-select placeholder="Raid zone" [(ngModel)]="selection.zone" (change)="getLogs()">
+    <md-option value="">Current raid</md-option>
+    <md-option *ngFor="let z of logs.zones; let i = index" [value]="z.id">{{ z.name }}</md-option>
+  </md-select>
+  Change the metric, to see the performence for healing, dps etc. If the logs are not up to date, follow
+  <a href="https://www.warcraftlogs.com/character/eu/{{ slugifyName(character.realm) }}/{{ character.name }}" target="_blank">this</a>  to the warcraft logs profile.
+</p>
+<md-tab-group>
+  <!-- LFR -->
+  <md-tab *ngIf="logs[1].logs.length > 0" [label]="logs[1].difficulty">
+    <md-progress-bar *ngIf="selection.isDownloading" mode="indeterminate"></md-progress-bar>
+    <app-character-log-item *ngFor="let boss of logs[1].logs" [boss]="boss" class="col-md-4 float-left"></app-character-log-item>
+  </md-tab>
+  <!-- Normal -->
+  <md-tab *ngIf="logs[3].logs.length > 0" [label]="logs[3].difficulty">
+    <md-progress-bar *ngIf="selection.isDownloading" mode="indeterminate"></md-progress-bar>
+    <app-character-log-item *ngFor="let boss of logs[3].logs" [boss]="boss" class="col-md-4 float-left"></app-character-log-item>
+  </md-tab>
+  <!-- Normal -->
+  <md-tab *ngIf="logs[4].logs.length > 0" [label]="logs[4].difficulty">
+    <md-progress-bar *ngIf="selection.isDownloading" mode="indeterminate"></md-progress-bar>
+    <app-character-log-item *ngFor="let boss of logs[4].logs" [boss]="boss" class="col-md-4 float-left"></app-character-log-item>
+  </md-tab>
+  <!-- Heroic -->
+  <md-tab *ngIf="logs[5].logs.length > 0" [label]="logs[5].difficulty">
+    <md-progress-bar *ngIf="selection.isDownloading" mode="indeterminate"></md-progress-bar>
+    <app-character-log-item *ngFor="let boss of logs[5].logs" [boss]="boss" class="col-md-4 float-left"></app-character-log-item>
+  </md-tab>
+  <!-- Mythic -->
+  <md-tab *ngIf="logs[6].logs.length > 0" [label]="logs[6].difficulty">
+    <md-progress-bar *ngIf="selection.isDownloading" mode="indeterminate"></md-progress-bar>
+    <app-character-log-item *ngFor="let boss of logs[6].logs" [boss]="boss" class="col-md-4 float-left"></app-character-log-item>
+  </md-tab>
+  <!-- Challenge mode -->
+  <md-tab *ngIf="logs[10].logs.length > 0" [label]="logs[10].difficulty">
+    <md-progress-bar *ngIf="selection.isDownloading" mode="indeterminate"></md-progress-bar>
+    <app-character-log-item *ngFor="let boss of logs[10].logs" [boss]="boss" class="col-md-4 float-left"></app-character-log-item>
+  </md-tab>
+</md-tab-group>
