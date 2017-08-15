@@ -8,6 +8,7 @@ import { MaterialModule } from './modules/material.module';
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
+import { DatabaseService } from './services/database.service';
 import { GuildService } from './services/guild.service';
 import { CharacterService } from './services/character.service';
 import { AchievementsService } from './services/achievements.service';
@@ -32,6 +33,8 @@ import { CharacterAchievementComponent } from './components/roster/character/cha
 import { CharacterAchievementListItemComponent } from './components/roster/character/character-achievement-list-item/character-achievement-list-item.component';
 import { CharacterItemsComponent } from './components/roster/character/character-items/character-items.component';
 import { CharacterLogsComponent } from './components/roster/character/character-logs/character-logs.component';
+import { RaidToolComponent } from './components/raid-tool/raid-tool.component';
+import { RaiderComponent } from './components/raid-tool/raider/raider.component';
 
 @NgModule({
 	declarations: [
@@ -56,7 +59,9 @@ import { CharacterLogsComponent } from './components/roster/character/character-
 		CharacterAchievementComponent,
 		CharacterAchievementListItemComponent,
 		CharacterItemsComponent,
-		CharacterLogsComponent
+		CharacterLogsComponent,
+		RaidToolComponent,
+		RaiderComponent
 	],
 	imports: [
 		BrowserModule,
@@ -71,6 +76,7 @@ import { CharacterLogsComponent } from './components/roster/character/character-
 			{path: 'roster/:realm/:character/:tab', component: CharacterComponent},
 			{path: 'roster/:realm/:character/:tab/:category', component: CharacterComponent},
 			{path: 'challenges', component: ChallengeComponent},
+			{path: 'tools/raid-composition', component: RaidToolComponent},
 			{path: 'logs', component: LogsComponent},
 			{path: 'streams', component: StreamsComponent},
 			{path: '**', component: NewsComponent}
@@ -79,7 +85,8 @@ import { CharacterLogsComponent } from './components/roster/character/character-
 	providers: [
 		GuildService,
 		CharacterService,
-		AchievementsService
+		AchievementsService,
+		DatabaseService
 	],
 	bootstrap: [AppComponent]
 })
