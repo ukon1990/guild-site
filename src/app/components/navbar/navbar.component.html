@@ -1,4 +1,4 @@
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded sticky-top">
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded sticky-top mat-elevation-z8">
 	<button class="navbar-toggler navbar-toggler-right"
 		type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
 		aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -26,11 +26,11 @@
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" routerLink="challenges">Challenges</a>
-			</li>
+			</li><!--
 			<li class="nav-item">
 				<a class="nav-link" routerLink="streams">Streams</a>
-			</li>
+			</li>-->
 		</ul>
 	</div>
-	<span>Realm rank: {{ guildRank.realm_rank }}</span>
+	<span>Realm rank: {{ guildRank !== null ? guildRank.realm_rank : 'N/A' }}</span>
 </nav>

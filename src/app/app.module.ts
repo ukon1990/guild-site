@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { Http, HttpModule } from '@angular/http';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './modules/material.module';
 import 'hammerjs';
 
@@ -35,6 +35,7 @@ import { CharacterItemsComponent } from './components/roster/character/character
 import { CharacterLogsComponent } from './components/roster/character/character-logs/character-logs.component';
 import { RaidToolComponent } from './components/raid-tool/raid-tool.component';
 import { RaiderComponent } from './components/raid-tool/raider/raider.component';
+import { AuthenticationService } from './services/authentication.service';
 
 @NgModule({
 	declarations: [
@@ -66,6 +67,7 @@ import { RaiderComponent } from './components/raid-tool/raider/raider.component'
 	imports: [
 		BrowserModule,
 		FormsModule,
+		ReactiveFormsModule,
 		HttpModule,
 		HttpClientModule,
 		MaterialModule,
@@ -86,7 +88,8 @@ import { RaiderComponent } from './components/raid-tool/raider/raider.component'
 		GuildService,
 		CharacterService,
 		AchievementsService,
-		DatabaseService
+		DatabaseService,
+		AuthenticationService
 	],
 	bootstrap: [AppComponent]
 })

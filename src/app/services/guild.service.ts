@@ -6,7 +6,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class GuildService {
 	private region = 'eu';
-	private realm = 'emerald-dream';
+	private realm = 'draenor';
 	private apiKey = 'ugwc5qde7n5svga5yh7fwwxsjqtsdcws';
 	private baseUrl = `https://${this.region}.api.battle.net/wow/guild/${this.realm}/`;
 	private urlEnd = `?locale=en_GB&apikey=${this.apiKey}`;
@@ -92,7 +92,13 @@ export class GuildService {
 
 	getGuildRank(guildName: string): Promise<any> {
 		return this.httpClient
-			.get(`http://guild.jonaskf.net/assets/api/GetGuildRank.php`).toPromise();
+			.get(`http://guild.jonaskf.net/assets/api/GetGuildRank.php?region=${
+				this.region
+			}&realm=${
+				this.realm
+			}&guild=${
+				guildName
+			}`).toPromise();
 	}
 
 	getGuildLogs(realm: string, guild: string): Promise<any> {

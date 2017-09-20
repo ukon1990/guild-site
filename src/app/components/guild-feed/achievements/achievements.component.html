@@ -2,20 +2,22 @@
 </md-paginator>
 
 <article class="col-md-12">
-  <md-card class="col-md-4 float-left" *ngFor="let achievement of achievements |
-	slice: 
-		(pageEvent.pageSize * (pageEvent.pageIndex + 1)) - pageEvent.pageSize:
-		pageEvent.pageSize * (pageEvent.pageIndex + 1)">
-    <md-card-header>
-      <md-card-title>
-        <a href="https://www.wowhead.com/achievement={{ achievement.id }}" target="_blank" 
-			    rel="achievement={{ achievement.id }}">{{ achievement.id }}</a>
-      </md-card-title>
-      <md-card-subtitle>
-        {{ achievement.timestamp | date:'dd.MMM-yy HH:mm' }}
-      </md-card-subtitle>
-    </md-card-header>
-  </md-card>
+  <div class="col-md-4 float-left" *ngFor="let achievement of achievements |
+    slice: 
+      (pageEvent.pageSize * (pageEvent.pageIndex + 1)) - pageEvent.pageSize:
+      pageEvent.pageSize * (pageEvent.pageIndex + 1)">
+      <md-card class="mat-elevation-z5">
+        <md-card-header>
+          <md-card-title>
+            <a href="https://www.wowhead.com/achievement={{ achievement.id }}" target="_blank" 
+              rel="achievement={{ achievement.id }}">{{ achievement.id }}</a>
+          </md-card-title>
+          <md-card-subtitle>
+            {{ achievement.timestamp | date:'dd.MMM-yy HH:mm' }}
+          </md-card-subtitle>
+        </md-card-header>
+      </md-card>
+  </div>
 </article>
 
 <md-paginator [length]="achievements?.length" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions" (page)="changePage($event)">

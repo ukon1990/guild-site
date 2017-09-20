@@ -39,3 +39,11 @@ app-character-achievement .mat-card .mat-card-subtitle {
 .achievement-card {
 	height: 10em;
 }
+
+md-card {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+.float-right {
+	float: right;
+}

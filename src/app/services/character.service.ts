@@ -6,7 +6,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class CharacterService {
 	private region = 'eu';
-	private realm = 'emerald-dream';
+	private realm = 'draenor';
 	private apiKey = 'ugwc5qde7n5svga5yh7fwwxsjqtsdcws';
 	private baseUrl = `https://${this.region}.api.battle.net/wow/character/`;
 	private urlEnd = `?locale=en_GB&apikey=${this.apiKey}`;

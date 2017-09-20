@@ -9,11 +9,11 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
 })
 export class ChallengeComponent implements OnInit {
 	challenges: any;
-	guildName = 'Cake or Pie';
+	guildName = 'Cannon Fodder';
 
 	constructor(private guildService: GuildService, private sanitizer: DomSanitizer) {
 		this.guildService
-			.getChallenges('Cake or pie')
+			.getChallenges('Cannon Fodder')
 			.then(response => {
 				this.challenges = response.challenge.sort( (a, b) => a.map.id < b.map.id ? 1 : -1 );
 				console.log(this.challenges);

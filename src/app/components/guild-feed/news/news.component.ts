@@ -19,7 +19,7 @@ export class NewsComponent implements OnInit {
 
 	constructor(private guildService: GuildService) {
 		this.guildService
-			.getNews('Cake or pie')
+			.getNews('Cannon Fodder')
 			.then(response => {
 				this.news = this.sortedNews(response.news)
 				console.log(this.news);
@@ -30,7 +30,7 @@ export class NewsComponent implements OnInit {
 			});
 		setInterval( () => {
 			this.guildService
-				.getNews('Cake or pie', true)
+				.getNews('Cannon Fodder', true)
 					.then(n => {
 						this.news = this.sortedNews(n.news);
 						this.init();

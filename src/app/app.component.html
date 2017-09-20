@@ -1,5 +1,6 @@
-<div class="container">
-  <app-navbar [guildName]="guildName"></app-navbar>
+<app-navbar [guildName]="guildName">
+</app-navbar>
+<div class="container mat-elevation-z2">
   <div class="card">
     <div class="card-block">
       <router-outlet></router-outlet>
@@ -7,3 +8,5 @@
   </div>
   <!--<app-footer></app-footer>-->
 </div>
+
+<app-footer></app-footer>

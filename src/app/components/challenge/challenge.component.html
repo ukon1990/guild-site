@@ -4,8 +4,9 @@
 </div>
 
 <div class="row">
-  <div *ngFor="let challenge of challenges" class="challenge-card col-md-4" [hidden]="challenge.groups.length === 0">
-    <div class="card" style="width: 20rem;">
+  <div *ngFor="let challenge of challenges" class="challenge-card col-sm-6 col-md-4"
+    [hidden]="challenge.groups.length === 0">
+    <div class="card mat-elevation-z5">
       <div class="card-block card-img-top challenge-img" [style.background-image]="getImageUrl(challenge.map.slug)">
         <h4 class="card-title">{{ challenge.map.name }}</h4>
       </div>

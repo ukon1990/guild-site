@@ -3,29 +3,29 @@
   <p>
     Here you can browse all the guild members, click a character to get more details.
   </p>
-  <div class="input-group">
-    <select [(ngModel)]="queryParams.rank">
+  <form class="input-group" [formGroup]="form">
+    <select formControlName="rank">
       <option value="-1">All ranks</option>
-	  <option *ngFor="let rank of ranks; let i = index" [value]="i">{{ rank }}</option>
+	    <option *ngFor="let rank of ranks; let i = index" [value]="i">{{ rank }}</option>
     </select>
     <span class="input-group-addon" id="basic-addon3">Character</span>
     <input placeholder="Search for a character"
-		type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" 
-		[(ngModel)]="queryParams.character">
-  </div>
+      type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" 
+      formControlName="name">
+  </form>
 
   <nav class="col-md-12">
-    <md-paginator [length]="members?.length" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions"
+    <md-paginator [length]="filteredCount" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions"
       (page)="pageEvent = $event">
     </md-paginator>
   </nav>
 
   <div class="row">
-    <div class="col-sm-6 col-md-4" *ngFor="let member of getMembers() |
+    <div class="col-sm-6 col-md-4" *ngFor="let member of filteredMembers | async |
       slice: 
             (pageEvent.pageSize * (pageEvent.pageIndex + 1)) - pageEvent.pageSize:
             pageEvent.pageSize * (pageEvent.pageIndex + 1)">
-      <div class="card">
+      <div class="card mat-elevation-z5">
         <div class="card-block" (click)="goToCharacter(member.character.realm, member.character.name)"
 			      [style.background-image]="getBGImageUrl(member?.character?.spec?.backgroundImage)">
           <img class="thumbnail-icon-spec  rounded-circle" [src]="getSpecIcon(member)" />
@@ -43,7 +43,7 @@
   </div>
 
   <nav class="col-md-12">
-    <md-paginator [length]="members?.length" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions"
+    <md-paginator [length]="filteredCount" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions"
       (page)="pageEvent = $event">
     </md-paginator>
   </nav>
