@@ -115,7 +115,8 @@ export class CharacterComponent implements OnInit, OnDestroy {
 				this.router.navigateByUrl(baseUrl + 'achievements');
 				break;
 			case 4:
-				this.router.navigateByUrl(baseUrl + 'pvp');
+				this.router.navigateByUrl(baseUrl + 'statistics');
+				// this.router.navigateByUrl(baseUrl + 'pvp');
 				break;
 			case 5:
 				this.router.navigateByUrl(baseUrl + 'statistics');
