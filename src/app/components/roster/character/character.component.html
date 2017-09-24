@@ -26,21 +26,7 @@
     {{ character.level }} {{ characterSpecialization }} {{ classes[character.class] }} {{ character.realm }}
   </h6>
 
-  <!--
-    <nav md-tab-nav-bar>
-      <a md-tab-link
-        *ngFor="let link of navLinks"
-        [routerLink]="link"
-        routerLinkActive #rla="routerLinkActive"
-        [active]="rla.isActive">
-        {{tabLink.label}}
-      </a>
-    </nav>
-
-    <router-outlet></router-outlet>
-   -->
-
-  <md-tab-group (selectChange)="onTabChanged($event)" [selectedIndex]="page.selectedTabIndex"><!-- [selectedIndex]="3" -->
+  <md-tab-group (selectChange)="onTabChanged($event)" [selectedIndex]="page.selectedTabIndex">
     <md-tab label="Equipment">
       <app-character-items [items]="character?.items"></app-character-items>
     </md-tab>
@@ -82,9 +68,11 @@
           (resetIndex)="unselectAchievementGroup($event)"></app-character-achievement>
       </ng-template>
     </md-tab>
+    <!-- TODO: Soon™
     <md-tab label="Pvp">
       PvP?
     </md-tab>
+    -->
     <md-tab label="Statistics">
       <app-stats [statistics]="character?.statistics?.subCategories"></app-stats>
     </md-tab>

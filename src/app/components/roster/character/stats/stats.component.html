@@ -1,5 +1,43 @@
 <md-tab-group>
   <md-tab *ngFor="let statistic of statistics" [label]="statistic.name">
-      s
+      <md-tab-group>
+        <md-tab label="General">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Quantity</th>
+                    <th>Timestamp</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let entry of statistic.statistics">
+                    <td>{{ entry.name }}</td>
+                    <td>{{ entry.quantity | number }}</td>
+                    <td>{{ entry.lastUpdated | date }}</td>
+                  </tr>
+                </tbody>
+              </table>
+        </md-tab>
+        <md-tab *ngFor="let subCategory of statistic?.subCategories" [label]="subCategory.name">
+          <!-- {id: 1149, name: "Talent tree respecs", quantity: 184, lastUpdated: 1448972573000, money: false} -->
+          <table class="table">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Quantity</th>
+                  <th>Timestamp</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let entry of subCategory.statistics">
+                  <td>{{ entry.name }}</td>
+                  <td>{{ entry.quantity | number }}</td>
+                  <td>{{ entry.lastUpdated | date }}</td>
+                </tr>
+              </tbody>
+            </table>
+        </md-tab>
+      </md-tab-group>
   </md-tab>
 </md-tab-group>
