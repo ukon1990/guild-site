@@ -47,3 +47,9 @@ md-card {
 .float-right {
 	float: right;
 }
+
+@media screen and (max-width: 577px){
+	.p-none-sm {
+		padding: 0 !important;
+	}
+}

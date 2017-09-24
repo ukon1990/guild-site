@@ -4,7 +4,10 @@
     <a routerLink="/roster">
 			<i class="fa fa-chevron-left" aria-hidden="true"></i>
 			Back to guild roster
-		</a>
+    </a>
+    <a class="float-right"
+      href="http://www.askmrrobot.com/wow/gear/eu/{{ character.realm }}/{{ character.name }}"
+      target="_blank">Ask MR.Robot</a>
   </div>
   <span *ngIf="character.items">
 		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" class="Icon-svg mini-icon">
@@ -16,7 +19,7 @@
 		</svg> {{ character.items.averageItemLevelEquipped }} / {{ character.items.averageItemLevel }}
 	</span>
   <span class="pull-right">
-		Last updated {{ character.lastModified | date:'HH:mm dd.MMM, yyyy' }}
+    Last updated {{ character.lastModified | date:'HH:mm dd.MMM, yyyy' }}
 	</span>
   <h3 class="card-title">{{ character.name }}</h3>
   <h6 class="card-subtitle mb-2">
@@ -83,7 +86,7 @@
       PvP?
     </md-tab>
     <md-tab label="Statistics">
-      Same as armory stats?
+      <app-stats [statistics]="character?.statistics?.subCategories"></app-stats>
     </md-tab>
   </md-tab-group>
 </div>

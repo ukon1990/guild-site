@@ -1,7 +1,6 @@
 <div *ngIf="reports; else none">
   <md-card class="mat-elevation-z5" *ngFor="let r of reports">
     <md-card-header>
-      <div md-card-avatar></div>
       <md-card-title>{{ r.start | date:'dd.MMM, yyyy'}} - {{ r.title }}</md-card-title>
       <md-card-subtitle>
         {{ r.start | date:'HH:mm' }} - {{ r.end | date:'HH:mm' }} Logged by:{{ r.owner }}

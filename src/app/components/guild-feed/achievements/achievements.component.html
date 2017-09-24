@@ -1,7 +1,7 @@
 <md-paginator [length]="achievements?.length" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions" (page)="changePage($event)">
 </md-paginator>
 
-<article class="col-md-12">
+<article class="p-none-sm col-md-12">
   <div class="col-md-4 float-left" *ngFor="let achievement of achievements |
     slice: 
       (pageEvent.pageSize * (pageEvent.pageIndex + 1)) - pageEvent.pageSize:
