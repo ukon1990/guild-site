@@ -37,6 +37,8 @@ import { RaidToolComponent } from './components/raid-tool/raid-tool.component';
 import { RaiderComponent } from './components/raid-tool/raider/raider.component';
 import { AuthenticationService } from './services/authentication.service';
 import { StatsComponent } from './components/roster/character/stats/stats.component';
+import { LoginComponent } from './components/login/login.component';
+import { LoginService } from './services/login.service';
 
 @NgModule({
 	declarations: [
@@ -64,7 +66,8 @@ import { StatsComponent } from './components/roster/character/stats/stats.compon
 		CharacterLogsComponent,
 		RaidToolComponent,
 		RaiderComponent,
-		StatsComponent
+		StatsComponent,
+		LoginComponent
 	],
 	imports: [
 		BrowserModule,
@@ -83,6 +86,7 @@ import { StatsComponent } from './components/roster/character/stats/stats.compon
 			{path: 'tools/raid-composition', component: RaidToolComponent},
 			{path: 'logs', component: LogsComponent},
 			{path: 'streams', component: StreamsComponent},
+			{path: 'login', component: LoginComponent},
 			{path: '**', component: NewsComponent}
 		])
 	],
@@ -91,7 +95,8 @@ import { StatsComponent } from './components/roster/character/stats/stats.compon
 		CharacterService,
 		AchievementsService,
 		DatabaseService,
-		AuthenticationService
+		AuthenticationService,
+		LoginService
 	],
 	bootstrap: [AppComponent]
 })
