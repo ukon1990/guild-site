@@ -1,7 +1,7 @@
-<md-tab-group>
-  <md-tab *ngFor="let statistic of statistics" [label]="statistic.name">
-      <md-tab-group>
-        <md-tab label="General">
+<mat-tab-group>
+  <mat-tab *ngFor="let statistic of statistics" [label]="statistic.name">
+      <mat-tab-group>
+        <mat-tab label="General">
             <table class="table">
                 <thead>
                   <tr>
@@ -18,8 +18,8 @@
                   </tr>
                 </tbody>
               </table>
-        </md-tab>
-        <md-tab *ngFor="let subCategory of statistic?.subCategories" [label]="subCategory.name">
+        </mat-tab>
+        <mat-tab *ngFor="let subCategory of statistic?.subCategories" [label]="subCategory.name">
           <!-- {id: 1149, name: "Talent tree respecs", quantity: 184, lastUpdated: 1448972573000, money: false} -->
           <table class="table">
               <thead>
@@ -37,7 +37,7 @@
                 </tr>
               </tbody>
             </table>
-        </md-tab>
-      </md-tab-group>
-  </md-tab>
-</md-tab-group>
+        </mat-tab>
+      </mat-tab-group>
+  </mat-tab>
+</mat-tab-group>

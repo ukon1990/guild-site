@@ -1,36 +1,36 @@
-<button (click)="resetIndex.emit()" md-button>
+<button (click)="resetIndex.emit()" mat-button>
   <i class="fa fa-chevron-left" aria-hidden="true"></i>
   Back to overview
 </button>
-<md-tab-group>
-  <md-tab label="General">
+<mat-tab-group>
+  <mat-tab label="General">
     <div *ngFor="let a of achievementGroup.achievements">
-      <md-card class="col-md-6 float-left" [ngClass]="{'uncompleted': !map[a.id]}">
-        <md-card-header>
-          <div md-card-avatar [style.background-image]="getIcon(a)"></div>
-          <md-card-title [ngClass]="{'uncompleted': !map[a.id]}">
+      <mat-card class="col-md-6 float-left" [ngClass]="{'uncompleted': !map[a.id]}">
+        <mat-card-header>
+          <div mat-card-avatar [style.background-image]="getIcon(a)"></div>
+          <mat-card-title [ngClass]="{'uncompleted': !map[a.id]}">
             {{ a.title }} <span *ngIf="map[a.id]"> - {{ completedAchievementsTimestamp[a.id] | date}}</span>
-          </md-card-title>
-          <md-card-subtitle [ngClass]="{'uncompleted': !map[a.id]}">
+          </mat-card-title>
+          <mat-card-subtitle [ngClass]="{'uncompleted': !map[a.id]}">
             {{ a.description }}
-          </md-card-subtitle>
-        </md-card-header>
-      </md-card>
+          </mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
     </div>
-  </md-tab>
-  <md-tab *ngFor="let category of achievementGroup.categories" [label]="category.name">
+  </mat-tab>
+  <mat-tab *ngFor="let category of achievementGroup.categories" [label]="category.name">
     <div *ngFor="let a of category.achievements">
-      <md-card class="col-md-6 float-left achievement-card" [ngClass]="{'uncompleted': !map[a.id]}">
-        <md-card-header>
-          <div md-card-avatar [style.background-image]="getIcon(a)"></div>
-          <md-card-title [ngClass]="{'uncompleted': !map[a.id]}">
+      <mat-card class="col-md-6 float-left achievement-card" [ngClass]="{'uncompleted': !map[a.id]}">
+        <mat-card-header>
+          <div mat-card-avatar [style.background-image]="getIcon(a)"></div>
+          <mat-card-title [ngClass]="{'uncompleted': !map[a.id]}">
             {{ a.title }} <span *ngIf="map[a.id]"> - {{ completedAchievementsTimestamp[a.id] | date}}</span>
-          </md-card-title>
-          <md-card-subtitle [ngClass]="{'uncompleted': !map[a.id]}">
+          </mat-card-title>
+          <mat-card-subtitle [ngClass]="{'uncompleted': !map[a.id]}">
             {{ a.description }}
-          </md-card-subtitle>
-        </md-card-header>
-      </md-card>
+          </mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
     </div>
-  </md-tab>
-</md-tab-group>
+  </mat-tab>
+</mat-tab-group>

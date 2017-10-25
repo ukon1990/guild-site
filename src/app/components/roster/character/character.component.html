@@ -26,15 +26,15 @@
     {{ character.level }} {{ characterSpecialization }} {{ classes[character.class] }} {{ character.realm }}
   </h6>
 
-  <md-tab-group (selectChange)="onTabChanged($event)" [selectedIndex]="page.selectedTabIndex">
-    <md-tab label="Equipment">
+  <mat-tab-group (selectChange)="onTabChanged($event)" [selectedIndex]="page.selectedTabIndex">
+    <mat-tab label="Equipment">
       <app-character-items [items]="character?.items"></app-character-items>
-    </md-tab>
-    <md-tab label="Raid progress">
+    </mat-tab>
+    <mat-tab label="Raid progress">
       <nav class="col-md-12">
-        <md-paginator [length]="character?.progression?.raids?.length" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions"
+        <mat-paginator [length]="character?.progression?.raids?.length" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions"
           (page)="pageEvent = $event">
-        </md-paginator>
+        </mat-paginator>
       </nav>
       <div class="clearfix" *ngIf="character.progression">
         <div *ngFor="let raid of character?.progression?.raids |
@@ -45,15 +45,15 @@
         </div>
       </div>
       <div class="col-md-12">
-        <md-paginator [length]="character?.progression?.raids?.length" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions"
+        <mat-paginator [length]="character?.progression?.raids?.length" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions"
           (page)="pageEvent = $event">
-        </md-paginator>
+        </mat-paginator>
       </div>
-    </md-tab>
-    <md-tab label="Warcraft logs">
+    </mat-tab>
+    <mat-tab label="Warcraft logs">
       <app-character-logs [character]="character"></app-character-logs>
-    </md-tab>
-    <md-tab label="Achievements" *ngIf="achievementsService !== null && achievementsService?.achievements !== null">
+    </mat-tab>
+    <mat-tab label="Achievements" *ngIf="achievementsService !== null && achievementsService?.achievements !== null">
       <div *ngIf="selectedAchivementGroupIndex === -1; else achivementGroup">
         <app-character-achievement-list-item (click)="selectAchievementGroup(i, a.name)"
           *ngFor="let a of achievementsService?.achievements; let i = index" 
@@ -67,14 +67,14 @@
           [achievementGroup]="achievementsService?.achievements[selectedAchivementGroupIndex]"
           (resetIndex)="unselectAchievementGroup($event)"></app-character-achievement>
       </ng-template>
-    </md-tab>
+    </mat-tab>
     <!-- TODO: Soon™
-    <md-tab label="Pvp">
+    <mat-tab label="Pvp">
       PvP?
-    </md-tab>
+    </mat-tab>
     -->
-    <md-tab label="Statistics">
+    <mat-tab label="Statistics">
       <app-stats [statistics]="character?.statistics?.subCategories"></app-stats>
-    </md-tab>
-  </md-tab-group>
+    </mat-tab>
+  </mat-tab-group>
 </div>

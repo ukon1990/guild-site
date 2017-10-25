@@ -1,8 +1,8 @@
-md-card {
+mat-card {
     height: 8em;
 }
 
-md-card-title {
+mat-card-title {
     white-space: nowrap;
     overflow: hidden;
 }
