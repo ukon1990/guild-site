@@ -17,8 +17,8 @@ export class CharacterProgressComponent implements OnInit {
 	getBGImageUrl() {
 		if (this.raid) {
 			// background-image:url("https://blzmedia-a.akamaihd.net/wow/zones/the-emerald-nightmare-small.jpg")
-			const url = 'https://blzmedia-a.akamaihd.net/wow/zones/'
-				+ this.raid.name.toLowerCase().replace(/[']/g, '').replace(/[ ]/g, '-') + '-small.jpg';
+			const url = 'https://render-eu.worldofwarcraft.com/zones/'
+				+ this.raid.name.toLowerCase().replace(/[,]/g, '').replace(/[']/g, '').replace(/[ ]/g, '-') + '-small.jpg';
 			return this.sanitizer.bypassSecurityTrustStyle(`url(${url})`);
 		}
 		return '';
