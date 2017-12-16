@@ -3,7 +3,12 @@
     <div class="bg-img">
       <mat-card  [style.background-image]="getImageUrl(record.map.slug)">
         <mat-card-header>
-          <mat-card-title>{{ record.map.name }} ({{ record.bestMedal }})</mat-card-title>
+          <mat-card-title>
+            {{ record.map.name }} 
+            <span *ngIf="record.guildRank > 0">
+              (gRank: {{ record.guildRank }})
+            </span>
+          </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           Best run time: {{ getTimeToString(record?.bestTime) }} <br>
