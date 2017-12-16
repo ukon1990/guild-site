@@ -44,7 +44,6 @@ export class RosterComponent implements OnInit {
 			.map( ( query ) => {
 				this.filteredCount = 0;
 				return query !== null ? this.members.filter( m => {
-					console.log(query);
 					if (m.character.name.toLowerCase().indexOf(query.name.toLowerCase()) > -1
 						&& (parseInt(query.rank, 10) === -1 || m.rank === parseInt(query.rank, 10))) {
 						this.filteredCount++;
@@ -84,7 +83,8 @@ export class RosterComponent implements OnInit {
 
 	getThumbnail(member: any) {
 		if (member.character.thumbnail && member.character.thumbnail !== 'unknown/unknown-avatar.jpg') {
-			return `http://render-eu.worldofwarcraft.com/character/${member.character.thumbnail}`;
+			return this.sanitizer.bypassSecurityTrustStyle(
+				`url(http://render-eu.worldofwarcraft.com/character/${member.character.thumbnail})`);
 		}
 		return '';
 	}
