@@ -1,0 +1,15 @@
+<div class="row m-0">
+  <div class="col-md-4" *ngFor="let record of challenges?.records">
+    <div class="bg-img">
+      <mat-card  [style.background-image]="getImageUrl(record.map.slug)">
+        <mat-card-header>
+          <mat-card-title>{{ record.map.name }} ({{ record.bestMedal }})</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          Best run time: {{ getTimeToString(record?.bestTime) }} <br>
+          Last run time: {{ getTimeToString(record?.lastTime) }}
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>

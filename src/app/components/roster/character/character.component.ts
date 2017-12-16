@@ -64,6 +64,8 @@ export class CharacterComponent implements OnInit, OnDestroy {
 							this.characterSpecialization = spec.spec.name;
 						}
 					});
+					this.character.challenge.records
+						.sort( (a, b) => a.map.id < b.map.id ? 1 : -1 );
 					/*
 					this.character.lastModified = moment
 						.tz(this.character.lastModified, 'UTC');
@@ -115,8 +117,11 @@ export class CharacterComponent implements OnInit, OnDestroy {
 				this.router.navigateByUrl(baseUrl + 'achievements');
 				break;
 			case 4:
-				this.router.navigateByUrl(baseUrl + 'statistics');
+				this.router.navigateByUrl(baseUrl + 'challenges');
 				// this.router.navigateByUrl(baseUrl + 'pvp');
+				break;
+			case 5:
+				this.router.navigateByUrl(baseUrl + 'statistics');
 				break;
 			case 5:
 				this.router.navigateByUrl(baseUrl + 'statistics');
@@ -140,13 +145,8 @@ export class CharacterComponent implements OnInit, OnDestroy {
 					break;
 				case 'achievements':
 					this.page.selectedTabIndex = 3;
-					/* TODO: Soon™
-					if (path.category) {
-						this.selectedAchivementGroupIndex =
-							this.findSelectedAchievementGroupIndex(path.category);
-					}*/
 					break;
-				case 'pvp':
+				case 'challenges':
 					this.page.selectedTabIndex = 4;
 					break;
 				case 'statistics':

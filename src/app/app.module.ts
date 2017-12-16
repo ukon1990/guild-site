@@ -37,6 +37,7 @@ import { RaidToolComponent } from './components/raid-tool/raid-tool.component';
 import { RaiderComponent } from './components/raid-tool/raider/raider.component';
 import { AuthenticationService } from './services/authentication.service';
 import { StatsComponent } from './components/roster/character/stats/stats.component';
+import { CharacterChallengesComponent } from './components/roster/character/character-challenges/character-challenges.component';
 
 @NgModule({
 	declarations: [
@@ -64,7 +65,8 @@ import { StatsComponent } from './components/roster/character/stats/stats.compon
 		CharacterLogsComponent,
 		RaidToolComponent,
 		RaiderComponent,
-		StatsComponent
+		StatsComponent,
+		CharacterChallengesComponent
 	],
 	imports: [
 		BrowserModule,

@@ -73,6 +73,9 @@
       PvP?
     </mat-tab>
     -->
+    <mat-tab label="Challenges">
+      <app-character-challenges [challenges]="character?.challenge"></app-character-challenges>
+    </mat-tab>
     <mat-tab label="Statistics">
       <app-stats [statistics]="character?.statistics?.subCategories"></app-stats>
     </mat-tab>

@@ -17,6 +17,18 @@ app-guild-feed .mat-tab-label {
 	color: black !important;
 }
 
+app-character mat-card {
+	background: rgba(0, 0, 0, .3) !important;
+}
+
+app-character mat-card .bg-img {
+	background-size: contain;
+}
+app-character mat-card mat-card-header,
+app-character mat-card mat-card-content {
+	color: white;
+}
+
 app-character-achievement-list-item .mat-card,
 app-character-achievement .mat-card{
 	background-color: transparent;
@@ -45,7 +57,7 @@ app-character .mat-paginator-increment {
 	height: 10em;
 }
 
-md-card {
+mat-card {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }

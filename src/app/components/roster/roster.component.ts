@@ -21,7 +21,7 @@ export class RosterComponent implements OnInit {
 	filteredCount: number;
 	members: any;
 	ranks = ['Guild master', 'Officer', 'Officer alt', 'Raid team',
-		'Alt', 'Social', 'Trial'];
+		'Raid team', 'Alt', 'Trial'];
 
 	queryParams = { character: '', rank: '-1' };
 	page = {
