@@ -26,7 +26,7 @@ export class CharacterService {
 					character
 				}${
 					this.urlEnd
-				}&fields=items,feed,achievements,progression,audit,talents,statistics,reputation,pvp`// ,quests,professions
+				}&fields=items,feed,achievements,progression,audit,talents,statistics,reputation,pvp,challenge`// ,quests,professions
 			).toPromise();
 	}
 
