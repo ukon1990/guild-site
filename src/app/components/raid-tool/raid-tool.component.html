@@ -1,25 +1,26 @@
-Raid composition
-
 <form [formGroup]="form">
   <mat-form-field>
-    <mat-select placeholder="difficulty" formControlName="difficulty">
+    <mat-select placeholder="difficulty" formControlName="difficulty" (change)="updateRelevantLogs()">
       <mat-option *ngFor="let d of difficulty" [value]="d.id">{{ d.name }}</mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field>
-    <mat-select placeholder="Raid zone" formControlName="zone">
+    <mat-select placeholder="Raid zone" formControlName="zone" (change)="getAllLogs()">
       <mat-option *ngFor="let z of zones; let i = index" [value]="i">
         {{ z.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
   <mat-form-field *ngIf="zones && zones[form.value.zone]">
-    <mat-select
+    <mat-select (change)="updateRelevantLogs()"
       placeholder="Boss" formControlName="encounter">
       <mat-option *ngFor="let e of zones[form.value.zone].encounters; let i = index" [value]="i">{{ e.name }}</mat-option>
     </mat-select>
   </mat-form-field>
 </form>
-{{ form.value | json }}
 
-<app-table [columns]="columns" [data]="raiders"></app-table>
+<em>
+  The log data is based on the characters spec. Change the characters spec, to see their log data for another spec etc.
+</em>
+
+<app-table [columns]="columns" [data]="raiders" (change)="getLogsForPlayer($event)"></app-table>
