@@ -5,14 +5,20 @@
         <mat-card-header>
           <mat-card-title>
             {{ record.map.name }} 
-            <span *ngIf="record.guildRank > 0">
-              (gRank: {{ record.guildRank }})
-            </span>
           </mat-card-title>
         </mat-card-header>
         <mat-card-content>
           Best run time: {{ getTimeToString(record?.bestTime) }} <br>
-          Last run time: {{ getTimeToString(record?.lastTime) }}
+          Last run time: {{ getTimeToString(record?.lastTime) }} <br>
+          <span *ngIf="record.guildRank > 0">
+            Guild rank: {{ record.guildRank }}
+          </span>
+          <span *ngIf="record.realmRank > 0">
+            Realm rank: {{ record.realmRank }}
+          </span>
+          <span *ngIf="record.regionRank > 0">
+            Region rank: {{ record.regionRank }}
+          </span>
         </mat-card-content>
       </mat-card>
     </div>

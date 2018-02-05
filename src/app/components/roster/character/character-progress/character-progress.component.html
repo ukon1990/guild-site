@@ -1,11 +1,13 @@
-<div class="card card-raid" [style.background-image]="getBGImageUrl()">
-  <div class="card-block">
-    <h4 class="card-title">{{ raid.name }}</h4>
-  </div>
-  <div class="card-raid-progress">
+<mat-card [style.background-image]="getBGImageUrl()">
+  <mat-card-header>
+    <mat-card-title>
+      {{ raid.name }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
     <app-raid-progress-bar [bosses]="raid.bosses" difficulty="lfr"></app-raid-progress-bar>
     <app-raid-progress-bar [bosses]="raid.bosses" difficulty="normal"></app-raid-progress-bar>
     <app-raid-progress-bar [bosses]="raid.bosses" difficulty="heroic"></app-raid-progress-bar>
     <app-raid-progress-bar [bosses]="raid.bosses" difficulty="mythic"></app-raid-progress-bar>
-  </div>
-</div>
+  </mat-card-content>
+</mat-card>

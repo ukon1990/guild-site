@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
-.mat-card {
+mat-card {
 	background-size: cover;
 }
 
@@ -27,6 +27,10 @@ app-guild-feed .mat-tab-label {
 
 app-character mat-card {
 	background: rgba(0, 0, 0, .3) !important;
+}
+
+app-character .mat-form-field-label {
+	color: white;
 }
 
 app-character mat-card .bg-img {
@@ -69,6 +73,12 @@ mat-card {
     margin-top: 0.5em;
     margin-bottom: 0.5em;
 }
+
+mat-card mat-card-title {
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
 .float-right {
 	float: right;
 }

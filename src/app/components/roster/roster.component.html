@@ -1,61 +1,59 @@
-<h3 class="card-title">Roster</h3>
-<div class="card-text">
-  <p>
-    Here you can browse all the guild members, click a character to get more details.
-  </p>
-  <form class="row" [formGroup]="form">
-    <mat-form-field class="col-md-3">
-        <mat-select placeholder="Rank" formControlName="rank">
-          <mat-option value="-1">
-            All ranks
-          </mat-option>
-          <mat-option *ngFor="let rank of ranks; let i = index" [value]="i">
-              {{ rank }}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      
-      <mat-form-field class="col-md-9">
-        <input matInput placeholder="Character name" formControlName="name">
-      </mat-form-field>
-  </form>
+<h3>Roster</h3>
+<p>
+  Here you can browse all the guild members, click a character to get more details.
+</p>
+<form class="row" [formGroup]="form">
+  <mat-form-field class="col-md-3">
+      <mat-select placeholder="Rank" formControlName="rank">
+        <mat-option value="-1">
+          All ranks
+        </mat-option>
+        <mat-option *ngFor="let rank of ranks; let i = index" [value]="i">
+            {{ rank }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    
+    <mat-form-field class="col-md-9">
+      <input matInput placeholder="Character name" formControlName="name">
+    </mat-form-field>
+</form>
+
+<nav class="col-md-12">
+  <mat-paginator [length]="filteredCount" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions" (page)="pageEvent = $event">
+  </mat-paginator>
+</nav>
+
+<div class="row">
+  <div class="col-sm-6 col-md-4" *ngFor="let member of filteredMembers | async |
+    slice: 
+          (pageEvent.pageSize * (pageEvent.pageIndex + 1)) - pageEvent.pageSize:
+          pageEvent.pageSize * (pageEvent.pageIndex + 1)">
+    <mat-card [style.background-image]="getBGImageUrl(member?.character?.spec?.backgroundImage)">
+      <mat-card-header>
+        <div mat-card-avatar [style.background-image]="getThumbnail(member)"></div>
+        <mat-card-title>
+          {{ member.character.level }} {{ member.character.name }}
+        </mat-card-title>
+        <mat-card-subtitle>
+          {{ getRank(member.rank) }} -
+          <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" class="Icon-svg mini-icon">
+            <use xlink:href="assets/images/icons/Icon.svg#achievement-shield"></use>
+          </svg> {{ member.character.achievementPoints }}
+        </mat-card-subtitle>
+      </mat-card-header><!--
+      <mat-card-content>
+        Some stuff coming here?
+      </mat-card-content>-->
+      <mat-card-actions>
+        <button mat-raised-button (click)="goToCharacter(member.character.realm, member.character.name)">
+          Go to profile
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 
   <nav class="col-md-12">
     <mat-paginator [length]="filteredCount" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions" (page)="pageEvent = $event">
     </mat-paginator>
   </nav>
-
-  <div class="row">
-    <div class="col-sm-6 col-md-4" *ngFor="let member of filteredMembers | async |
-      slice: 
-            (pageEvent.pageSize * (pageEvent.pageIndex + 1)) - pageEvent.pageSize:
-            pageEvent.pageSize * (pageEvent.pageIndex + 1)">
-      <mat-card [style.background-image]="getBGImageUrl(member?.character?.spec?.backgroundImage)">
-        <mat-card-header>
-          <div mat-card-avatar [style.background-image]="getThumbnail(member)"></div>
-          <mat-card-title>
-            {{ member.character.level }} {{ member.character.name }}
-          </mat-card-title>
-          <mat-card-subtitle>
-            {{ getRank(member.rank) }} -
-            <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" class="Icon-svg mini-icon">
-              <use xlink:href="assets/images/icons/Icon.svg#achievement-shield"></use>
-            </svg> {{ member.character.achievementPoints }}
-          </mat-card-subtitle>
-        </mat-card-header><!--
-        <mat-card-content>
-          Some stuff coming here?
-        </mat-card-content>-->
-        <mat-card-actions>
-          <button mat-button (click)="goToCharacter(member.character.realm, member.character.name)">
-            Go to profile
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-
-    <nav class="col-md-12">
-      <mat-paginator [length]="filteredCount" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions" (page)="pageEvent = $event">
-      </mat-paginator>
-    </nav>
-  </div>

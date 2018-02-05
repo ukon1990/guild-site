@@ -9,6 +9,7 @@ import 'rxjs/add/operator/map';
 
 import { GuildService } from '../../services/guild.service';
 import { LogsComponent } from '../logs/logs.component';
+import { guildRanks } from '../..//models/guild-ranks';
 
 @Component({
 	selector: 'app-rooster',
@@ -20,8 +21,7 @@ export class RosterComponent implements OnInit {
 	filteredMembers: Observable<any[]>;
 	filteredCount: number;
 	members: any;
-	ranks = ['Guild master', 'Officer', 'Officer alt', 'Raid team',
-		'Raid team', 'Alt', 'Trial'];
+	ranks = guildRanks;
 
 	queryParams = { character: '', rank: '-1' };
 	page = {

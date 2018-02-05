@@ -1,13 +1,19 @@
-<div *ngIf="reports; else none">
-  <mat-card class="mat-elevation-z5" *ngFor="let r of reports">
-    <mat-card-header>
-      <mat-card-title>{{ r.start | date:'dd.MMM, yyyy'}} - {{ r.title }}</mat-card-title>
-      <mat-card-subtitle>
-        {{ r.start | date:'HH:mm' }} - {{ r.end | date:'HH:mm' }} Logged by:{{ r.owner }}
-        <a href="https://www.warcraftlogs.com/reports/{{ r.id }}" target="_blank" md-button>Open report in Warcraftlogs</a>
-      </mat-card-subtitle>
-    </mat-card-header>
-  </mat-card>
+<h3>Warcraft log entries</h3>
+<div *ngIf="reports; else none" class="row">
+  <div *ngFor="let r of reports" class="col-xs-12 col-md-6 col-lg-4">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{ r.start | date:'dd.MMM, yyyy'}} - {{ r.title }}</mat-card-title>
+        <mat-card-subtitle>
+          {{ r.start | date:'HH:mm' }} - {{ r.end | date:'HH:mm' }} Logged by:{{ r.owner }}
+        </mat-card-subtitle>
+      </mat-card-header>
+
+      <mat-card-actions>
+        <a href="https://www.warcraftlogs.com/reports/{{ r.id }}" target="_blank" mat-raised-button>Open report in Warcraftlogs</a>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>
 <ng-template #none>
   <p>

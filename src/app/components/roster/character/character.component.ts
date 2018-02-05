@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment-timezone';
 import { CharacterService } from '../../../services/character.service';
 import { AchievementsService } from '../../../services/achievements.service';
+import { classes, classColors } from '../../../models/classes';
 
 declare const $WowheadPower: any;
 @Component({
@@ -26,24 +27,8 @@ export class CharacterComponent implements OnInit, OnDestroy {
 		selectedTabIndex: 0
 	};
 	pageEvent: PageEvent = { pageIndex: 0, pageSize: this.page.pageSize, length: 1 };
-	classBgColor: any  = {
-		1: '#1a0407', // Warrior
-		2: '#13040a', // Paladin
-		3: '#0f091b', // Hunter
-		4: '#160720"', // Rogue
-		5: '#15060e', // Priest
-		6: '#080812', // Death Knight
-		7: '#050414', // Shaman
-		8: '#110617', // Mage
-		9: '#080516', // Warlock
-		10: '#040b17', // Monk
-		11: '#04100a', // Druid
-		12: '#000900' // Demon hunter
-	};
-	classes = [
-		'0', 'Warrior', 'Paladin', 'Hunter', 'Rogue',
-		'Priest', 'Death knight', 'Shaman', 'Mage',
-		'Warlock', 'Monk', 'Druid', 'Demon hunter'];
+	classBgColor: any  = classColors;
+	classes = classes;
 
 	constructor(private activatedRoute: ActivatedRoute, private router: Router, achievementsService: AchievementsService,
 		private sanitizer: DomSanitizer, private characterService: CharacterService) {
@@ -117,7 +102,7 @@ export class CharacterComponent implements OnInit, OnDestroy {
 				this.router.navigateByUrl(baseUrl + 'achievements');
 				break;
 			case 4:
-				this.router.navigateByUrl(baseUrl + 'challenges');
+				this.router.navigateByUrl(baseUrl + 'mythic-dungeons');
 				// this.router.navigateByUrl(baseUrl + 'pvp');
 				break;
 			case 5:
@@ -146,7 +131,7 @@ export class CharacterComponent implements OnInit, OnDestroy {
 				case 'achievements':
 					this.page.selectedTabIndex = 3;
 					break;
-				case 'challenges':
+				case 'mythic-dungeons':
 					this.page.selectedTabIndex = 4;
 					break;
 				case 'statistics':

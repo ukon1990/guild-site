@@ -1,11 +1,17 @@
-<p class="mt-3">
-  <mat-select placeholder="Log metric" [(ngModel)]="selection.metric" (change)="getLogs()">
-    <mat-option *ngFor="let m of metrics; let i = index" [value]="i">{{ m.name }}</mat-option>
-  </mat-select>
+<div>
+  <mat-form-field>
+    <mat-select placeholder="Log metric" [(ngModel)]="selection.metric" (change)="getLogs()">
+      <mat-option *ngFor="let m of metrics; let i = index" [value]="i">{{ m.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
   <mat-select placeholder="Raid zone" [(ngModel)]="selection.zone" (change)="getLogs()">
-    <mat-option value="">Current raid</mat-option>
-    <mat-option *ngFor="let z of logs.zones; let i = index" [value]="z.id">{{ z.name }}</mat-option>
-  </mat-select>
+      <mat-option value="">Current raid</mat-option>
+      <mat-option *ngFor="let z of logs.zones; let i = index" [value]="z.id">{{ z.name }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+<p class="mt-3">
   Change the metric, to see the performence for healing, dps etc. If the logs are not up to date, follow
   <a href="https://www.warcraftlogs.com/character/eu/{{ slugifyName(character.realm) }}/{{ character.name }}" target="_blank">this</a>  to the warcraft logs profile.
 </p>

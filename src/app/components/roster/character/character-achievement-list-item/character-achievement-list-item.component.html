@@ -1,5 +1,5 @@
 <mat-card class="col-md-3 float-left">
-  <mat-card-content>
+  <mat-card-content class="mr-auto ml-auto">
     <div class="progress-label">
       {{ achievementGroup.progress }}%
     </div>
@@ -13,7 +13,7 @@
     <mat-card-title>{{ achievementGroup.name }}</mat-card-title>
     <mat-card-subtitle>
       {{ getCompletedCount() }}/
-      {{ 
+      {{
         achievementGroup.achievements.length + this.achievementGroup.categoryAchievementCount
       }}
     </mat-card-subtitle>

@@ -4,9 +4,11 @@ export class Character {
 	realm: string;
 	battlegroup: string;
 	class: number;
+	spec: Specialization;
 	race: number;
 	gender: number;
 	level: number;
+	items: any;
 	achievementPoints: number;
 	totalHonorableKills: number;
 	thumbnail: string; // draenor/217/111484633-avatar.jpg
@@ -24,6 +26,15 @@ export class Character {
 	};
 	pets?: Pet[];
 	petSlots?: PetSlot[];
+}
+
+export class Specialization {
+	backgroundImage: string;
+	description: string;
+	icon: string;
+	name: string;
+	order: number;
+	role: string;
 }
 
 class Profession {

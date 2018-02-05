@@ -1,12 +1,14 @@
-<mat-paginator [length]="achievements?.length" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions" (page)="changePage($event)">
-</mat-paginator>
+<div class="row col-md-12">
+  <mat-paginator [length]="achievements?.length" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions" (page)="changePage($event)">
+  </mat-paginator>
+</div>
 
 <article class="p-none-sm col-md-12">
   <div class="col-md-4 float-left" *ngFor="let achievement of achievements |
     slice: 
       (pageEvent.pageSize * (pageEvent.pageIndex + 1)) - pageEvent.pageSize:
       pageEvent.pageSize * (pageEvent.pageIndex + 1)">
-      <mat-card class="mat-elevation-z5">
+      <mat-card class="mat-elevation-z2">
         <mat-card-header>
           <mat-card-title>
             <a href="https://www.wowhead.com/achievement={{ achievement.id }}" target="_blank" 
@@ -20,5 +22,7 @@
   </div>
 </article>
 
-<mat-paginator [length]="achievements?.length" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions" (page)="changePage($event)">
-</mat-paginator>
+<div class="row col-md-12">
+  <mat-paginator [length]="achievements?.length" [pageSize]="page.pageSize" [pageSizeOptions]="page.pageSizeOptions" (page)="changePage($event)">
+  </mat-paginator>
+</div>

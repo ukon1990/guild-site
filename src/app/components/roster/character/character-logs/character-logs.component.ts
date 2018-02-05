@@ -1,5 +1,6 @@
 import { Component, Input, Output, OnChanges } from '@angular/core';
 import { CharacterService } from '../../../../services/character.service';
+import { metrics } from '../../../../models/log-vars';
 
 @Component({
 	selector: 'app-character-logs',
@@ -23,14 +24,8 @@ export class CharacterLogsComponent implements OnChanges {
 		9: {difficulty: 'Unknown', logs: []},
 		10: {difficulty: 'Challenge mode', logs: []}
 	};
-	metrics = [
-		{value: 'krsi', name: 'Tank Survivability'},
-		{value: 'hps', name: 'HPS'},
-		{value: 'dps', name: 'DPS'},
-		{value: 'bossdps', name: 'Boss DPS'},
-		{value: 'tankhps', name: 'Tank HPS'},
-		{value: 'playerspeed', name: 'Player speed'}
-	];
+	metrics = metrics;
+
 	selection = {
 		metric: 0,
 		zone: '',
@@ -66,6 +61,7 @@ export class CharacterLogsComponent implements OnChanges {
 			.then(logs => {
 				this.groupLogs(logs);
 				this.selection.isDownloading = false;
+				console.log('The logs:', logs);
 			})
 			.catch(error => {
 				console.log(error);
