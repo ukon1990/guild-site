@@ -51,7 +51,7 @@ export class RaidToolComponent implements OnInit {
 		this.form = this.formBuilder.group({
 			difficulty: 4,
 			zone: 0,
-			encounter: 0
+			encounter: -1
 		});
 	}
 
@@ -61,14 +61,13 @@ export class RaidToolComponent implements OnInit {
 				this.members = m.json().members;
 
 				this.updateCharacterList();
-				console.log(m.json().members);
 			})
 			.catch(error => console.error('Unable to get guild members', error));
 
 		await this.characterService.getLogZones()
 			.then(zones => {
 				this.zones = zones.reverse();
-			}).catch(error => console.log(error));
+			}).catch(error => console.error(error));
 
 		await this.getAllLogs();
 	}
@@ -80,7 +79,6 @@ export class RaidToolComponent implements OnInit {
 	}
 
 	getLogsForPlayer(raider: Raider): void {
-		console.log(raider);
 		raider.downloading.logs = true;
 		this.characterService.getCharacterLogs(
 			raider.realm,
@@ -111,28 +109,44 @@ export class RaidToolComponent implements OnInit {
 
 	updateRelevantLogs(): void {
 		this.raiders.forEach(raider => {
-			console.log(raider.name);
 			this.setRelevantLog(raider);
 		});
 	}
 
 	setRelevantLog(raider: Raider): void {
+		let relevantLogCount = 0;
 		raider.best_allstar_points = 0;
 		raider.best_historical_percent = 0;
 		raider.best_persecondamount = 0;
 
 		raider.logs.forEach(log => {
-			if (log.difficulty === this.form.value.difficulty &&
-				log.name === this.zones[this.form.value.zone].encounters[this.form.value.encounter].name) {
-				log.specs.forEach(spec => {
-					if (spec.spec === raider.spec) {
-						raider.best_allstar_points = spec.best_allstar_points;
-						raider.best_historical_percent = spec.best_historical_percent;
-						raider.best_persecondamount = spec.best_persecondamount;
-					}
-				});
+			if (log.difficulty === this.form.value.difficulty) {
+				if (this.form.value.encounter === -1) {
+					relevantLogCount++;
+					log.specs.forEach(spec => {
+						if (spec.spec === raider.spec) {
+							raider.best_allstar_points += spec.best_allstar_points;
+							raider.best_historical_percent += spec.best_historical_percent;
+							raider.best_persecondamount += spec.best_persecondamount;
+						}
+					});
+				} else if (log.name === this.zones[this.form.value.zone].encounters[this.form.value.encounter].name) {
+					log.specs.forEach(spec => {
+						if (spec.spec === raider.spec) {
+							raider.best_allstar_points = spec.best_allstar_points;
+							raider.best_historical_percent = spec.best_historical_percent;
+							raider.best_persecondamount = spec.best_persecondamount;
+						}
+					});
+				}
 			}
 		});
+
+		if (this.form.value.encounter === -1 && relevantLogCount > 0) {
+			raider.best_allstar_points = raider.best_allstar_points / relevantLogCount;
+			raider.best_historical_percent = raider.best_historical_percent / relevantLogCount;
+			raider.best_persecondamount = raider.best_persecondamount / relevantLogCount;
+		}
 	}
 
 	updateCharacterList(): void {

@@ -14,6 +14,7 @@
   <mat-form-field *ngIf="zones && zones[form.value.zone]">
     <mat-select (change)="updateRelevantLogs()"
       placeholder="Boss" formControlName="encounter">
+      <mat-option [value]="-1">Avrage</mat-option>
       <mat-option *ngFor="let e of zones[form.value.zone].encounters; let i = index" [value]="i">{{ e.name }}</mat-option>
     </mat-select>
   </mat-form-field>
