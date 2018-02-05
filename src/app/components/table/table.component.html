@@ -33,7 +33,7 @@
             </mat-select>
           </span>
           <span *ngSwitchCase="'percent'">
-            {{ d[c.key] | number }}%
+            {{ d[c.key] | number:'1.0-0' }}%
           </span>
           <span *ngSwitchCase="'number'">
             {{ d[c.key] | number }}
