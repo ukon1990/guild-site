@@ -21,4 +21,9 @@ export class LogsComponent implements OnInit {
 	ngOnInit() {
 	}
 
+	getLog(id: string): void {
+		this.guildService.getGuildLogFights(id)
+			.then(r => console.log(r))
+			.catch(e => console.error(':(', e));
+	}
 }

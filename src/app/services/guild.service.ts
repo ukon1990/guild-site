@@ -118,17 +118,12 @@ export class GuildService {
 	}
 
 	getGuildLogFights(report: string) {
-		if (this.logs) {
-			return this.logs;
-		} else {
-			this.logs = this.httpClient
-				.get(
-					`https://www.warcraftlogs.com:443/v1/report/fights/${
-						report
-					}?api_key=4508059150144d5b3159184e77c51070`// ,quests,professions
-				).toPromise();
-			return this.logs;
-		}
+		return this.httpClient
+			.get(
+				`https://www.warcraftlogs.com:443/v1/report/fights/${
+					report
+				}?api_key=4508059150144d5b3159184e77c51070`
+			).toPromise();
 	}
 
 	getLogZones() {
