@@ -1,13 +1,18 @@
 <div class="character character-bg clearfix" [style.background-image]="getBackgroundImage()" [style.background-color]="getBackgroundColor()">
   <!-- Basic data -->
   <div class="clearfix">
-    <a routerLink="/roster">
-			<i class="fa fa-chevron-left" aria-hidden="true"></i>
+    <a routerLink="../../">
+			<i class="fas fa-chevron-left"></i>
 			Back to guild roster
     </a>
     <a class="float-right"
       href="http://www.askmrrobot.com/wow/gear/eu/{{ character.realm }}/{{ character.name }}"
-      target="_blank">Ask MR.Robot</a>
+      target="_blank">
+      <span class="mr-2">
+        <i class="fas fa-external-link-alt"></i>
+      </span>
+      Ask MR.Robot
+    </a>
   </div>
   <span *ngIf="character.items">
 		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 64 64" class="Icon-svg mini-icon">

@@ -25,7 +25,8 @@ export class RaidToolComponent implements OnInit {
 		{ key: 'best_historical_percent', title: '%', dataType: 'percent' },
 		{ key: 'best_persecondamount', title: 'DPS/HPS', dataType: 'number' },
 		{ key: 'best_allstar_points', title: '*', dataType: 'number' },
-		{ key: 'lastModified', title: 'Last modified', dataType: 'date' }
+		{ key: 'lastModified', title: 'Last modified', dataType: 'date' },
+		{ key: '', title: 'Profile', dataType: 'raider-profile' }
 	];
 	members;
 	characters = new Array<Character>();
@@ -44,13 +45,14 @@ export class RaidToolComponent implements OnInit {
 		{ id: 4, name: 'Heroic' },
 		{ id: 5, name: 'Mythic' }
 	];
-	classCount;
+	classCount = new Array<any>();
+	classCountMap = new Map<string, any>();
 	roleCount;
 
 	constructor(private guildService: GuildService, private characterService: CharacterService, private formBuilder: FormBuilder) {
 		this.form = this.formBuilder.group({
 			difficulty: 4,
-			zone: 0,
+			zone: 1,
 			encounter: -1
 		});
 	}
@@ -61,6 +63,7 @@ export class RaidToolComponent implements OnInit {
 				this.members = m.json().members;
 
 				this.updateCharacterList();
+				this.updateClassSpecInfo();
 			})
 			.catch(error => console.error('Unable to get guild members', error));
 
@@ -74,7 +77,30 @@ export class RaidToolComponent implements OnInit {
 
 	async getAllLogs() {
 		this.raiders.forEach(r => {
+
 			this.getLogsForPlayer(r);
+		});
+	}
+
+	updateClassSpecInfo(): void {
+		this.classCount = new Array<any>();
+		this.classCountMap = new Map<string, any>();
+
+		this.raiders.forEach(r => {
+			if (!this.classCountMap[r.class]) {
+				const c =  { class: r.class, count: 1, specMap: [], spec: [] };
+				this.classCount.push(c);
+				this.classCountMap[c.class] = c;
+			} else {
+				this.classCountMap[r.class].count++;
+			}
+
+			if (this.classCountMap[r.class].specMap[r.spec]) {
+				this.classCountMap[r.class].specMap[r.spec].count++;
+			} else {
+				this.classCountMap[r.class].specMap[r.spec] = { name: r.spec, count: 1, role: r.role.toLowerCase() };
+				this.classCountMap[r.class].spec.push(this.classCountMap[r.class].specMap[r.spec]);
+			}
 		});
 	}
 

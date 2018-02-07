@@ -49,6 +49,6 @@ export class CharacterService {
 		if (this.logs) {
 			return this.logs;
 		}
-		return this.httpClient.get('assets/mock/zones.json').toPromise();
+		return this.httpClient.get('https://www.warcraftlogs.com/v1/zones?api_key=4508059150144d5b3159184e77c51070').toPromise();
 	}
 }

@@ -86,7 +86,8 @@ import { SortIconComponent } from './components/table/sort-icon/sort-icon.compon
 			{path: 'roster/:realm/:character/:tab', component: CharacterComponent},
 			{path: 'roster/:realm/:character/:tab/:category', component: CharacterComponent},
 			{path: 'challenges', component: ChallengeComponent},
-			{path: 'tools/raid-composition', component: RaidToolComponent},
+			{path: 'raiders', component: RaidToolComponent},
+			{path: 'tools/raid-composition', redirectTo: 'raiders'},
 			{path: 'logs', component: LogsComponent},
 			{path: 'streams', component: StreamsComponent},
 			{path: '**', component: NewsComponent}

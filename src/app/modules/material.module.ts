@@ -9,7 +9,7 @@ import {
 	MatSidenavModule, MatPaginatorModule,
 	MatSortModule, MatTableModule,
 	MatCardModule, MatProgressSpinnerModule,
-	MatSelectModule
+	MatSelectModule, MatExpansionModule
 } from '@angular/material';
 
 @NgModule({
@@ -30,7 +30,8 @@ import {
 		MatTableModule,
 		MatCardModule,
 		MatProgressSpinnerModule,
-		MatSelectModule
+		MatSelectModule,
+		MatExpansionModule
 	],
 	imports: [
 	],

@@ -1,3 +1,4 @@
+<h2>Raiders</h2>
 <form [formGroup]="form">
   <mat-form-field>
     <mat-select placeholder="difficulty" formControlName="difficulty" (change)="updateRelevantLogs()">
@@ -23,5 +24,39 @@
 <em>
   The log data is based on the characters spec. Change the characters spec, to see their log data for another spec etc.
 </em>
+
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Class and spec overview
+      </mat-panel-title>
+      <mat-panel-description>
+        Overview of how many players per class and spec
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <button (click)="updateClassSpecInfo()" mat-raised-button>Update</button>
+    <div class="row">
+      <div class="col-md-3" *ngFor="let class of classCount">
+        <mat-card>
+          <mat-card-header>
+            <mat-card-title>
+              {{ class.class }}
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <mat-list dense>
+              <mat-list-item *ngFor="let spec of class.spec">
+                <strong>{{ spec.name }}({{spec.role}})</strong>: {{ spec.count }}
+              </mat-list-item>
+            </mat-list>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </mat-expansion-panel>
+
+</mat-accordion>
+
 
 <app-table [columns]="columns" [data]="raiders" (change)="getLogsForPlayer($event)"></app-table>
