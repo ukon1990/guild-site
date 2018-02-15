@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GuildService } from '../../services/guild.service';
 import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { Private } from '../../models/private';
 
 @Component({
 	selector: 'app-challenge',
@@ -9,11 +10,11 @@ import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browse
 })
 export class ChallengeComponent implements OnInit {
 	challenges: any;
-	guildName = 'Cannon Fodder';
+	guildName = Private.guildName;
 
 	constructor(private guildService: GuildService, private sanitizer: DomSanitizer) {
 		this.guildService
-			.getChallenges('Cannon Fodder')
+			.getChallenges()
 			.then(response => {
 				this.challenges = response.challenge
 					.sort( (a, b) => a.map.id < b.map.id ? 1 : -1 );

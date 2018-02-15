@@ -10,7 +10,7 @@ export class LogsComponent implements OnInit {
 	reports: any[];
 
 	constructor(private guildService: GuildService) {
-		this.guildService.getGuildLogs('draenor', 'Cannon Fodder')
+		this.guildService.getGuildLogs()
 		.then( result => {
 			console.log(result);
 			this.reports = result.sort( (a, b) => a.start < b.start ? 1 : -1 );

@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
 	constructor(private guildSerivce: GuildService) { }
 
 	ngOnInit() {
-		this.guildSerivce.getGuildRank(this.guildName)
+		this.guildSerivce.getGuildRank()
 			.then(rank => {
 				this.guildRank = rank;
 			})

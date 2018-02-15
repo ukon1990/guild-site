@@ -2,14 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { Private } from '../models/private';
 
 @Injectable()
 export class CharacterService {
-	private region = 'eu';
-	private realm = 'draenor';
-	private apiKey = 'ugwc5qde7n5svga5yh7fwwxsjqtsdcws';
-	private baseUrl = `https://${this.region}.api.battle.net/wow/character/`;
-	private urlEnd = `?locale=en_GB&apikey=${this.apiKey}`;
+	private baseUrl = `https://${Private.region}.api.battle.net/wow/character/`;
+	private urlEnd = `?locale=en_GB&apikey=${Private.blizzardApiKey}`;
 
 	logs: Promise<any>;
 
@@ -41,7 +39,9 @@ export class CharacterService {
 					metric
 				}${
 					zone && zone !== ''  ? '&zone=' + zone : ''
-				}&api_key=4508059150144d5b3159184e77c51070`
+				}&api_key=${
+					Private.warcraftLogsApiKey
+				}`
 			).toPromise();
 	}
 
@@ -49,6 +49,8 @@ export class CharacterService {
 		if (this.logs) {
 			return this.logs;
 		}
-		return this.httpClient.get('https://www.warcraftlogs.com/v1/zones?api_key=4508059150144d5b3159184e77c51070').toPromise();
+		return this.httpClient.get(`https://www.warcraftlogs.com/v1/zones?api_key=${
+			Private.warcraftLogsApiKey
+		}`).toPromise();
 	}
 }

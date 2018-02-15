@@ -3,6 +3,32 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.1.2.
 The project is mainly created for the sake of making something. You may feel free to use the code as you wish and alter it in any way you'd like. It allows you to browse your guild data, available through blizzards API. Currently it's set to a spesific realm and guild.
 
+
+## To get started using the app for your guild
+You first need to create a file with the name private.ts in the `app/models/` directory.
+This file should look something like this:
+
+```
+export class Private {
+	public static guildName = 'Cannon Fodder';
+	public static realm = 'the realm name';
+	public static region = 'eu';
+	public static blizzardApiKey = 'your key';
+	public static warcraftLogsApiKey = 'your public key';
+}
+
+```
+
+To get Warcraft logs API key:
+* Log in to their site
+* Follow this link: `https://www.warcraftlogs.com/accounts/changeuser`
+* Look for `public key` and copy it
+
+To get a API key from Blizzard:
+* Make a user or log in to `https://dev.battle.net/`
+* Go to your account page and either get a existing key or make a new one.
+
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

@@ -58,7 +58,7 @@ export class RaidToolComponent implements OnInit {
 	}
 
 	async ngOnInit() {
-		await this.guildService.getMembers('Cannon fodder')
+		await this.guildService.getMembers()
 			.then(m => {
 				this.members = m.json().members;
 

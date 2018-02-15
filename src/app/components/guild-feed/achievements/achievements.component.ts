@@ -18,7 +18,7 @@ export class AchievementsComponent implements OnInit {
 
 	constructor(private guildService: GuildService) {
 		this.guildService
-			.getAchievements('Cannon Fodder')
+			.getAchievements()
 			.then(response => {
 				const tmp = response.json().achievements;
 				for (let i = 0; i < tmp.achievementsCompleted.length; i++) {

@@ -2,14 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
+import { Private } from '../models/private';
 
 @Injectable()
 export class GuildService {
-	private region = 'eu';
-	private realm = 'draenor';
-	private apiKey = 'ugwc5qde7n5svga5yh7fwwxsjqtsdcws';
-	private baseUrl = `https://${this.region}.api.battle.net/wow/guild/${this.realm}/`;
-	private urlEnd = `?locale=en_GB&apikey=${this.apiKey}`;
+	private baseUrl = `https://${Private.region}.api.battle.net/wow/guild/${Private.realm}/`;
+	private urlEnd = `?locale=en_GB&apikey=${Private.blizzardApiKey}`;
 
 	// Statics
 	logs: Promise<any>;
@@ -20,33 +18,33 @@ export class GuildService {
 
 	constructor (private http: Http, private httpClient: HttpClient) { }
 
-	getAllGuildData(guildName: string): Promise<any> {
+	getAllGuildData(): Promise<any> {
 		return this.http
 			.get(
 				`${
 					this.baseUrl
 				}${
-					guildName
+					Private.guildName
 				}${
 					this.urlEnd
 				}`// &fields=achievements,challenge,news,members
 			).toPromise();
 	}
 
-	getAchievements(guildName: string): Promise<any> {
+	getAchievements(): Promise<any> {
 		return this.http
 			.get(
 				`${
 					this.baseUrl
 				}${
-					guildName
+					Private.guildName
 				}${
 					this.urlEnd
 				}&fields=achievements`
 			).toPromise();
 	}
 
-	getChallenges(guildName: string): Promise<any> {
+	getChallenges(): Promise<any> {
 		if (this.challenges) {
 			return this.challenges;
 		} else {
@@ -55,7 +53,7 @@ export class GuildService {
 				`${
 					this.baseUrl
 				}${
-					guildName
+					Private.guildName
 				}${
 					this.urlEnd
 				}&fields=challenge`
@@ -64,54 +62,58 @@ export class GuildService {
 		}
 	}
 
-	getNews(guildName: string, refresh?: boolean): Promise<any> {
+	getNews(refresh?: boolean): Promise<any> {
 		return this.httpClient
 				.get(
 					`${
 						this.baseUrl
 					}${
-						guildName
+						Private.guildName
 					}${
 						this.urlEnd
 					}&fields=news`
 				).toPromise();
 	}
 
-	getMembers(guildName: string): Promise<any> {
+	getMembers(): Promise<any> {
 		return this.http
 			.get(
 				`${
 					this.baseUrl
 				}${
-					guildName
+					Private.guildName
 				}${
 					this.urlEnd
 				}&fields=members`
 			).toPromise();
 	}
 
-	getGuildRank(guildName: string): Promise<any> {
+	getGuildRank(): Promise<any> {
 		return this.httpClient
 			.get(`http://guild.jonaskf.net/assets/api/GetGuildRank.php?region=${
-				this.region
+				Private.region
 			}&realm=${
-				this.realm
+				Private.realm
 			}&guild=${
-				guildName
+				Private.guildName
 			}`).toPromise();
 	}
 
-	getGuildLogs(realm: string, guild: string): Promise<any> {
+	getGuildLogs(): Promise<any> {
 		if (this.logs) {
 			return this.logs;
 		} else {
 			this.logs = this.httpClient
 				.get(
 					`https://www.warcraftlogs.com:443/v1/reports/guild/${
-						guild
+						Private.guildName
 					}/${
-						realm
-					}/eu?api_key=4508059150144d5b3159184e77c51070`// ,quests,professions
+						Private.realm
+					}/${
+						Private.region
+					}?api_key=${
+						Private.warcraftLogsApiKey
+					}`// ,quests,professions
 				).toPromise();
 			return this.logs;
 		}
@@ -122,7 +124,9 @@ export class GuildService {
 			.get(
 				`https://www.warcraftlogs.com:443/v1/report/fights/${
 					report
-				}?api_key=4508059150144d5b3159184e77c51070`
+				}?api_key=${
+					Private.warcraftLogsApiKey
+				}`
 			).toPromise();
 	}
 
@@ -132,7 +136,9 @@ export class GuildService {
 		} else {
 			this.zones = this.httpClient
 				.get(
-					`https://www.warcraftlogs.com/v1/zones?api_key=4508059150144d5b3159184e77c51070`// ,quests,professions
+					`https://www.warcraftlogs.com/v1/zones?api_key=${
+						Private.warcraftLogsApiKey
+					}`// ,quests,professions
 				).toPromise();
 			return this.zones;
 		}

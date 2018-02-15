@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GuildService } from './services/guild.service';
 import { AchievementsService } from './services/achievements.service';
 import { AuthenticationService } from './services/authentication.service';
+import { Private } from './models/private';
 
 declare const GuildTabard: any;
 @Component({
@@ -10,7 +11,7 @@ declare const GuildTabard: any;
 	styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-	guildName = 'Cannon fodder';
+	guildName = Private.guildName;
 	guild: any;
 
 	constructor(
@@ -18,7 +19,7 @@ export class AppComponent implements OnInit {
 		private achievementsService: AchievementsService,
 		private authService: AuthenticationService) {
 		this.guildService
-			.getAllGuildData(this.guildName)
+			.getAllGuildData()
 			.then(response => this.guild = response.json())
 			.catch(error => {
 				console.log(error);

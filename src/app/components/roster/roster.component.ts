@@ -52,7 +52,7 @@ export class RosterComponent implements OnInit {
 				}) : this.members;
 			});
 		this.guildService
-			.getMembers('Cannon Fodder')
+			.getMembers()
 			.then(response => {
 				this.members = response.json().members;
 
