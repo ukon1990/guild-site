@@ -12,6 +12,7 @@ export class ChallengeRecord {
 	guildRank: number;
 	realmRank: number;
 	regionRank: number;
+	map: ChallengeMap;
 	bestTime: ChallengeTime;
 	diff: ChallengeTime;
 	lastTime: ChallengeTime;

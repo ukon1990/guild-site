@@ -54,6 +54,12 @@ app-character-achievement .mat-card .mat-card-header-text,
 app-character-achievement .mat-card .mat-card-subtitle {
 	color: white;
 }
+
+app-character .mat-paginator {
+	background: transparent !important;
+	color: white !important;
+}
+
 app-character .mat-tab-header-pagination-chevron,
 app-character .mat-paginator-decrement,
 app-character .mat-paginator-increment {

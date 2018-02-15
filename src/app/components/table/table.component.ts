@@ -90,4 +90,20 @@ export class TableComponent implements AfterViewInit, OnChanges {
 		});
 		this.change.emit(raider);
 	}
+
+	timeToMinutesAndSeconds(time: number): string {
+		let s = time / 1000,
+			m = Math.floor((time - s) / 60000);
+		const h = Math.floor(m / 60);
+		m = Math.floor(m % 60);
+		s = Math.floor(s % 60);
+		return `${
+			this.getStringNumber(h)}:${
+			this.getStringNumber(m)}:${
+			this.getStringNumber(s)}`;
+	}
+
+	private getStringNumber(num: number): string {
+		return num < 10 ? '0' + num :  '' + num;
+	}
 }

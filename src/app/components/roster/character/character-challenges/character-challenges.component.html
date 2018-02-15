@@ -1,3 +1,5 @@
+
+<!--
 <div class="row m-0">
   <div class="col-md-4" *ngFor="let record of challenges?.records">
     <div class="bg-img">
@@ -23,4 +25,8 @@
       </mat-card>
     </div>
   </div>
-</div>
+</div>-->
+
+<app-table *ngIf="records"
+  [columns]="columns"
+  [data]="records"></app-table>

@@ -47,6 +47,9 @@
           <span *ngSwitchCase="'date'">
             {{ d[c.key] | date}}
           </span>
+          <span *ngSwitchCase="'time'">
+            {{ timeToMinutesAndSeconds(d[c.key]) }}
+          </span>
           <span *ngSwitchDefault>{{ d[c.key] }}</span>
         </span>
       </td>
