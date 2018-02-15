@@ -179,7 +179,7 @@ export class RaidToolComponent implements OnInit {
 		const classMap = new Map<string, any>();
 		this.members.forEach(m => {
 			if (m.character.level === 110 &&
-				(m.rank === 0 || m.rank === 1 || m.rank === 4 || m.rank === 6 || m.rank === 9)) {
+				(m.rank === 0 || m.rank === 1|| m.rank === 3 || m.rank === 4 || m.rank === 6 || m.rank === 9)) {
 				const id = `${m.character.realm}-${m.character.name}`,
 					raider: Raider = new Raider(m.character);
 				this.raidersMap[id] = raider;

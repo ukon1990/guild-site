@@ -28,6 +28,12 @@ To get a API key from Blizzard:
 * Make a user or log in to `https://dev.battle.net/`
 * Go to your account page and either get a existing key or make a new one.
 
+## To set the guild rank names
+go to `app/models/guild-ranks.ts` and change the ranks there.
+Index 0 [the first element] is rank 0 (GM) and so forth.
+
+## Defining what ranks are displayed in the "raiders" page
+Open the `app/components/raid-tool/raid-tool.component.ts` file, and change it in the `updateCharacterList()` function. 
 
 ## Development server
 
