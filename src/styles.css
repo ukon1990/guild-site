@@ -5,6 +5,10 @@ mat-card {
 	background-size: cover;
 }
 
+.cdk-overlay-container {
+  z-index: 1030 !important;
+}
+
 app-character .mat-tab-label {
 	color: white !important;
 }
