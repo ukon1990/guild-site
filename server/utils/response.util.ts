@@ -28,7 +28,11 @@ export class Response {
     return Response.send({
       statusCode: 500,
       error: error ? error : 'Malormed request',
-      event: event.requestContext.stage === 'dev' ? event : undefined
+      event: event && event.requestContext.stage === 'dev' ? event : undefined
     }, callback);
   }
 }
+
+/*
+curl -X POST https://eu.battle.net/oauth/token -u a71249eda6654bd9862a981ae3f6e649:EFK8lDLVcVqBE3eFzrcJSJJ4jLj7Stfk -d redirect_uri=https://guild.jonaskf.net -d scope=wow.profile -d grant_type=authorization_code -d code=EUUPZKEMKHUTCJIGPCHF1VIHSDUDCIF6XR
+*/
