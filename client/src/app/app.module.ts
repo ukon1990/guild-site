@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
+import { AppRoutingModule } from './modules/app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
 import {HttpClientModule} from '@angular/common/http';
@@ -13,13 +13,17 @@ import { CharacterListComponent } from './components/character/character-list/ch
 import { NavComponent } from './components/nav/nav.component';
 import {MaterialModule} from './modules/material.module';
 import {OAuthModule} from 'angular-oauth2-oidc-codeflow';
+import { CharacterCardComponent } from './components/character/character-card/character-card.component';
+import { GuildComponent } from './components/guild/guild.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     CharacterListComponent,
-    NavComponent
+    NavComponent,
+    CharacterCardComponent,
+    GuildComponent
   ],
   imports: [
     BrowserModule,

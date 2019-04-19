@@ -2,6 +2,7 @@ import {Component, OnDestroy} from '@angular/core';
 import {NavigationEnd, Route, Router} from '@angular/router';
 import {AuthService} from './services/auth.service';
 import {SubscriptionsUtil} from './utils/subscriptions.util';
+import {UserService} from './services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -11,8 +12,7 @@ import {SubscriptionsUtil} from './utils/subscriptions.util';
 export class AppComponent implements OnDestroy {
   subscriptions = new SubscriptionsUtil();
 
-  constructor(private routeService: Router, private authService: AuthService) {
-    this.authService.getAccessToken();
+  constructor(private routeService: Router, private authService: AuthService, private userService: UserService) {
 
     this.subscriptions.add(
       this.routeService.events,

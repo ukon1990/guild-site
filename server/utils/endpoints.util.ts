@@ -13,7 +13,7 @@ export class Endpoints {
     return region ? this.endpoints[region] : this.endpoints.eu;
   }
 
-  getPath(query: string, region?: string, isNotWoW?: boolean): string {
+  getPath(query: string, region?: string): string {
     return this.getBase(region) + this.addQueriesToQueries(query);
   }
 

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Character} from '../models/character';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from './auth.service';
+import {Endpoints} from '../../../../server/utils/endpoints.util';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +15,9 @@ export class CharacterService {
   getCharacters(): Promise<Character[]> {
     const region = 'eu';
     return this.http.get(
-      `https://${
-        region
-        }.api.blizzard.com/wow/user/characters?access_token=${
-        this.authService.getAccessToken()
-        }`
-    )
-      .toPromise() as Promise<Character[]>;
+      new Endpoints().getPath('user/characters', region))
+      .toPromise()
+      .then((data: any) =>
+        data.characters) as Promise<Character[]>;
   }
 }

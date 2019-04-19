@@ -52,6 +52,13 @@ export class AuthService {
     return BLIZZARD.ACCESS_TOKEN;
   }
 
+  checkToken() {
+    const region = 'eu';
+    return this.http.post(`https://${region}.battle.net/oauth/check_token `, {
+      token: this.getAccessToken()
+    }).toPromise();
+  }
+
   authRequest() {
     const url = 'https://eu.battle.net/oauth/authorize?' +
       'response_type=code' +
