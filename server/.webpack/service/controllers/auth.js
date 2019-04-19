@@ -96,16 +96,13 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _utils_response_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils/response.util */ "./utils/response.util.ts");
-/* harmony import */ var _secrets__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../secrets */ "./secrets.ts");
-/* harmony import */ var _handlers_auth_handler__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../handlers/auth.handler */ "./handlers/auth.handler.ts");
-
+/* harmony import */ var _handlers_auth_handler__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../handlers/auth.handler */ "./handlers/auth.handler.ts");
 
 
 exports.handler = (event, context, callback) => {
     const region = 'eu';
-    const baseUrl = `https://${region}.battle.net/oauth/authorize?response_type=code&client_id=${_secrets__WEBPACK_IMPORTED_MODULE_1__["BLIZZARD"].CLIENT_ID}&scope=wow.profile%20sc2.profile&redirect_uri=${'http://localhost:4200'}`;
     if (event.httpMethod === 'POST') {
-        new _handlers_auth_handler__WEBPACK_IMPORTED_MODULE_2__["AuthHandler"]()
+        new _handlers_auth_handler__WEBPACK_IMPORTED_MODULE_1__["AuthHandler"]()
             .getAccessToken(event, callback);
     }
     else {
@@ -141,32 +138,20 @@ class AuthHandler {
         const body = JSON.parse(event.body), region = body.region, code = body.code, redirectURI = body.redirectURI;
         request__WEBPACK_IMPORTED_MODULE_0__["post"]({
             headers: {
-                'Authorization': `Basic ${btoa__WEBPACK_IMPORTED_MODULE_1__(`${_secrets__WEBPACK_IMPORTED_MODULE_2__["BLIZZARD"].CLIENT_ID}:${_secrets__WEBPACK_IMPORTED_MODULE_2__["BLIZZARD"].CLIENT_SECRET}`)}`
+                Authorization: `Basic ${btoa__WEBPACK_IMPORTED_MODULE_1__(`${_secrets__WEBPACK_IMPORTED_MODULE_2__["BLIZZARD"].CLIENT_ID}:${_secrets__WEBPACK_IMPORTED_MODULE_2__["BLIZZARD"].CLIENT_SECRET}`)}`,
+                Origin: redirectURI,
+                'Content-Type': 'application/x-www-form-urlencoded'
             },
             url: `https://${region}.battle.net/oauth/token`,
             form: {
                 code: code,
                 redirect_uri: redirectURI,
                 grant_type: 'authorization_code',
-                scope: 'wow.profile sc2.profile'
+                scope: 'wow.profile'
             }
         }, (err, response, body) => {
             _utils_response_util__WEBPACK_IMPORTED_MODULE_3__["Response"].send(body, callback);
-        }); /*
-      http.post(`https://${
-          region
-          }.battle.net/oauth/token`, {
-          code: code,
-          redirect_uri: redirectURI,
-          grant_type: 'authorization_code',
-          scope: 'wow.profile sc2.profile',
-          client_id: BLIZZARD.CLIENT_ID,
-          client_secret: BLIZZARD.CLIENT_SECRET
-        },
-        (err, response, body) => {
-          Response.send(JSON.parse(body), callback);
-  
-        });*/
+        });
     }
 }
 
@@ -32294,7 +32279,7 @@ Store.prototype.getAllCookies = function(cb) {
 /*! exports provided: _args, _from, _id, _inBundle, _integrity, _location, _phantomChildren, _requested, _requiredBy, _resolved, _spec, _where, author, bugs, contributors, dependencies, description, devDependencies, engines, files, homepage, keywords, license, main, name, repository, scripts, version, default */
 /***/ (function(module) {
 
-module.exports = {"_args":[["tough-cookie@2.4.3","/Users/jonas/Dev/Hobby/Web/wow-auction-helper/server-lambda"]],"_from":"tough-cookie@2.4.3","_id":"tough-cookie@2.4.3","_inBundle":false,"_integrity":"sha512-Q5srk/4vDM54WJsJio3XNn6K2sCG+CQ8G5Wz6bZhRZoAe/+TxjWB/GlFAnYEbkYVlON9FMk/fE3h2RLpPXo4lQ==","_location":"/tough-cookie","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"tough-cookie@2.4.3","name":"tough-cookie","escapedName":"tough-cookie","rawSpec":"2.4.3","saveSpec":null,"fetchSpec":"2.4.3"},"_requiredBy":["/request","/request-promise"],"_resolved":"https://registry.npmjs.org/tough-cookie/-/tough-cookie-2.4.3.tgz","_spec":"2.4.3","_where":"/Users/jonas/Dev/Hobby/Web/wow-auction-helper/server-lambda","author":{"name":"Jeremy Stashewsky","email":"jstash@gmail.com"},"bugs":{"url":"https://github.com/salesforce/tough-cookie/issues"},"contributors":[{"name":"Alexander Savin"},{"name":"Ian Livingstone"},{"name":"Ivan Nikulin"},{"name":"Lalit Kapoor"},{"name":"Sam Thompson"},{"name":"Sebastian Mayr"}],"dependencies":{"psl":"^1.1.24","punycode":"^1.4.1"},"description":"RFC6265 Cookies and Cookie Jar for node.js","devDependencies":{"async":"^1.4.2","nyc":"^11.6.0","string.prototype.repeat":"^0.2.0","vows":"^0.8.1"},"engines":{"node":">=0.8"},"files":["lib"],"homepage":"https://github.com/salesforce/tough-cookie","keywords":["HTTP","cookie","cookies","set-cookie","cookiejar","jar","RFC6265","RFC2965"],"license":"BSD-3-Clause","main":"./lib/cookie","name":"tough-cookie","repository":{"type":"git","url":"git://github.com/salesforce/tough-cookie.git"},"scripts":{"cover":"nyc --reporter=lcov --reporter=html vows test/*_test.js","test":"vows test/*_test.js"},"version":"2.4.3"};
+module.exports = {"_args":[["tough-cookie@2.4.3","/home/jonas/Dev/Web/guild-site/server"]],"_from":"tough-cookie@2.4.3","_id":"tough-cookie@2.4.3","_inBundle":false,"_integrity":"sha512-Q5srk/4vDM54WJsJio3XNn6K2sCG+CQ8G5Wz6bZhRZoAe/+TxjWB/GlFAnYEbkYVlON9FMk/fE3h2RLpPXo4lQ==","_location":"/tough-cookie","_phantomChildren":{},"_requested":{"type":"version","registry":true,"raw":"tough-cookie@2.4.3","name":"tough-cookie","escapedName":"tough-cookie","rawSpec":"2.4.3","saveSpec":null,"fetchSpec":"2.4.3"},"_requiredBy":["/request","/request-promise"],"_resolved":"https://registry.npmjs.org/tough-cookie/-/tough-cookie-2.4.3.tgz","_spec":"2.4.3","_where":"/home/jonas/Dev/Web/guild-site/server","author":{"name":"Jeremy Stashewsky","email":"jstash@gmail.com"},"bugs":{"url":"https://github.com/salesforce/tough-cookie/issues"},"contributors":[{"name":"Alexander Savin"},{"name":"Ian Livingstone"},{"name":"Ivan Nikulin"},{"name":"Lalit Kapoor"},{"name":"Sam Thompson"},{"name":"Sebastian Mayr"}],"dependencies":{"psl":"^1.1.24","punycode":"^1.4.1"},"description":"RFC6265 Cookies and Cookie Jar for node.js","devDependencies":{"async":"^1.4.2","nyc":"^11.6.0","string.prototype.repeat":"^0.2.0","vows":"^0.8.1"},"engines":{"node":">=0.8"},"files":["lib"],"homepage":"https://github.com/salesforce/tough-cookie","keywords":["HTTP","cookie","cookies","set-cookie","cookiejar","jar","RFC6265","RFC2965"],"license":"BSD-3-Clause","main":"./lib/cookie","name":"tough-cookie","repository":{"type":"git","url":"git://github.com/salesforce/tough-cookie.git"},"scripts":{"cover":"nyc --reporter=lcov --reporter=html vows test/*_test.js","test":"vows test/*_test.js"},"version":"2.4.3"};
 
 /***/ }),
 

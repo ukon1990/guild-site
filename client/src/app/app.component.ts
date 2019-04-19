@@ -1,7 +1,7 @@
 import {Component, OnDestroy} from '@angular/core';
 import {NavigationEnd, Route, Router} from '@angular/router';
 import {AuthService} from './services/auth.service';
-import { SubscriptionsUtil } from './utils/subscriptions.util';
+import {SubscriptionsUtil} from './utils/subscriptions.util';
 
 @Component({
   selector: 'app-root',
@@ -15,14 +15,15 @@ export class AppComponent implements OnDestroy {
     this.subscriptions.add(
       this.routeService.events,
       (event) => {
-      if (event instanceof NavigationEnd) {
-        const res = /code=[a-zA-Z0-9]{3,40}/.exec((event as NavigationEnd).urlAfterRedirects);
-        if (res && res !== null && res.length > 0) {
-          const code = res[0].replace('code=', '');
-          this.authService.setAuthCode(code);
+        if (event instanceof NavigationEnd) {
+          const res = /code=[a-zA-Z0-9]{3,40}/.exec((event as NavigationEnd).urlAfterRedirects);
+          if (res && res !== null && res.length > 0) {
+            const code = res[0].replace('code=', '');
+            this.authService.setAuthCode(code);
+            this.routeService.navigateByUrl('');
+          }
         }
-      }
-    });
+      });
   }
 
   ngOnDestroy() {

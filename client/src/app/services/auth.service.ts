@@ -1,5 +1,4 @@
-import {AuthConfig, JwksValidationHandler, OAuthService} from 'angular-oauth2-oidc-codeflow';
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {BLIZZARD} from '../../../../server/secrets';
 import {HttpClient} from '@angular/common/http';
 
@@ -7,34 +6,33 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class AuthService {
+  public static authTokenEvent = new EventEmitter<any>();
+  private authorizationTab;
 
-  constructor(private http: HttpClient, private oauthService: OAuthService) {
-    // this.configureWithNewConfigApi();
-    // this.oauthService.initAuthorizationCodeFlow();
+  constructor(private http: HttpClient) {
+
+    this.setAuthCodeSubscriptionEvent();
   }
 
-  private configureWithNewConfigApi() {
-    this.oauthService.configure(authConfig);
-    this.oauthService.tokenValidationHandler = new JwksValidationHandler();
-
-    this.oauthService.loadDiscoveryDocumentAndTryLogin().then(response => {
-      console.log('Success?', response);
-    }).catch(err => {
-      console.log('Login failed');
-    });
-
-
-    // Call this.oauthService.tryLogin() if discovery document is not used.
-    // All configurations must be set manually.
+  private setAuthCodeSubscriptionEvent() {
+    window.addEventListener('storage', (event: StorageEvent) => {
+      if (event.key === 'authorization_code') {
+        window.removeEventListener('storage', () => {
+        });
+        this.accessTokenRequest();
+        if (this.authorizationTab) {
+          this.authorizationTab.close();
+        }
+      }
+    }, false);
   }
 
   setAuthCode(code: string): void {
     localStorage.setItem('authorization_code', code);
-    this.accessTokenTest();
   }
 
-  setAccessToken(token: string): void {
-    localStorage.setItem('access_token', token);
+  setAccessToken(token: any): void {
+    localStorage.setItem('access_token', JSON.stringify(token));
   }
 
   getAuthCode(): string {
@@ -49,43 +47,38 @@ export class AuthService {
     const url = 'https://eu.battle.net/oauth/authorize?' +
       'response_type=code' +
       '&redirect_uri=' + location.origin +
-      '&scope=wow.profile sc2.profile&' +
+      '&scope=wow.profile&' +
       'client_id=' + BLIZZARD.CLIENT_ID;
     console.log('url', url);
-    this.openNewTab(
-      url
-    );
+    this.authorizationTab = this.openNewTab(url);
   }
 
-  accessTokenTest(): void {
-    this.http.get(`https://eu.battle.net/oauth/token?grant_type=authorization_code&client_id=${
-      BLIZZARD.CLIENT_ID
-      }&code=${
-      this.getAuthCode()
-      }&redirect_uri=${
-      location.origin
-      }`)
-      .toPromise();
-  }
-
-  accessTokenRequest(authCode: string) {
-    console.log('The code', authCode);
+  accessTokenRequest() {
+    console.log('The code', this.getAuthCode());
     this.http.post(
       'http://localhost:3000/auth',
       JSON.stringify({
         region: 'eu',
-        code: authCode,
+        code: this.getAuthCode(),
         redirectURI: location.origin
       }))
       .toPromise()
-      .then((response: string) => {
-        this.setAccessToken(response);
+      .then((response: any) => {
+        const resObj = JSON.parse(response);
+        if (resObj.error) {
+          localStorage.removeItem('authorization_code');
+          localStorage.removeItem('access_token');
+        } else {
+          this.setAccessToken(response);
+          AuthService.authTokenEvent.emit();
+        }
+
       })
       .catch(error => console.error(error));
   }
 
 
-  openNewTab(url: string): void {
+  openNewTab(url: string) {
     if (navigator.platform !== 'Win32' &&
       (window.navigator['standalone'] || window.matchMedia('(display-mode: standalone)').matches)) {
       const a = document.createElement('a');
@@ -94,18 +87,9 @@ export class AuthService {
 
       const dispatch = document.createEvent('HTMLEvents');
       dispatch.initEvent('click', true, true);
-      a.dispatchEvent(dispatch);
+      return a.dispatchEvent(dispatch);
     } else {
-      window.open(url, '_blank');
+      return window.open(url, '_blank');
     }
   }
 }
-
-
-export const authConfig: AuthConfig = {
-  issuer: 'https://eu.battle.net/oauth/authorize',
-  redirectUri: window.location.origin + '/index.html',
-  clientId: BLIZZARD.CLIENT_ID,
-  scope: 'wow.profile sc2.profile',
-};
-
