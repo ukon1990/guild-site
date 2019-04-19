@@ -1,6 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import {BLIZZARD} from '../../../../server/secrets';
 import {HttpClient} from '@angular/common/http';
+import {ObjectUtil} from '../utils/object.util';
 
 @Injectable({
   providedIn: 'root'
@@ -41,9 +42,13 @@ export class AuthService {
   }
 
   getAccessToken(): string {
-    console.log('getAccessToken');
-    BLIZZARD.ACCESS_TOKEN = JSON.parse(localStorage.getItem('access_token')).access_token;
-    console.log('token', localStorage.getItem('access_token'));
+    const item = localStorage.getItem('access_token');
+    if (ObjectUtil.isNullOrUndefined(item)) {
+      return undefined;
+    }
+
+    const obj = JSON.parse(item);
+    BLIZZARD.ACCESS_TOKEN = obj.access_token;
     return BLIZZARD.ACCESS_TOKEN;
   }
 
@@ -58,7 +63,6 @@ export class AuthService {
   }
 
   accessTokenRequest() {
-    console.log('The code', this.getAuthCode());
     this.http.post(
       'http://localhost:3000/auth',
       JSON.stringify({
@@ -68,8 +72,7 @@ export class AuthService {
       }))
       .toPromise()
       .then((response: any) => {
-        const resObj = JSON.parse(response);
-        if (resObj.error) {
+        if (response.error) {
           localStorage.removeItem('authorization_code');
           localStorage.removeItem('access_token');
         } else {
@@ -78,7 +81,8 @@ export class AuthService {
         }
 
       })
-      .catch(error => console.error(error));
+      .catch(error =>
+        console.error(error));
   }
 
 

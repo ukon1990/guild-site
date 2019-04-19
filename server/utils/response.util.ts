@@ -5,7 +5,7 @@ const zlib = require('zlib');
 export class Response {
   public static async send(body: any, callback: Callback) {
     const gzip = zlib.createGzip();
-    zlib.gzip(JSON.stringify(body), (error, buffer) => {
+    zlib.gzip(this.getStringValue(body), (error, buffer) => {
       console.log('get', error, buffer);
       callback(null, {
         statusCode: 200,
@@ -19,6 +19,10 @@ export class Response {
         }
       });
     });
+  }
+
+  private static getStringValue(body: any) {
+    return typeof body === 'string' ? body : JSON.stringify(body);
   }
 
   public static error(callback: Callback, error?, event?: APIGatewayEvent): any {

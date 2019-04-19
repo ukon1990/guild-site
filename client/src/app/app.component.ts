@@ -12,6 +12,8 @@ export class AppComponent implements OnDestroy {
   subscriptions = new SubscriptionsUtil();
 
   constructor(private routeService: Router, private authService: AuthService) {
+    this.authService.getAccessToken();
+
     this.subscriptions.add(
       this.routeService.events,
       (event) => {
