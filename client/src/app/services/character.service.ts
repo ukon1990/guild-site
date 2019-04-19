@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Character} from '../models/character';
 import {HttpClient} from '@angular/common/http';
-import {BLIZZARD} from '../../../../server/secrets';
 import {AuthService} from './auth.service';
 
 @Injectable({
@@ -14,7 +13,6 @@ export class CharacterService {
 
   getCharacters(): Promise<Character[]> {
     const region = 'eu';
-    // https://eu.api.blizzard.com/wow/user/characters?access_token=USVxHNEuAdgxLYaFG5jZ4R699ATV8cKfRV
     return this.http.get(
       `https://${
         region
