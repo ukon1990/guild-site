@@ -33,6 +33,7 @@ export class AuthService {
 
   setAccessToken(token: any): void {
     localStorage.setItem('access_token', JSON.stringify(token));
+    BLIZZARD.ACCESS_TOKEN = token.access_token;
   }
 
   getAuthCode(): string {
@@ -40,7 +41,10 @@ export class AuthService {
   }
 
   getAccessToken(): string {
-    return 'USVxHNEuAdgxLYaFG5jZ4R699ATV8cKfRV'; // localStorage.getItem('access_token');
+    console.log('getAccessToken');
+    BLIZZARD.ACCESS_TOKEN = JSON.parse(localStorage.getItem('access_token')).access_token;
+    console.log('token', localStorage.getItem('access_token'));
+    return BLIZZARD.ACCESS_TOKEN;
   }
 
   authRequest() {
