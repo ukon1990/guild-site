@@ -9,18 +9,26 @@ import { AuthService } from './services/auth.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { CharacterListComponent } from './components/character/character-list/character-list.component';
+import { NavComponent } from './components/nav/nav.component';
+import {MaterialModule} from './modules/material.module';
+import {OAuthModule} from 'angular-oauth2-oidc-codeflow';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    CharacterListComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
+    OAuthModule.forRoot(),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    MaterialModule
   ],
   providers: [
     AuthService

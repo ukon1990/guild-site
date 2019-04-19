@@ -1,5 +1,4 @@
 import {APIGatewayEvent, Callback, Context} from 'aws-lambda';
-import {CharacterHandler} from '../handlers/character.handler';
 import {Response} from '../utils/response.util';
 import {RealmHandler} from '../handlers/realm.handler';
 

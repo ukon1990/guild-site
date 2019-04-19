@@ -1,7 +1,7 @@
 import {APIGatewayEvent, Callback, Context} from 'aws-lambda';
-import {CharacterHandler} from '../handlers/character.handler';
 import {Response} from '../utils/response.util';
 import {BLIZZARD} from '../secrets';
+import {AuthHandler} from '../handlers/auth.handler';
 
 exports.handler = (event: APIGatewayEvent, context: Context, callback: Callback) => {
   const region = 'eu';
@@ -9,13 +9,13 @@ exports.handler = (event: APIGatewayEvent, context: Context, callback: Callback)
     region
     }.battle.net/oauth/authorize?response_type=code&client_id=${
     BLIZZARD.CLIENT_ID
-  }&scope=wow.profile%20sc2.profile&redirect_uri=${
+    }&scope=wow.profile%20sc2.profile&redirect_uri=${
     'http://localhost:4200'
     }`;
-  switch (event.httpMethod) {
-    case 'POST':
-      break;
-    default:
-      break;
+  if (event.httpMethod === 'POST') {
+    new AuthHandler()
+      .getAccessToken(event, callback);
+  } else {
+    Response.error(callback, {message: 'Unsupported method'});
   }
 };

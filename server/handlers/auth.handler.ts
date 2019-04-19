@@ -1,29 +1,29 @@
 import * as http from 'request';
-import {BLIZZARD, AWS_DETAILS} from '../secrets';
-import {APIGatewayEvent} from 'aws-lambda';
+import {BLIZZARD} from '../secrets';
+import {APIGatewayEvent, Callback} from 'aws-lambda';
+import {Response} from '../utils/response.util';
 
 export class AuthHandler {
-  public static getToken(): Promise<string> {
-    return new Promise<string>((resolve, reject) => {
-      http.get(`https://eu.battle.net/oauth/token?grant_type=client_credentials&client_id=${
-          BLIZZARD.CLIENT_ID
-          }&client_secret=${
-          BLIZZARD.CLIENT_SECRET
-          }&scope=wow.profile`,
-        (err, r, body) => {
-          const tokenResponse = JSON.parse(body);
-          BLIZZARD.ACCESS_TOKEN = tokenResponse.access_token;
-          resolve(tokenResponse.access_token);
-        });
-    });
-  }
+  public getAccessToken(event: APIGatewayEvent, callback: Callback): void {
+    const body = JSON.parse(event.body),
+      region = body.region,
+      code = body.code,
+      redirectURI = body.redirectURI;
 
-  public static isAuthorizedIdentity(event: APIGatewayEvent): boolean {
-    const requestIp = event.requestContext.identity.sourceIp,
-      localIp = '127.0.0.1';
-    const requestDomain = event.requestContext['domainName'],
-      allowedDomain = AWS_DETAILS.ALLOWED_DOMAIN;
+    http.get(`https://${
+        region
+        }.battle.net/oauth/token?grant_type=authorization_code&client_id=${
+        BLIZZARD.CLIENT_ID
+        }&client_secret=${
+        BLIZZARD.CLIENT_SECRET
+        }&code=${
+        code
+        }&redirect_uri=${
+        redirectURI
+        }`,
+      (err, response, body) => {
+        Response.send(JSON.parse(body), callback);
 
-    return true;
+      });
   }
 }

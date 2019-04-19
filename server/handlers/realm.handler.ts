@@ -7,7 +7,7 @@ import {Response} from '../utils/response.util';
 export class RealmHandler {
 
   async getStatus(event: APIGatewayEvent, callback: Callback) {
-    await AuthHandler.getToken();
+    // await AuthHandler.getToken();
 
     const body = JSON.parse(event.body);
 
