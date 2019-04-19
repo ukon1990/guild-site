@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {GuildComponent} from '../components/guild/guild.component';
+import {CharacterComponent} from '../components/character/character.component';
 
 const routes: Routes = [
   {
@@ -23,7 +24,7 @@ const routes: Routes = [
             children: [
               {
                 path: ':name',
-                component: GuildComponent
+                component: CharacterComponent
               }
             ]
           }

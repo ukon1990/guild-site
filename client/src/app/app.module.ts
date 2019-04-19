@@ -15,6 +15,7 @@ import {MaterialModule} from './modules/material.module';
 import {OAuthModule} from 'angular-oauth2-oidc-codeflow';
 import { CharacterCardComponent } from './components/character/character-card/character-card.component';
 import { GuildComponent } from './components/guild/guild.component';
+import { CharacterComponent } from './components/character/character.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { GuildComponent } from './components/guild/guild.component';
     CharacterListComponent,
     NavComponent,
     CharacterCardComponent,
-    GuildComponent
+    GuildComponent,
+    CharacterComponent
   ],
   imports: [
     BrowserModule,
