@@ -71,7 +71,7 @@ export class AuthService {
 
   accessTokenRequest() {
     this.http.post(
-      'http://localhost:3000/auth',
+      'https://w6f8vikqy3.execute-api.eu-west-1.amazonaws.com/prod/auth',
       JSON.stringify({
         region: 'eu',
         code: this.getAuthCode(),
