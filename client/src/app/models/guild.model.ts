@@ -16,7 +16,7 @@ export interface Spec {
   order: number;
 }
 
-export interface Character {
+export interface GuildCharacter {
   name: string;
   realm: string;
   battlegroup: string;
@@ -33,7 +33,7 @@ export interface Character {
 }
 
 export interface Member {
-  character: Character;
+  character: GuildCharacter;
   rank: number;
 }
 
@@ -142,7 +142,7 @@ export interface Spec2 {
   order: number;
 }
 
-export interface Character2 {
+export interface GuildCharacter2 {
   name: string;
   realm: string;
   battlegroup: string;
@@ -168,7 +168,7 @@ export interface Spec3 {
 }
 
 export interface Member2 {
-  character: Character2;
+  character: GuildCharacter2;
   spec: Spec3;
 }
 

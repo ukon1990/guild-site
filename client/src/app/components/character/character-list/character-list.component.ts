@@ -3,7 +3,7 @@ import {CharacterService} from '../../../services/character.service';
 import {SubscriptionsUtil} from '../../../utils/subscriptions.util';
 import {AuthService} from '../../../services/auth.service';
 import {UserService} from '../../../services/user.service';
-import {UserRealm} from '../../../models/user-realm.model';
+import {UserRealm, UserRealmRoot} from '../../../models/user-realm.model';
 import {Router} from '@angular/router';
 
 @Component({
@@ -24,8 +24,8 @@ export class CharacterListComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.authService.getAuthCode()) {
       this.service.getCharacters()
-        .then((realms: UserRealm[]) => {
-          this.realms = realms;
+        .then((realms: UserRealmRoot) => {
+          this.realms = realms.list;
           console.log(realms);
         })
         .catch(error =>

@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Endpoints} from '../../../../server/utils/endpoints.util';
 import {AuthService} from './auth.service';
@@ -9,6 +9,7 @@ import {UserRealm} from '../models/user-realm.model';
   providedIn: 'root'
 })
 export class UserService {
+  static events: EventEmitter<User> = new EventEmitter<User>();
   user: User = new User();
 
   constructor(private http: HttpClient, private authService: AuthService) {
@@ -36,7 +37,10 @@ export class UserService {
         console.error);
   }
 
-  private handleCharactersResponse(data: any): UserRealm[] {
-    return UserRealm.group(data);
+  private handleCharactersResponse(data: any): any {
+    const obj = UserRealm.group(data);
+    this.user.characters = obj;
+    UserService.events.emit(this.user);
+    return obj;
   }
 }

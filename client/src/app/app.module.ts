@@ -20,6 +20,7 @@ import {AuthenticationInterceptor} from './interceptors/auth.interceptor';
 import { GuildRosterComponent } from './components/guild/guild-roster/guild-roster.component';
 import { GuildNewsComponent } from './components/guild/guild-news/guild-news.component';
 import { GuildChallengeComponent } from './components/guild/guild-challenge/guild-challenge.component';
+import { GoldPipe } from './pipes/gold.pipe';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { GuildChallengeComponent } from './components/guild/guild-challenge/guil
     CharacterComponent,
     GuildRosterComponent,
     GuildNewsComponent,
-    GuildChallengeComponent
+    GuildChallengeComponent,
+    GoldPipe
   ],
   imports: [
     BrowserModule,

@@ -1,3 +1,5 @@
-<p>
-  guild-news works!
-</p>
+<mat-list *ngIf="guild">
+  <mat-list-item *ngFor="let news of guild.news">
+    {{ news.timestamp | date: 'dd.MMM yyyy HH:mm:ss' }} -> {{ news.character }} - {{ news.type }}
+  </mat-list-item>
+</mat-list>

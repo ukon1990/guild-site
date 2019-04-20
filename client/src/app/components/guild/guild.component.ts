@@ -2,8 +2,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SubscriptionsUtil} from '../../utils/subscriptions.util';
 import {ActivatedRoute, Navigation, NavigationEnd, Router} from '@angular/router';
 import {GuildService} from '../../services/guild.service';
-import {Guild} from '../../models/guild.model';
+import {Guild, GuildCharacter, Member} from '../../models/guild.model';
 import {AuthService} from '../../services/auth.service';
+import {UserService} from '../../services/user.service';
+import {Character} from '../../models/character';
+import {UserRealm} from '../../models/user-realm.model';
 
 @Component({
   selector: 'app-guild',
@@ -15,8 +18,10 @@ export class GuildComponent implements OnInit, OnDestroy {
   guild: Guild;
   urlParams;
   currentRoute;
+  userHighestRank = -1;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private service: GuildService) {
+  constructor(private activatedRoute: ActivatedRoute, private router: Router,
+              private service: GuildService, private userService: UserService) {
     this.subscriptions.add(
       AuthService.authTokenEvent,
       () => {
@@ -31,6 +36,11 @@ export class GuildComponent implements OnInit, OnDestroy {
     this.subscriptions.add(
       this.router.events,
       (event) => this.handleRouterEvent(event)
+    );
+
+    this.subscriptions.add(
+      UserService.events,
+      () => this.setHighestGuildRank()
     );
   }
 
@@ -52,9 +62,26 @@ export class GuildComponent implements OnInit, OnDestroy {
       .then(
         (guild: Guild) => {
           this.guild = guild;
+          this.setHighestGuildRank();
           console.log(guild);
         })
       .catch(console.error);
+  }
+
+  private setHighestGuildRank() {
+    if (!this.userService.user || !this.userService.user.characters) {
+      return;
+    }
+    this.userHighestRank = -1;
+    const userRealm: UserRealm = this.userService.user.characters.map[this.urlParams.realm];
+    this.guild.members
+      .forEach((member: Member) => {
+        if (userRealm && userRealm.characterMap.get(member.character.name)) {
+          if (this.userHighestRank === -1 || member.rank < this.userHighestRank) {
+            this.userHighestRank = member.rank;
+          }
+        }
+      });
   }
 
   private handleRouterEvent(event: Navigation) {
