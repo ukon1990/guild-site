@@ -10,8 +10,8 @@
 
   <mat-accordion *ngIf="showCharacters">
     <mat-expansion-panel *ngFor="let realm of realms"
-                         [style.background-color]="'#' + colors.background"
-                         [style.color]="'#' + colors.font">
+                         [style.background-color]="colors.background"
+                         [style.color]="colors.font">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{ realm.name }}

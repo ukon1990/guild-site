@@ -1,0 +1,7 @@
+<div  *ngIf="item" [ngClass]="{'transmogged': item?.apperance}">
+  {{ item.itemLevel }}
+  <a href="https://www.wowhead.com/item={{ item.id }}" target="_blank"
+     [rel]="itemRel()">
+    {{ item.name }}
+  </a>
+</div>

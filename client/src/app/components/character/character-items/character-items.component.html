@@ -1,0 +1,58 @@
+<div class="clearfix" *ngIf="character && character.items">
+  <div class="col-md-5 float-left">
+    <mat-list>
+      <mat-list-item>
+        <app-character-item [item]="character.items?.head"></app-character-item>
+      </mat-list-item>
+      <mat-list-item>
+        <app-character-item [item]="character.items?.neck"></app-character-item>
+      </mat-list-item>
+      <mat-list-item>
+        <app-character-item [item]="character.items?.shoulder"></app-character-item>
+      </mat-list-item>
+      <mat-list-item>
+        <app-character-item [item]="character.items?.back"></app-character-item>
+      </mat-list-item>
+      <mat-list-item>
+        <app-character-item [item]="character.items?.chest"></app-character-item>
+      </mat-list-item>
+      <mat-list-item>
+        <app-character-item [item]="character.items?.wrist"></app-character-item>
+      </mat-list-item>
+      <mat-list-item>
+        <app-character-item [item]="character.items?.mainHand"></app-character-item>
+      </mat-list-item>
+      <mat-list-item>
+        <app-character-item [item]="character.items?.offHand"></app-character-item>
+      </mat-list-item>
+    </mat-list>
+  </div>
+  <div class="col-md-5 float-right">
+    <mat-list>
+      <mat-list-item>
+        <app-character-item [item]="character.items?.hands"></app-character-item>
+      </mat-list-item>
+      <mat-list-item>
+        <app-character-item [item]="character.items?.waist"></app-character-item>
+      </mat-list-item>
+      <mat-list-item>
+        <app-character-item [item]="character.items?.legs"></app-character-item>
+      </mat-list-item>
+      <mat-list-item>
+        <app-character-item [item]="character.items?.feet"></app-character-item>
+      </mat-list-item>
+      <mat-list-item>
+        <app-character-item [item]="character.items?.finger1"></app-character-item>
+      </mat-list-item>
+      <mat-list-item>
+        <app-character-item [item]="character.items?.finger2"></app-character-item>
+      </mat-list-item>
+      <mat-list-item>
+        <app-character-item [item]="character.items?.trinket1"></app-character-item>
+      </mat-list-item>
+      <mat-list-item>
+        <app-character-item [item]="character.items?.trinket2"></app-character-item>
+      </mat-list-item>
+    </mat-list>
+  </div>
+</div>

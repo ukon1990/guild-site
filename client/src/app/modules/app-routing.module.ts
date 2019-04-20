@@ -1,10 +1,11 @@
 import {NgModule} from '@angular/core';
-import {Routes, RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import {GuildComponent} from '../components/guild/guild.component';
 import {CharacterComponent} from '../components/character/character.component';
 import {GuildRosterComponent} from '../components/guild/guild-roster/guild-roster.component';
 import {GuildChallengeComponent} from '../components/guild/guild-challenge/guild-challenge.component';
 import {GuildNewsComponent} from '../components/guild/guild-news/guild-news.component';
+import {CharacterItemsComponent} from '../components/character/character-items/character-items.component';
 
 const routes: Routes = [
   {
@@ -27,7 +28,10 @@ const routes: Routes = [
                 ]
               }, {
                 path: 'character',
-                component: CharacterComponent
+                component: CharacterComponent,
+                children: [
+                  {path: 'equipment', component: CharacterItemsComponent}
+                ]
               }
             ]
           }

@@ -21,18 +21,26 @@ export class CharacterListComponent implements OnInit, OnDestroy {
   constructor(private service: UserService, private authService: AuthService, private router: Router) {
     this.subscriptions.add(this.router.events, () =>
       this.showCharacters = false);
+
+    this.subscriptions.add(
+      AuthService.authTokenEvent,
+      () => this.getCharacters());
   }
 
   ngOnInit() {
     if (this.authService.getAuthCode()) {
-      this.service.getCharacters()
-        .then((realms: UserRealmRoot) => {
-          this.realms = realms.list;
-          console.log(realms);
-        })
-        .catch(error =>
-          console.error(error));
+      this.getCharacters();
     }
+  }
+
+  private getCharacters() {
+    this.service.getCharacters()
+      .then((realms: UserRealmRoot) => {
+        this.realms = realms.list;
+        console.log(realms);
+      })
+      .catch(error =>
+        console.error(error));
   }
 
   ngOnDestroy(): void {

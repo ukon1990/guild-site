@@ -22,6 +22,9 @@ import { GuildNewsComponent } from './components/guild/guild-news/guild-news.com
 import { GuildChallengeComponent } from './components/guild/guild-challenge/guild-challenge.component';
 import { GoldPipe } from './pipes/gold.pipe';
 import { TableComponent } from './components/table/table.component';
+import { CharacterItemsComponent } from './components/character/character-items/character-items.component';
+import { CharacterItemComponent } from './components/character/character-item/character-item.component';
+import { CharacterItemArtifactComponent } from './components/character/character-item-artifact/character-item-artifact.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { TableComponent } from './components/table/table.component';
     GuildNewsComponent,
     GuildChallengeComponent,
     GoldPipe,
-    TableComponent
+    TableComponent,
+    CharacterItemsComponent,
+    CharacterItemComponent,
+    CharacterItemArtifactComponent
   ],
   imports: [
     BrowserModule,

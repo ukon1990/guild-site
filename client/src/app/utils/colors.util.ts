@@ -7,19 +7,22 @@ export class Colors {
   static font: string;
 
   static setFromGuild(guild: Guild): void {
-    Colors.background = guild.emblem.backgroundColor;
-    Colors.font = guild.emblem.iconColor;
+    Colors.background = '#' + guild.emblem.backgroundColor;
+    Colors.font = '#' + guild.emblem.iconColor;
   }
 
   static setColorFromClass(character: Character): void {
     Colors.background = classColors[character.class];
     Colors.font = Colors.invertHex(
       Colors.background);
+    console.log({
+      bg: Colors.background, text: Colors.font
+    });
   }
 
   private static invertHex(color: string): string {
     if (color.length !== 6) {
-      return color;
+      return undefined;
     }
 
     color = color.toUpperCase();
@@ -41,7 +44,7 @@ export class Colors {
       } else if (complexnum[splitnum[i]]) {
         resultnum += complexnum[splitnum[i]];
       } else {
-        return color;
+        return undefined;
       }
     }
 

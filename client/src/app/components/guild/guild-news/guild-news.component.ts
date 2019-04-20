@@ -5,7 +5,6 @@ import {SubscriptionsUtil} from '../../../utils/subscriptions.util';
 import {PageEvent} from '@angular/material';
 
 declare const $WowheadPower: any;
-
 @Component({
   selector: 'app-guild-news',
   templateUrl: './guild-news.component.html',

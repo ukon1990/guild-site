@@ -1,7 +1,7 @@
 <mat-card *ngIf="guild">
   <mat-card-header
-    [style.background-color]="'#' + colors.background"
-    [style.color]="'#' + colors.font">
+    [style.background-color]="colors.background"
+    [style.color]="colors.font">
     <mat-card-title>
       {{ guild.name }}
     </mat-card-title>
@@ -17,8 +17,8 @@
   </mat-card-header>
 
   <mat-card-content
-    [style.background-color]="'#' + colors.background"
-    [style.color]="'#' + colors.font">
+    [style.background-color]="colors.background"
+    [style.color]="colors.font">
     <nav mat-tab-nav-bar>
       <a mat-tab-link
          routerLink="news"

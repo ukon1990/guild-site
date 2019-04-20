@@ -1,3 +1,54 @@
-<p>
-  character works!
-</p>
+<mat-card *ngIf="character">
+  <mat-card-header
+    [style.background-color]="colors.background"
+    [style.color]="colors.font">
+    <mat-card-title>
+      {{ character.level }} - {{ character.name }}
+    </mat-card-title>
+    <mat-card-subtitle>
+      Class: {{ classes[character.class] }}
+    </mat-card-subtitle>
+    <mat-card-subtitle>
+      Last modified: {{ character.lastModified | date: 'dd.MMM yyyy HH:mm:ss' }}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content
+    [style.background-color]="colors.background"
+    [style.color]="colors.font">
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link
+         routerLink="feed"
+         [active]="currentRoute === 'feed'">
+        Feed ({{ character.feed?.length | number }})
+      </a>
+      <a mat-tab-link
+         routerLink="equipment"
+         [active]="currentRoute === 'equipment' || !currentRoute">
+        Equipment (+ audit?)
+      </a>
+      <a mat-tab-link
+         routerLink="progression"
+         [active]="currentRoute === 'progression'">
+        Raid progress
+      </a>
+      <a mat-tab-link
+         routerLink="pvp"
+         [active]="currentRoute === 'pvp'">
+        PvP
+      </a>
+      <a mat-tab-link
+         routerLink="mounts"
+         [active]="currentRoute === 'mounts'">
+        Mounts ({{ character.mounts.numCollected | number }})
+      </a>
+      <a mat-tab-link
+         routerLink="pets"
+         [active]="currentRoute === 'pets'">
+        Mounts ({{ character.pets.numCollected | number }})
+      </a>
+    </nav>
+
+    <router-outlet></router-outlet>
+  </mat-card-content>
+</mat-card>
