@@ -2,6 +2,9 @@
           [style.background-image]="getBGImageUrl(character?.spec?.backgroundImage)">
   <mat-card-header>
     <div class="card-block" mat-card-avatar [style.background-image]="getThumbnail(character)"></div>
+    <mat-card-subtitle *ngIf="character.lastModified">
+      Last modified: {{ character.lastModified | date: 'dd.MMM yyyy HH:mm:ss' }}
+    </mat-card-subtitle>
     <mat-card-title>
       {{ character.name }}({{ character.level }})
     </mat-card-title>

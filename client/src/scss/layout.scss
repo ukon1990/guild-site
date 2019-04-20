@@ -2,6 +2,10 @@
   float: left;
 }
 
+.d-none {
+  display: none;
+}
+
 .clearfix::after {
   content: "";
   clear: both;

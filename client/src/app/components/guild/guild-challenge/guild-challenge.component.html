@@ -1,3 +1,54 @@
-<p>
-  guild-challenge works!
-</p>
+<div>
+  <mat-card >
+
+  </mat-card>
+  <mat-accordion>
+    <ng-container *ngFor="let challenge of guild.challenge">
+     <mat-expansion-panel *ngIf="challenge.groups.length > 0">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ challenge.map.name }}
+        </mat-panel-title>
+        <mat-panel-description>
+          Best time: {{
+          challenge.groups[0]?.time.hours
+          }}:{{
+          challenge.groups[0]?.time.minutes
+          }}:{{
+          challenge.groups[0]?.time.seconds
+          }} - Time limit: {{
+          challenge.map.bronzeCriteria.hours
+          }}:{{
+          challenge.map.bronzeCriteria.minutes
+          }}:{{
+          challenge.map.bronzeCriteria.seconds
+          }}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+       <mat-card-content>
+         <mat-card *ngFor="let group of challenge.groups">
+           <mat-card-header>
+             <mat-card-title>
+               Rank {{ group.ranking }}
+             </mat-card-title>
+             <mat-card-subtitle>
+               Date: {{ group.date | date }}
+             </mat-card-subtitle>
+             <mat-card-subtitle>
+               Time: {{ group?.time.hours }}:{{ group?.time.minutes }}:{{ group?.time.seconds }}
+             </mat-card-subtitle>
+           </mat-card-header>
+
+           <mat-card-content>
+             <app-table
+               [columns]="challengeColumns"
+               [data]="getCharacters(group.members)">
+             </app-table>
+           </mat-card-content>
+         </mat-card>
+       </mat-card-content>
+     </mat-expansion-panel>
+    </ng-container>
+  </mat-accordion>
+</div>

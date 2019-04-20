@@ -8,7 +8,7 @@
     </mat-panel-title>
   </mat-expansion-panel-header>
 
-  <mat-accordion>
+  <mat-accordion *ngIf="showCharacters">
     <mat-expansion-panel *ngFor="let realm of realms">
       <mat-expansion-panel-header>
         <mat-panel-title>

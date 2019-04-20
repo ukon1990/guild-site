@@ -21,6 +21,7 @@ import { GuildRosterComponent } from './components/guild/guild-roster/guild-rost
 import { GuildNewsComponent } from './components/guild/guild-news/guild-news.component';
 import { GuildChallengeComponent } from './components/guild/guild-challenge/guild-challenge.component';
 import { GoldPipe } from './pipes/gold.pipe';
+import { TableComponent } from './components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { GoldPipe } from './pipes/gold.pipe';
     GuildRosterComponent,
     GuildNewsComponent,
     GuildChallengeComponent,
-    GoldPipe
+    GoldPipe,
+    TableComponent
   ],
   imports: [
     BrowserModule,
