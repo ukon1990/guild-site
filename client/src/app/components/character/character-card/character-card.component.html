@@ -1,6 +1,6 @@
-<mat-card *ngIf="character.level >= 10" [style.background-image]="getBGImageUrl(character?.spec?.backgroundImage)">
+<mat-card class="character-card" *ngIf="character.level >= 10" [style.background-image]="getBGImageUrl(character?.spec?.backgroundImage)">
   <mat-card-header>
-    <div mat-card-avatar [style.background-image]="getThumbnail(character)"></div>
+    <div class="card-block" mat-card-avatar [style.background-image]="getThumbnail(character)"></div>
     <mat-card-title>
       [{{character.realm}}] {{ character.name }}({{ character.level }})
     </mat-card-title>
