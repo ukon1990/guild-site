@@ -2,7 +2,8 @@ import {EventEmitter, Injectable} from '@angular/core';
 import {AuthService} from './auth.service';
 import {HttpClient} from '@angular/common/http';
 import {Endpoints} from '../../../../server/utils/endpoints.util';
-import {Guild} from '../models/guild.model';
+import {Guild, Member} from '../models/guild.model';
+import {Character} from '../models/character';
 
 @Injectable({
   providedIn: 'root'
@@ -24,9 +25,26 @@ export class GuildService {
         region))
       .toPromise()
       .then((guild: Guild) => {
+        this.sortMembers(guild.members);
         this.guild = guild;
         GuildService.events.emit(guild);
         return guild;
       }) as Promise<Guild>;
+  }
+
+  private sortMembers(members: Member[]) {
+    members.sort(
+      (a: Member, b: Member) => {
+        a.character.rank = a.rank;
+        const levelDiff = b.character.level - a.character.level;
+        if (levelDiff !== 0) {
+          return levelDiff;
+        }
+        const rankDiff = a.rank - b.rank;
+        if (rankDiff !== 0) {
+          return rankDiff;
+        }
+        return b.character.achievementPoints - a.character.achievementPoints;
+      });
   }
 }

@@ -1,3 +1,5 @@
-<p>
-  guild-roster works!
-</p>
+<div class="clearfix">
+  <app-character-card class="float-left p-1" *ngFor="let member of guild.members"
+                      [character]="member.character">
+  </app-character-card>
+</div>

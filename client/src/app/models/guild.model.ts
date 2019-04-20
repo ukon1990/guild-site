@@ -17,6 +17,7 @@ export interface Spec {
 }
 
 export interface GuildCharacter {
+  rank: number;
   name: string;
   realm: string;
   battlegroup: string;

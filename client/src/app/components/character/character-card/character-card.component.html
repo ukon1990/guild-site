@@ -3,10 +3,13 @@
   <mat-card-header>
     <div class="card-block" mat-card-avatar [style.background-image]="getThumbnail(character)"></div>
     <mat-card-title>
-      [{{character.realm}}] {{ character.name }}({{ character.level }})
+      {{ character.name }}({{ character.level }})
     </mat-card-title>
-    <mat-card-subtitle *ngIf="character.guild">
+    <mat-card-subtitle *ngIf="character.guild && character.rank === undefined">
       Guild: {{ character.guild }}
+    </mat-card-subtitle>
+    <mat-card-subtitle>
+      Guild rank: {{ character.rank | number }}
     </mat-card-subtitle>
     <mat-card-subtitle *ngIf="character.achievementPoints">
       Achievement points: {{ character.achievementPoints | number }}

@@ -1,0 +1,21 @@
+.float-left {
+  float: left;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.p-1 {
+  padding: .5em;
+}
+
+.p-2 {
+  padding: 1em;
+}
+
+.p-3 {
+  padding: 1.5em;
+}

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Character} from '../../../models/character';
 import {DomSanitizer} from '@angular/platform-browser';
+import {GuildCharacter} from '../../../models/guild.model';
 
 @Component({
   selector: 'app-character-card',
@@ -8,7 +9,7 @@ import {DomSanitizer} from '@angular/platform-browser';
   styleUrls: ['./character-card.component.scss']
 })
 export class CharacterCardComponent implements OnInit {
-  @Input() character: Character;
+  @Input() character: Character | GuildCharacter;
 
   constructor(private sanitizer: DomSanitizer) { }
 
