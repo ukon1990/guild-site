@@ -13,7 +13,7 @@ export class UserService {
 
   constructor(private http: HttpClient, private authService: AuthService) {
     if (this.authService.getAccessToken()) {
-      this.getProfiles();
+      this.getProfile();
     }
   }
 
@@ -24,13 +24,11 @@ export class UserService {
       .then((data: any) => this.handleCharactersResponse(data));
   }
 
-  getProfiles() {
+  getProfile() {
     const region = 'eu';
     this.http.get(`https://${
       region
-      }.battle.net/oauth/userinfo?access_token=${
-      this.authService.getAccessToken()
-      }`)
+      }.battle.net/oauth/userinfo`)
       .toPromise()
       .then((user: User) =>
         this.user.setUserInfo(user))

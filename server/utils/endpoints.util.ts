@@ -1,5 +1,3 @@
-import {BLIZZARD} from '../secrets';
-
 export class Endpoints {
   private endpoints = {
     eu: 'https://eu.api.blizzard.com/wow/',
@@ -19,9 +17,9 @@ export class Endpoints {
 
   private addQueriesToQueries(query: string): string {
     if (query.indexOf('?') > -1) {
-      return `${query}&access_token=${BLIZZARD.ACCESS_TOKEN}`;
+      return `${query}&`;
     } else {
-      return `${query}?access_token=${BLIZZARD.ACCESS_TOKEN}`;
+      return `${query}`;
     }
   }
 }

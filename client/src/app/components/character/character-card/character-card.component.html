@@ -1,4 +1,5 @@
-<mat-card class="character-card" *ngIf="character.level >= 10" [style.background-image]="getBGImageUrl(character?.spec?.backgroundImage)">
+<mat-card class="character-card" *ngIf="character.level >= 10"
+          [style.background-image]="getBGImageUrl(character?.spec?.backgroundImage)">
   <mat-card-header>
     <div class="card-block" mat-card-avatar [style.background-image]="getThumbnail(character)"></div>
     <mat-card-title>
@@ -15,5 +16,13 @@
         Some stuff coming here?
       </mat-card-content>-->
   <mat-card-actions>
+    <a *ngIf="character.guild" mat-raised-button
+       [routerLink]="'/eu/' + character.realm + '/guild/' + character.guild">
+      Go to guild
+    </a>
+    <a mat-raised-button
+       [routerLink]="'/eu/' + character.realm + '/character/' + character.name">
+      Go to profile
+    </a>
   </mat-card-actions>
 </mat-card>

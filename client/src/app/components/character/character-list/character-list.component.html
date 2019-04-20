@@ -1,4 +1,14 @@
-<mat-accordion>
+<mat-expansion-panel
+  [expanded]="showCharacters"
+  (opened)="showCharacters = true"
+  (closed)="showCharacters = false">
+  <mat-expansion-panel-header>
+    <mat-panel-title>
+      Characters
+    </mat-panel-title>
+  </mat-expansion-panel-header>
+
+  <mat-accordion>
     <mat-expansion-panel *ngFor="let realm of realms">
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -13,4 +23,6 @@
                           [character]="character">
       </app-character-card>
     </mat-expansion-panel>
-</mat-accordion>
+  </mat-accordion>
+
+</mat-expansion-panel>
