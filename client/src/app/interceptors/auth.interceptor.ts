@@ -15,8 +15,6 @@ export class AuthenticationInterceptor implements HttpInterceptor {
   }
 
   intercept(r: HttpRequest<any>, handler: HttpHandler): Observable<HttpEvent<any>> {
-    console.log(r);
-
     if (BLIZZARD.ACCESS_TOKEN) {
       if (StringUtil.contains(r.url, 'battle.net') || StringUtil.contains(r.url, 'api.blizzard.com')) {
         return handler.handle(

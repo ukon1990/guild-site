@@ -17,6 +17,9 @@ import { CharacterCardComponent } from './components/character/character-card/ch
 import { GuildComponent } from './components/guild/guild.component';
 import { CharacterComponent } from './components/character/character.component';
 import {AuthenticationInterceptor} from './interceptors/auth.interceptor';
+import { GuildRosterComponent } from './components/guild/guild-roster/guild-roster.component';
+import { GuildNewsComponent } from './components/guild/guild-news/guild-news.component';
+import { GuildChallengeComponent } from './components/guild/guild-challenge/guild-challenge.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,10 @@ import {AuthenticationInterceptor} from './interceptors/auth.interceptor';
     NavComponent,
     CharacterCardComponent,
     GuildComponent,
-    CharacterComponent
+    CharacterComponent,
+    GuildRosterComponent,
+    GuildNewsComponent,
+    GuildChallengeComponent
   ],
   imports: [
     BrowserModule,

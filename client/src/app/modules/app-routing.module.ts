@@ -2,6 +2,9 @@ import {NgModule} from '@angular/core';
 import {Routes, RouterModule} from '@angular/router';
 import {GuildComponent} from '../components/guild/guild.component';
 import {CharacterComponent} from '../components/character/character.component';
+import {GuildRosterComponent} from '../components/guild/guild-roster/guild-roster.component';
+import {GuildChallengeComponent} from '../components/guild/guild-challenge/guild-challenge.component';
+import {GuildNewsComponent} from '../components/guild/guild-news/guild-news.component';
 
 const routes: Routes = [
   {
@@ -11,19 +14,19 @@ const routes: Routes = [
         path: ':realm',
         children: [
           {
-            path: 'guild',
+            path: ':name',
             children: [
               {
-                path: ':name',
-                component: GuildComponent
-              }
-            ]
-          },
-          {
-            path: 'character',
-            children: [
-              {
-                path: ':name',
+                path: 'guild',
+                component: GuildComponent,
+                children: [
+                  {path: '', component: GuildNewsComponent},
+                  {path: 'news', component: GuildNewsComponent},
+                  {path: 'roster', component: GuildRosterComponent},
+                  {path: 'challenges', component: GuildChallengeComponent}
+                ]
+              }, {
+                path: 'character',
                 component: CharacterComponent
               }
             ]

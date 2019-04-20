@@ -17,11 +17,11 @@
       </mat-card-content>-->
   <mat-card-actions>
     <a *ngIf="character.guild" mat-raised-button
-       [routerLink]="'/eu/' + character.realm + '/guild/' + character.guild">
+       [routerLink]="'/eu/' + character.realm + '/' + character.guild + '/guild'">
       Go to guild
     </a>
     <a mat-raised-button
-       [routerLink]="'/eu/' + character.realm + '/character/' + character.name">
+       [routerLink]="'/eu/' + character.realm + '/' + character.name + '/character'">
       Go to profile
     </a>
   </mat-card-actions>

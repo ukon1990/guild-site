@@ -1,3 +1,32 @@
-<p>
-  guild works!
-</p>
+<mat-card *ngIf="guild">
+  <mat-card-header>
+    <mat-card-title>
+      {{ guild.name }}
+    </mat-card-title>
+    <mat-card-subtitle>
+      Last modified: {{ guild.lastModified | date: 'dd.MMM yyyy HH:mm:ss' }}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link
+         routerLink="news"
+         [active]="currentRoute === 'news' || !currentRoute">
+        News
+      </a>
+      <a mat-tab-link
+         routerLink="roster"
+         [active]="currentRoute === 'roster'">
+        Roster
+      </a>
+      <a mat-tab-link
+         routerLink="challenges"
+         [active]="currentRoute === 'challenges'">
+        Best mythic runs
+      </a>
+    </nav>
+
+    <router-outlet></router-outlet>
+  </mat-card-content>
+</mat-card>
