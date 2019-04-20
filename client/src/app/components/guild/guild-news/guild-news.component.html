@@ -1,5 +1,46 @@
-<mat-list *ngIf="guild">
-  <mat-list-item *ngFor="let news of guild.news">
-    {{ news.timestamp | date: 'dd.MMM yyyy HH:mm:ss' }} -> {{ news.character }} - {{ news.type }}
+<mat-list *ngIf="guild"><div class="row col-md-12">
+  <mat-paginator
+    [length]="guild.news?.length"
+    [pageSize]="page.pageSize"
+    [pageIndex]="pageEvent.pageIndex"
+    [pageSizeOptions]="page.pageSizeOptions"
+    [showFirstLastButtons]="true"
+    (page)="changePage($event)">>
+  </mat-paginator>
+</div>
+  <mat-list-item *ngFor="let news of guild.news |
+		slice:
+			(pageEvent.pageSize * (pageEvent.pageIndex + 1)) - pageEvent.pageSize:
+			pageEvent.pageSize * (pageEvent.pageIndex + 1)">
+    {{ news.timestamp | date: 'dd.MMM yyyy HH:mm:ss' }}: {{ news.character }} got
+    <span [ngSwitch]="news.type">
+						<a *ngSwitchCase="'playerAchievement'"
+               href="https://www.wowhead.com/achievement={{ news.achievement.id }}"
+               rel="achievement={{ news.achievement.id }}">{{ news.achievement.title }}
+						</a>
+						<a *ngSwitchCase="'itemLoot'"
+               href="https://www.wowhead.com/item={{ news.itemId }}"
+               rel="item={{ news.itemId }}, bonus={{ bonusList(news.bonusLists) }}">{{ news.itemId }}
+						</a>
+						<a *ngSwitchCase="'itemPurchase'"
+               href="https://www.wowhead.com/item={{ news.itemId }}"
+               rel="item={{ news.itemId }}, bonus={{ bonusList(news.bonusLists) }}">{{ news.itemId }}
+						</a>
+						<a *ngSwitchCase="'itemCraft'"
+               href="https://www.wowhead.com/item={{ news.itemId }}"
+               rel="item={{ news.itemId }}, bonus={{ bonusList(news.bonusLists) }}">{{ news.itemId }}
+						</a>
+						<p *ngSwitchDefault>{{ news.type }}</p>
+        </span>
   </mat-list-item>
+  <div class="row col-md-12">
+    <mat-paginator
+      [length]="guild.news?.length"
+      [pageSize]="page.pageSize"
+      [pageIndex]="pageEvent.pageIndex"
+      [pageSizeOptions]="page.pageSizeOptions"
+      [showFirstLastButtons]="true"
+      (page)="changePage($event)">>
+    </mat-paginator>
+  </div>
 </mat-list>

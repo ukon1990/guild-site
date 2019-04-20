@@ -5,6 +5,7 @@ import {AuthService} from '../../../services/auth.service';
 import {UserService} from '../../../services/user.service';
 import {UserRealm, UserRealmRoot} from '../../../models/user-realm.model';
 import {Router} from '@angular/router';
+import {Colors} from '../../../utils/colors.util';
 
 @Component({
   selector: 'app-character-list',
@@ -15,6 +16,7 @@ export class CharacterListComponent implements OnInit, OnDestroy {
   private subscriptions = new SubscriptionsUtil();
   realms: UserRealm[] = [];
   showCharacters = false;
+  colors = Colors;
 
   constructor(private service: UserService, private authService: AuthService, private router: Router) {
     this.subscriptions.add(this.router.events, () =>

@@ -1,10 +1,9 @@
 <div>
-  <mat-card >
-
-  </mat-card>
   <mat-accordion>
     <ng-container *ngFor="let challenge of guild.challenge">
-     <mat-expansion-panel *ngIf="challenge.groups.length > 0">
+     <mat-expansion-panel *ngIf="challenge.groups.length > 0"
+                          [style.background-color]="'#' + colors.background"
+                          [style.color]="'#' + colors.font">
       <mat-expansion-panel-header>
         <mat-panel-title>
           {{ challenge.map.name }}

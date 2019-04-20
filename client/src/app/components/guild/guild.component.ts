@@ -7,6 +7,7 @@ import {AuthService} from '../../services/auth.service';
 import {UserService} from '../../services/user.service';
 import {UserRealm} from '../../models/user-realm.model';
 import {Character} from '../../models/character';
+import {Colors} from '../../utils/colors.util';
 
 @Component({
   selector: 'app-guild',
@@ -20,6 +21,7 @@ export class GuildComponent implements OnInit, OnDestroy {
   currentRoute;
   userHighestRank = -1;
   characters: Character[] = [];
+  colors = Colors;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
               private service: GuildService, private userService: UserService) {
@@ -64,6 +66,7 @@ export class GuildComponent implements OnInit, OnDestroy {
         (guild: Guild) => {
           this.guild = guild;
           this.setHighestGuildRank();
+          Colors.setFromGuild(guild);
           console.log(guild);
         })
       .catch(console.error);

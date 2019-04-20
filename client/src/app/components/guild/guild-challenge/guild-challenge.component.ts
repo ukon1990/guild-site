@@ -4,6 +4,7 @@ import {SubscriptionsUtil} from '../../../utils/subscriptions.util';
 import {GuildService} from '../../../services/guild.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {ColumnDescription} from '../../../models/column-description';
+import {Colors} from '../../../utils/colors.util';
 
 @Component({
   selector: 'app-guild-challenge',
@@ -11,6 +12,7 @@ import {ColumnDescription} from '../../../models/column-description';
   styleUrls: ['./guild-challenge.component.scss']
 })
 export class GuildChallengeComponent implements OnDestroy {
+  colors = Colors;
   guild: Guild;
   subscriptions = new SubscriptionsUtil();
   challengeColumns: ColumnDescription[] = [
@@ -37,8 +39,10 @@ export class GuildChallengeComponent implements OnDestroy {
   getCharacters(members: Member2[]): GuildCharacter2[] {
     const list = [];
     members.forEach((member: Member2) => {
-      member.character.spec = member.spec;
-      list.push(member.character);
+      if (member.character) {
+        member.character.spec = member.spec;
+        list.push(member.character);
+      }
     });
     return list;
   }

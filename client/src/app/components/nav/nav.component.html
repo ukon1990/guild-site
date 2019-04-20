@@ -2,7 +2,14 @@
   <nav>
     <a mat-button>Guild pages</a>
     <a mat-button>Stuff</a>
-    <app-login></app-login>
+
+    <div class="float-right p-1" *ngIf="userService.user?.battletag; else loginTemplate">
+      Battletag: {{ userService.user.battletag }}
+    </div>
+
+    <ng-template #loginTemplate>
+      <app-login class="float-right p-1"></app-login>
+    </ng-template>
   </nav>
 </header>
 
