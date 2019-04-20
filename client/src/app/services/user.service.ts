@@ -1,21 +1,32 @@
-import {EventEmitter, Injectable} from '@angular/core';
+import {EventEmitter, Injectable, OnDestroy} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Endpoints} from '../../../../server/utils/endpoints.util';
 import {AuthService} from './auth.service';
 import {User} from '../models/user.model';
 import {UserRealm} from '../models/user-realm.model';
+import {SubscriptionsUtil} from '../utils/subscriptions.util';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class UserService implements OnDestroy {
   static events: EventEmitter<User> = new EventEmitter<User>();
+  subscriptions = new SubscriptionsUtil();
   user: User = new User();
 
   constructor(private http: HttpClient, private authService: AuthService) {
     if (this.authService.getAccessToken()) {
       this.getProfile();
     }
+
+    this.subscriptions.add(
+      AuthService.authTokenEvent,
+      () => this.getProfile()
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
   }
 
   getCharacters(): Promise<any> {
