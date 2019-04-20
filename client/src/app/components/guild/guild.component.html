@@ -9,6 +9,9 @@
     <mat-card-subtitle *ngIf="userHighestRank > -1">
       Your rank in the guild: {{ userHighestRank | number }}
     </mat-card-subtitle>
+    <mat-card-subtitle *ngIf="characters.length">
+      You have {{ characters.length | number }} characters in this guild.
+    </mat-card-subtitle>
   </mat-card-header>
 
   <mat-card-content>

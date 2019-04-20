@@ -2,11 +2,11 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {SubscriptionsUtil} from '../../utils/subscriptions.util';
 import {ActivatedRoute, Navigation, NavigationEnd, Router} from '@angular/router';
 import {GuildService} from '../../services/guild.service';
-import {Guild, GuildCharacter, Member} from '../../models/guild.model';
+import {Guild, Member} from '../../models/guild.model';
 import {AuthService} from '../../services/auth.service';
 import {UserService} from '../../services/user.service';
-import {Character} from '../../models/character';
 import {UserRealm} from '../../models/user-realm.model';
+import {Character} from '../../models/character';
 
 @Component({
   selector: 'app-guild',
@@ -19,6 +19,7 @@ export class GuildComponent implements OnInit, OnDestroy {
   urlParams;
   currentRoute;
   userHighestRank = -1;
+  characters: Character[] = [];
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
               private service: GuildService, private userService: UserService) {
@@ -73,6 +74,7 @@ export class GuildComponent implements OnInit, OnDestroy {
       return;
     }
     this.userHighestRank = -1;
+    this.characters.length = 0;
     const userRealm: UserRealm = this.userService.user.characters.map[this.urlParams.realm];
     this.guild.members
       .forEach((member: Member) => {
@@ -80,6 +82,8 @@ export class GuildComponent implements OnInit, OnDestroy {
           if (this.userHighestRank === -1 || member.rank < this.userHighestRank) {
             this.userHighestRank = member.rank;
           }
+          this.characters.push(
+            userRealm.characterMap.get(member.character.name));
         }
       });
   }
