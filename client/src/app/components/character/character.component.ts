@@ -6,6 +6,7 @@ import {CharacterService} from '../../services/character.service';
 import {ActivatedRoute, Navigation, NavigationEnd, Router} from '@angular/router';
 import {Colors} from '../../utils/colors.util';
 import {classes} from '../../models/classes';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-character',
@@ -21,7 +22,7 @@ export class CharacterComponent implements OnInit, OnDestroy {
   classes = classes;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,
-              private service: CharacterService) {
+              private sanitizer: DomSanitizer, private service: CharacterService) {
     this.subscriptions.add(
       AuthService.authTokenEvent,
       () =>
@@ -63,5 +64,15 @@ export class CharacterComponent implements OnInit, OnDestroy {
         Colors.setColorFromClass(character);
       })
       .catch(console.error);
+  }
+
+  getBackgroundImage() {
+    if (this.character.thumbnail) {
+      const url = `https://render-eu.worldofwarcraft.com/character/${
+        this.character.thumbnail.replace('avatar', 'main')
+        }`;
+      return this.sanitizer.bypassSecurityTrustStyle('url(' + url + ')');
+    }
+    return '';
   }
 }

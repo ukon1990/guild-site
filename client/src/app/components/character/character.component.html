@@ -1,7 +1,6 @@
-<mat-card *ngIf="character">
+<mat-card *ngIf="character" [style.background-image]="getBackgroundImage()">
   <mat-card-header
-    [style.background-color]="colors.background"
-    [style.color]="colors.font">
+  >
     <mat-card-title>
       {{ character.level }} - {{ character.name }}
     </mat-card-title>
@@ -13,9 +12,7 @@
     </mat-card-subtitle>
   </mat-card-header>
 
-  <mat-card-content
-    [style.background-color]="colors.background"
-    [style.color]="colors.font">
+  <mat-card-content>
     <nav mat-tab-nav-bar>
       <a mat-tab-link
          routerLink="feed"
@@ -46,6 +43,16 @@
          routerLink="pets"
          [active]="currentRoute === 'pets'">
         Mounts ({{ character.pets.numCollected | number }})
+      </a>
+      <a mat-tab-link
+         routerLink="achievements"
+         [active]="currentRoute === 'achievements'">
+        Achievements
+      </a>
+      <a mat-tab-link
+         routerLink="statistics"
+         [active]="currentRoute === 'statistics'">
+        Statistics
       </a>
     </nav>
 
