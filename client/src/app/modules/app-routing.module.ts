@@ -6,13 +6,13 @@ import {GuildRosterComponent} from '../components/guild/guild-roster/guild-roste
 import {GuildChallengeComponent} from '../components/guild/guild-challenge/guild-challenge.component';
 import {GuildNewsComponent} from '../components/guild/guild-news/guild-news.component';
 import {CharacterItemsComponent} from '../components/character/character-items/character-items.component';
-import {CharacterProgressComponent} from '../../../../client_old/src/app/components/roster/character/character-progress/character-progress.component';
 import {CharacterFeedComponent} from '../components/character/character-feed/character-feed.component';
 import {CharacterMountsComponent} from '../components/character/character-mounts/character-mounts.component';
 import {CharacterPvpComponent} from '../components/character/character-pvp/character-pvp.component';
 import {CharacterPetsComponent} from '../components/character/character-pets/character-pets.component';
 import {CharacterAchievementsComponent} from '../components/character/character-achievements/character-achievements.component';
 import {CharacterStatisticsComponent} from '../components/character/character-statistics/character-statistics.component';
+import {CharacterProgressionComponent} from '../components/character/character-progression/character-progression.component';
 
 const routes: Routes = [
   {
@@ -39,7 +39,7 @@ const routes: Routes = [
                 children: [
                   {path: 'feed', component: CharacterFeedComponent},
                   {path: 'equipment', component: CharacterItemsComponent},
-                  {path: 'progression', component: CharacterProgressComponent},
+                  {path: 'progression', component: CharacterProgressionComponent},
                   {path: 'pvp', component: CharacterPvpComponent},
                   {path: 'mounts', component: CharacterMountsComponent},
                   {path: 'pets', component: CharacterPetsComponent},
