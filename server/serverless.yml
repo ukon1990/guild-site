@@ -1,0 +1,23 @@
+service:
+  name: guild-site-api
+
+plugins:
+  - serverless-webpack
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs8.10
+  memorySize: 128
+  timeout: 900
+
+functions:
+
+  auth:
+    handler: controllers/auth.handler
+    events:
+      - http:
+          method: post
+          path: auth
+          cors:
+            origin: '*'

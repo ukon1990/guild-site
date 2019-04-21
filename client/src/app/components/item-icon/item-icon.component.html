@@ -1,0 +1,11 @@
+<div>
+  <div
+    [style.width]="size + 'px'"
+    [style.height]="size + 'px'"
+    class="icon float-left ml-2 mr-2"
+    [style.background-image]="styleIcon"></div>
+  <div class="projected"
+    [style.color]="hexColorMap[qualityId]">
+    <ng-content></ng-content>
+  </div>
+</div>

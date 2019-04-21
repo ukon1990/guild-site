@@ -1,0 +1,72 @@
+<mat-card class="character-card" *ngIf="character" [style.background-image]="getBackgroundImage()"
+          [style.background-color]="colors.background"
+          [style.color]="colors.font">
+  <mat-card-header>
+    <mat-card-title>
+      {{ character.level }} - {{ character.name }}
+    </mat-card-title>
+    <mat-card-subtitle>
+      <a [style.color]="colors.font"
+        routerLink="/{{urlParams?.region}}/{{character.guild.realm}}/{{character.guild.name}}/guild">
+        {{ character.guild.name }}
+      </a>
+    </mat-card-subtitle>
+    <mat-card-subtitle>
+      Class:
+      <ng-container *ngFor="let talent of character.talents">
+        <span *ngIf="talent.selected">{{ talent.spec.name }}</span>
+      </ng-container>
+      {{ classes[character.class] }}
+    </mat-card-subtitle>
+    <mat-card-subtitle>
+      Last modified: {{ character.lastModified | date: 'dd.MMM yyyy HH:mm:ss' }}
+    </mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <nav mat-tab-nav-bar>
+      <a mat-tab-link
+         routerLink="feed"
+         [active]="currentRoute === 'feed'">
+        Feed ({{ character.feed?.length | number }})
+      </a>
+      <a mat-tab-link
+         routerLink="equipment"
+         [active]="currentRoute === 'equipment' || !currentRoute">
+        Equipment (+ audit?)
+      </a>
+      <a mat-tab-link
+         routerLink="progression"
+         [active]="currentRoute === 'progression'">
+        Raid progress
+      </a>
+      <a mat-tab-link
+         routerLink="pvp"
+         [active]="currentRoute === 'pvp'">
+        PvP
+      </a>
+      <a mat-tab-link
+         routerLink="mounts"
+         [active]="currentRoute === 'mounts'">
+        Mounts ({{ character.mounts.numCollected | number }})
+      </a>
+      <a mat-tab-link
+         routerLink="pets"
+         [active]="currentRoute === 'pets'">
+        Pets ({{ character.pets.numCollected | number }})
+      </a>
+      <a mat-tab-link
+         routerLink="achievements"
+         [active]="currentRoute === 'achievements'">
+        Achievements
+      </a>
+      <a mat-tab-link
+         routerLink="statistics"
+         [active]="currentRoute === 'statistics'">
+        Statistics
+      </a>
+    </nav>
+
+    <router-outlet></router-outlet>
+  </mat-card-content>
+</mat-card>
