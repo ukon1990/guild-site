@@ -141,14 +141,17 @@ export class TableComponent implements AfterViewInit, OnChanges {
     });
   }
 
-  onHover(item: any): void {
-    console.log('Hover', item);
-    if (item.itemId) {
+  onHover(item: any, event: any): void {
+    console.log('Hover', item, event);
+    if (!item.tooltip && item.itemId) {
       this.itemService.getTooltip({
         id: item.itemId,
         bonusLists: item.bonusLists ? item.bonusLists : undefined
       } as Item)
-        .then(res => console.log(res));
+        .then(res => {
+          console.log(res);
+          item.tooltip = res;
+        });
     }
   }
 }

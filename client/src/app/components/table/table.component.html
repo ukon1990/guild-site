@@ -19,7 +19,7 @@
             {{ d[c.key] }}
           </span>
           <div *ngSwitchCase="'character-feed-name'"
-                (mouseenter)="onHover(d)">
+               (mouseenter)="onHover(d, $event)">
             <span *ngIf="d.achievement">
             {{ d.achievement?.title }}
               <span *ngIf="d.achievement?.description">
@@ -28,7 +28,7 @@
             </span>
             <a *ngIf="d.itemId"
                href="https://www.wowhead.com/item={{ d.itemId }}"
-               rel="item={{ d.itemId }}, bonus={{ bonusList(d.bonusLists) }}">{{ d.itemId }}
+               target="_blank">{{ d.itemId }}
 						</a>
           </div>
           <span *ngSwitchCase="'criteria'">
