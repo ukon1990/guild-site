@@ -1,11 +1,15 @@
 <div *ngIf="item" [ngClass]="{'transmogged': item?.apperance}">
-  {{ item.itemLevel }}
   <a href="https://www.wowhead.com/item={{ item.id }}" target="_blank"
      [rel]="itemRel()">
-    {{ item.name }}
-  </a> <span *ngIf="item.azeriteItem && item.azeriteItem.azeriteLevel > 0">
-  <br>
-    Level: {{ item.azeriteItem.azeriteLevel }} ({{ item.azeriteItem.azeriteExperienceRemaining }}
-  /{{item.azeriteItem.azeriteExperience}})
-  </span>
+    <app-item-icon
+      [icon]="item.icon"
+      [qualityId]="item.quality">
+      {{ item.itemLevel }} - {{ item.name }}
+      <span *ngIf="item.azeriteItem && item.azeriteItem.azeriteLevel > 0">
+        <br>
+          Level: {{ item.azeriteItem.azeriteLevel }} ({{ item.azeriteItem.azeriteExperienceRemaining }}
+              /{{item.azeriteItem.azeriteExperience}})
+      </span>
+    </app-item-icon>
+  </a>
 </div>

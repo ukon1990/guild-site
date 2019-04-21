@@ -3,7 +3,8 @@ import {Character, Feed, Item} from '../../../models/character';
 import {SubscriptionsUtil} from '../../../utils/subscriptions.util';
 import {CharacterService} from '../../../services/character.service';
 import {ColumnDescription} from '../../../models/column-description';
-import {ItemService} from '../../../services/item.service';
+import {ItemService, WowheadTooltip} from '../../../services/item.service';
+import {News} from '../../../models/guild.model';
 
 @Component({
   selector: 'app-character-feed',
@@ -23,15 +24,32 @@ export class CharacterFeedComponent implements OnDestroy {
 
   constructor(private service: CharacterService, private itemService: ItemService) {
     this.character = this.service.character;
+    this.getTooltipData();
     this.subscriptions.add(
       CharacterService.events,
       (character: Character) => {
         this.character = character;
+        this.getTooltipData();
       }
     );
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  private getTooltipData(): void {
+    this.character.feed.forEach((feed: Feed) => {
+      if (feed.itemId && !feed.name) {
+        this.itemService.getTooltip({
+          id: feed.itemId,
+          bonusLists: feed.bonusLists
+        } as Item)
+          .then((tooltip: WowheadTooltip) => {
+            feed.name = tooltip.name;
+            feed.tooltip = tooltip;
+          });
+      }
+    });
   }
 }

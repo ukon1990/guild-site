@@ -1,11 +1,13 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {Character} from '../../../models/character';
+import {Character, Feed, Item} from '../../../models/character';
 import {SubscriptionsUtil} from '../../../utils/subscriptions.util';
 import {GuildService} from '../../../services/guild.service';
 import {Guild} from '../../../models/guild.model';
 import {CharacterService} from '../../../services/character.service';
+import {ItemService, WowheadTooltip} from '../../../services/item.service';
 
 declare const $WowheadPower: any;
+
 @Component({
   selector: 'app-character-items',
   templateUrl: './character-items.component.html',
@@ -15,32 +17,31 @@ export class CharacterItemsComponent implements AfterViewInit, OnDestroy {
   character: Character;
   subscriptions = new SubscriptionsUtil();
 
-  constructor(private service: CharacterService) {
+  constructor(private service: CharacterService, private itemService: ItemService) {
     this.character = this.service.character;
     this.subscriptions.add(
       CharacterService.events,
       (character: Character) => {
         this.character = character;
-        this.init();
+        this.getTooltipData();
       }
     );
   }
 
   ngAfterViewInit() {
-    this.init();
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 
-  init(): void {
-    try {
-      if ($WowheadPower) {
-        $WowheadPower.init();
+  private getTooltipData(): void {
+    Object.keys(this.character.items).forEach((slot: string) => {
+      const item: Item = this.character.items[slot];
+      if (!item.tooltip) {
+        this.itemService.getTooltip(item);
       }
-    } catch (error) {
-      console.log(error);
-    }
+
+    });
   }
 }

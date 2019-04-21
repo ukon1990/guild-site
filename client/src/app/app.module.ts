@@ -32,6 +32,7 @@ import { CharacterPetsComponent } from './components/character/character-pets/ch
 import { CharacterAchievementsComponent } from './components/character/character-achievements/character-achievements.component';
 import { CharacterStatisticsComponent } from './components/character/character-statistics/character-statistics.component';
 import { TooltipComponent } from './components/tooltip/tooltip.component';
+import { ItemIconComponent } from './components/item-icon/item-icon.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { TooltipComponent } from './components/tooltip/tooltip.component';
     CharacterPetsComponent,
     CharacterAchievementsComponent,
     CharacterStatisticsComponent,
-    TooltipComponent
+    TooltipComponent,
+    ItemIconComponent
   ],
   imports: [
     BrowserModule,

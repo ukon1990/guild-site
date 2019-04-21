@@ -28,7 +28,12 @@
             </span>
             <a *ngIf="d.itemId"
                href="https://www.wowhead.com/item={{ d.itemId }}"
-               target="_blank">{{ d.name ? d.name : d.itemId }}
+               target="_blank">
+              <app-item-icon
+                [icon]="d.tooltip?.icon"
+                [qualityId]="d.tooltip?.quality">
+              {{ d.name ? d.name : d.itemId }}
+              </app-item-icon>
 						</a>
           </div>
           <span *ngSwitchCase="'criteria'">
