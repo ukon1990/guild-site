@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {ColumnDescription} from '../../models/column-description';
 import {Raider} from '../../models/raider';
 import {Sorter} from '../../models/sorter';
@@ -21,10 +21,11 @@ export class TableComponent implements AfterViewInit, OnChanges {
   @Output() change: EventEmitter<Raider> = new EventEmitter<Raider>();
 
   pageRows: Array<number> = [10, 20, 40, 80, 100];
-  pageEvent: PageEvent = { pageIndex: 0, pageSize: this.pageRows[2], length: 0 };
+  pageEvent: PageEvent = {pageIndex: 0, pageSize: this.pageRows[2], length: 0};
   sorter: Sorter;
   previousLength = 0;
   classes: string[] = classes;
+  displayedColumns: string[] = [];
 
   constructor() {
     this.sorter = new Sorter();
@@ -37,8 +38,23 @@ export class TableComponent implements AfterViewInit, OnChanges {
   }
 
   /* istanbul ignore next */
-  ngOnChanges(change) {
-    if (change && change.data && change.data.currentValue) {
+  ngOnChanges(change: SimpleChanges) {
+    if (change) {
+      this.handleDataChange(change);
+      this.handleColumnChange(change);
+    }
+  }
+
+  private handleColumnChange(change: SimpleChanges) {
+    if (change.columns && change.columns.currentValue) {
+      this.displayedColumns.length = 0;
+      change.columns.currentValue.forEach((column: ColumnDescription) =>
+        this.displayedColumns.push(column.key));
+    }
+  }
+
+  private handleDataChange(change: SimpleChanges) {
+    if (change.data && change.data.currentValue) {
       // this.pageEvent.length = change.data.currentValue.length;
       if (this.previousLength !== change.data.currentValue.length) {
         this.pageEvent.pageIndex = 0;
@@ -100,6 +116,6 @@ export class TableComponent implements AfterViewInit, OnChanges {
   }
 
   private getStringNumber(num: number): string {
-    return num < 10 ? '0' + num :  '' + num;
+    return num < 10 ? '0' + num : '' + num;
   }
 }

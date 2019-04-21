@@ -14,11 +14,9 @@ export class CharacterFeedComponent implements OnDestroy {
   subscriptions = new SubscriptionsUtil();
   columns: ColumnDescription[] = [
     {key: 'timestamp', title: 'Date', dataType: 'date'},
-    {key: 'itemId', title: 'Id', dataType: 'number'},
-    {key: 'name', title: 'Name', dataType: 'string'},
-    {key: 'quantity', title: 'Qty', dataType: 'number'},
+    {key: 'name', title: 'Name', dataType: 'character-feed-name'},
     {key: 'criteria', title: 'Criteria', dataType: 'criteria'},
-    {key: 'achievement', title: 'Achievement', dataType: 'achievement'},
+    {key: 'quantity', title: 'Qty', dataType: 'number'},
     {key: 'context', title: 'Context', dataType: 'string'}
   ];
 

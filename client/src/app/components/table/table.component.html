@@ -5,26 +5,36 @@
                [pageIndex]="pageEvent.pageIndex"
                (page)="pageChange($event)">
 </mat-paginator>
-<table class="table table-hover table-bordered table-striped table-sm">
-  <thead>
-  <tr>
-    <td *ngFor="let c of columns" (click)="sort(c.key)">
-      <!--<wah-sort-icon [key]="sorter.getKey(c.key)"></wah-sort-icon>-->
-      {{ c.title }}
-    </td>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let d of data | slice:getFromValue():getToValue(); let i = index">
-    <td *ngFor="let c of columns;">
-        <span [ngSwitch]="c.dataType">
+<table mat-table [dataSource]="data" class="mat-elevation-z8">
+
+  <ng-container *ngFor="let c of columns" [matColumnDef]="c.key">
+    <th mat-header-cell (click)="sort(c.key)" *matHeaderCellDef>
+      {{c.title}}
+    </th>
+    <td mat-cell *matCellDef="let d">
+      <span [ngSwitch]="c.dataType">
           <span *ngSwitchCase="'name'">
             <mat-spinner *ngIf="d.downloading && (d.downloading.logs || d.downloading.character)"
                          class="float-left" [diameter]="12"></mat-spinner>
             {{ d[c.key] }}
           </span>
+          <span *ngSwitchCase="'character-feed-name'">
+            <span *ngIf="d.achievement">
+            {{ d.achievement?.title }}
+              <span *ngIf="d.achievement?.description">
+                 - {{ d.achievement.description }}
+              </span>
+            </span>
+            <a *ngIf="d.itemId"
+               href="https://www.wowhead.com/item={{ d.itemId }}"
+               rel="item={{ d.itemId }}, bonus={{ d.bonusLists | json }}">{{ d.itemId }}
+						</a>
+          </span>
           <span *ngSwitchCase="'criteria'">
-            {{ d.criteria?.description }} x {{ d.criteria?.max }}
+            {{ d.criteria?.description }}
+            <span *ngIf="d.criteria?.max">
+             x {{ d.criteria?.max }}
+            </span>
           </span>
           <span *ngSwitchCase="'achievement'">
             {{ d.achievement?.title }} - {{ d.achievement?.description }}
@@ -45,10 +55,10 @@
             {{ d[c.key] | number:'1.0-0' }}%
           </span>
           <span *ngSwitchCase="'number'">
-            {{ d[c.key] | number }}
+            {{ d[c.key] ? d[c.key] : 1 | number }}
           </span>
           <span *ngSwitchCase="'date'">
-            {{ d[c.key] | date}}
+            {{ d[c.key] | date: 'dd.MMM yyyy HH:mm:ss' }}
           </span>
           <span *ngSwitchCase="'time'">
             {{ timeToMinutesAndSeconds(d[c.key]) }}
@@ -56,8 +66,10 @@
           <span *ngSwitchDefault>{{ d[c.key] }}</span>
         </span>
     </td>
-  </tr>
-  </tbody>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 
 <mat-paginator *ngIf="data.length > pageRows[0]"
