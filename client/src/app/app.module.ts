@@ -31,6 +31,7 @@ import { CharacterMountsComponent } from './components/character/character-mount
 import { CharacterPetsComponent } from './components/character/character-pets/character-pets.component';
 import { CharacterAchievementsComponent } from './components/character/character-achievements/character-achievements.component';
 import { CharacterStatisticsComponent } from './components/character/character-statistics/character-statistics.component';
+import { TooltipComponent } from './components/tooltip/tooltip.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { CharacterStatisticsComponent } from './components/character/character-s
     CharacterMountsComponent,
     CharacterPetsComponent,
     CharacterAchievementsComponent,
-    CharacterStatisticsComponent
+    CharacterStatisticsComponent,
+    TooltipComponent
   ],
   imports: [
     BrowserModule,

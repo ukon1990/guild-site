@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Item} from '../models/character';
 import {HttpClient} from '@angular/common/http';
 
-class WowheadTooltip {
+export class WowheadTooltip {
   name: string;
   quality: number;
   icon: string;
@@ -31,6 +31,7 @@ export class ItemService {
       .toPromise()
       .then((tooltip: WowheadTooltip) => {
         item.name = tooltip.name;
+        item.tooltip = tooltip;
         return tooltip;
       }) as Promise<WowheadTooltip>;
   }

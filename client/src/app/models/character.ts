@@ -1,4 +1,5 @@
 import {Guild} from './guild.model';
+import {WowheadTooltip} from '../services/item.service';
 
 export interface Appearance {
   itemId: number;
@@ -63,6 +64,7 @@ export class Feed {
   itemId?: number;
   context: string;
   bonusLists: number[];
+  tooltip?: WowheadTooltip;
 }
 
 export interface TooltipParams {
@@ -123,6 +125,7 @@ export interface Item {
   appearance: Appearance;
   azeriteItem: AzeriteItem;
   azeriteEmpoweredItem: AzeriteEmpoweredItem;
+  tooltip?: WowheadTooltip;
 }
 
 export interface Damage {

@@ -28,7 +28,7 @@
             </span>
             <a *ngIf="d.itemId"
                href="https://www.wowhead.com/item={{ d.itemId }}"
-               target="_blank">{{ d.itemId }}
+               target="_blank">{{ d.name ? d.name : d.itemId }}
 						</a>
           </div>
           <span *ngSwitchCase="'criteria'">

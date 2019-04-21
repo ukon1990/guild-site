@@ -5,7 +5,7 @@ import {Sorter} from '../../models/sorter';
 import {PageEvent} from '@angular/material';
 import {classColors, classes} from '../../models/classes';
 import {Feed, Item} from '../../models/character';
-import {ItemService} from '../../services/item.service';
+import {ItemService, WowheadTooltip} from '../../services/item.service';
 
 declare const $WowheadPower: any;
 
@@ -46,7 +46,6 @@ export class TableComponent implements AfterViewInit, OnChanges {
     if (change) {
       this.handleDataChange(change);
       this.handleColumnChange(change);
-      this.init();
     }
   }
 
@@ -84,7 +83,6 @@ export class TableComponent implements AfterViewInit, OnChanges {
   /* istanbul ignore next */
   pageChange(event: PageEvent): void {
     this.pageEvent = event;
-    this.init();
   }
 
   /* istanbul ignore next */
@@ -129,28 +127,17 @@ export class TableComponent implements AfterViewInit, OnChanges {
     return bonusList.join(':');
   }
 
-  init(): void {
-    setTimeout(() => {
-      try {
-        if ($WowheadPower) {
-          $WowheadPower.init();
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    });
-  }
-
-  onHover(item: any, event: any): void {
-    console.log('Hover', item, event);
+  onHover(item: any, event: MouseEvent): void {
+    console.log('Hover', item, event, !item.tooltip, item.itemId);
     if (!item.tooltip && item.itemId) {
       this.itemService.getTooltip({
         id: item.itemId,
         bonusLists: item.bonusLists ? item.bonusLists : undefined
       } as Item)
-        .then(res => {
+        .then((res: WowheadTooltip) => {
           console.log(res);
-          item.tooltip = res;
+          item.name = res.name;
+          item.tooltip = res.tooltip;
         });
     }
   }
