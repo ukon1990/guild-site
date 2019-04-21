@@ -1,3 +1,5 @@
+import {WowheadTooltip} from '../services/item.service';
+
 export interface Achievements {
   achievementsCompleted: number[];
   achievementsCompletedTimestamp: any[];
@@ -77,6 +79,8 @@ export interface News {
   context: string;
   bonusLists: number[];
   achievement: Achievement;
+  name?: string;
+  tooltip?: WowheadTooltip;
 }
 
 export interface Realm {

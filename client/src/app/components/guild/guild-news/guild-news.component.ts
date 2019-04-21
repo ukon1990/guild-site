@@ -1,10 +1,11 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {Guild} from '../../../models/guild.model';
+import {Guild, News} from '../../../models/guild.model';
 import {GuildService} from '../../../services/guild.service';
 import {SubscriptionsUtil} from '../../../utils/subscriptions.util';
 import {PageEvent} from '@angular/material';
+import {ItemService, WowheadTooltip} from '../../../services/item.service';
+import {Item} from '../../../models/character';
 
-declare const $WowheadPower: any;
 @Component({
   selector: 'app-guild-news',
   templateUrl: './guild-news.component.html',
@@ -19,44 +20,46 @@ export class GuildNewsComponent implements OnDestroy, AfterViewInit {
   };
   pageEvent: PageEvent = {pageIndex: 0, pageSize: this.page.pageSize, length: 1};
 
-  constructor(private guildService: GuildService) {
+  constructor(private guildService: GuildService, private itemService: ItemService) {
     this.guild = this.guildService.guild;
+    this.getTooltipData();
     this.subscriptions.add(
       GuildService.events,
       (guild: Guild) => {
         this.guild = guild;
-        this.init();
+        this.getTooltipData();
       }
     );
   }
 
   ngAfterViewInit(): void {
-    this.init();
   }
 
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
   }
 
+  private getTooltipData(): void {
+    this.guild.news.forEach((news: News) => {
+      if (news.itemId && !news.name) {
+        this.itemService.getTooltip({
+          id: news.itemId,
+          bonusLists: news.bonusLists
+        } as Item)
+          .then((tooltip: WowheadTooltip) => {
+            news.name = tooltip.name;
+            news.tooltip = tooltip;
+          });
+      }
+    });
+  }
+
   changePage(event: PageEvent) {
     this.pageEvent = event;
-    setTimeout(
-      () => this.init(),
-      1);
   }
 
   bonusList(bonusList: any[]): string {
     return bonusList.join(':');
-  }
-
-  init(): void {
-    try {
-      if ($WowheadPower) {
-        $WowheadPower.init();
-      }
-    } catch (error) {
-      console.log(error);
-    }
   }
 
 }

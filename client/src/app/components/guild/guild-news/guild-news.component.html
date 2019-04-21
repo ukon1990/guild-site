@@ -1,13 +1,14 @@
-<mat-list *ngIf="guild"><div class="row col-md-12">
-  <mat-paginator
-    [length]="guild.news?.length"
-    [pageSize]="page.pageSize"
-    [pageIndex]="pageEvent.pageIndex"
-    [pageSizeOptions]="page.pageSizeOptions"
-    [showFirstLastButtons]="true"
-    (page)="changePage($event)">>
-  </mat-paginator>
-</div>
+<mat-list class="row col-md-12" *ngIf="guild">
+  <div class="col-md-12">
+    <mat-paginator
+      [length]="guild.news?.length"
+      [pageSize]="page.pageSize"
+      [pageIndex]="pageEvent.pageIndex"
+      [pageSizeOptions]="page.pageSizeOptions"
+      [showFirstLastButtons]="true"
+      (page)="changePage($event)">>
+    </mat-paginator>
+  </div>
   <mat-list-item *ngFor="let news of guild.news |
 		slice:
 			(pageEvent.pageSize * (pageEvent.pageIndex + 1)) - pageEvent.pageSize:
@@ -20,20 +21,23 @@
 						</a>
 						<a *ngSwitchCase="'itemLoot'"
                href="https://www.wowhead.com/item={{ news.itemId }}"
-               rel="item={{ news.itemId }}, bonus={{ bonusList(news.bonusLists) }}">{{ news.itemId }}
+               rel="item={{ news.itemId }}, bonus={{ bonusList(news.bonusLists) }}">
+              {{ news.name ? news.name : news.itemId }}
 						</a>
 						<a *ngSwitchCase="'itemPurchase'"
                href="https://www.wowhead.com/item={{ news.itemId }}"
-               rel="item={{ news.itemId }}, bonus={{ bonusList(news.bonusLists) }}">{{ news.itemId }}
+               rel="item={{ news.itemId }}, bonus={{ bonusList(news.bonusLists) }}">
+              {{ news.name ? news.name : news.itemId }}
 						</a>
 						<a *ngSwitchCase="'itemCraft'"
                href="https://www.wowhead.com/item={{ news.itemId }}"
-               rel="item={{ news.itemId }}, bonus={{ bonusList(news.bonusLists) }}">{{ news.itemId }}
+               rel="item={{ news.itemId }}, bonus={{ bonusList(news.bonusLists) }}">
+              {{ news.name ? news.name : news.itemId }}
 						</a>
 						<p *ngSwitchDefault>{{ news.type }}</p>
         </span>
   </mat-list-item>
-  <div class="row col-md-12">
+  <div class="col-md-12">
     <mat-paginator
       [length]="guild.news?.length"
       [pageSize]="page.pageSize"

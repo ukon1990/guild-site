@@ -1,14 +1,14 @@
 <mat-expansion-panel class="mb-1"
-  [expanded]="showCharacters"
-  (opened)="showCharacters = true"
-  (closed)="showCharacters = false">
+                     [expanded]="showCharacters"
+                     (opened)="showCharacters = true"
+                     (closed)="showCharacters = false">
   <mat-expansion-panel-header>
     <mat-panel-title>
       Characters
     </mat-panel-title>
   </mat-expansion-panel-header>
 
-  <mat-accordion *ngIf="showCharacters">
+  <mat-accordion>
     <mat-expansion-panel *ngFor="let realm of realms"
                          [style.background-color]="colors.background"
                          [style.color]="colors.font">
@@ -20,11 +20,12 @@
           {{ realm.characters.length | number }}
         </mat-panel-description>
       </mat-expansion-panel-header>
-
-      <app-character-card class="float-left p-1"
-                          *ngFor="let character of realm.characters"
-                          [character]="character">
-      </app-character-card>
+      <ng-container *ngIf="showCharacters">
+        <app-character-card class="float-left p-1"
+                            *ngFor="let character of realm.characters"
+                            [character]="character">
+        </app-character-card>
+      </ng-container>
     </mat-expansion-panel>
   </mat-accordion>
 
