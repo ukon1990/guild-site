@@ -4,6 +4,10 @@ import {Raider} from '../../models/raider';
 import {Sorter} from '../../models/sorter';
 import {PageEvent} from '@angular/material';
 import {classColors, classes} from '../../models/classes';
+import {Feed, Item} from '../../models/character';
+import {ItemService} from '../../services/item.service';
+
+declare const $WowheadPower: any;
 
 @Component({
   selector: 'app-table',
@@ -27,7 +31,7 @@ export class TableComponent implements AfterViewInit, OnChanges {
   classes: string[] = classes;
   displayedColumns: string[] = [];
 
-  constructor() {
+  constructor(private itemService: ItemService) {
     this.sorter = new Sorter();
   }
 
@@ -42,6 +46,7 @@ export class TableComponent implements AfterViewInit, OnChanges {
     if (change) {
       this.handleDataChange(change);
       this.handleColumnChange(change);
+      this.init();
     }
   }
 
@@ -79,6 +84,7 @@ export class TableComponent implements AfterViewInit, OnChanges {
   /* istanbul ignore next */
   pageChange(event: PageEvent): void {
     this.pageEvent = event;
+    this.init();
   }
 
   /* istanbul ignore next */
@@ -117,5 +123,32 @@ export class TableComponent implements AfterViewInit, OnChanges {
 
   private getStringNumber(num: number): string {
     return num < 10 ? '0' + num : '' + num;
+  }
+
+  bonusList(bonusList: any[]): string {
+    return bonusList.join(':');
+  }
+
+  init(): void {
+    setTimeout(() => {
+      try {
+        if ($WowheadPower) {
+          $WowheadPower.init();
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    });
+  }
+
+  onHover(item: any): void {
+    console.log('Hover', item);
+    if (item.itemId) {
+      this.itemService.getTooltip({
+        id: item.itemId,
+        bonusLists: item.bonusLists ? item.bonusLists : undefined
+      } as Item)
+        .then(res => console.log(res));
+    }
   }
 }

@@ -18,7 +18,8 @@
                          class="float-left" [diameter]="12"></mat-spinner>
             {{ d[c.key] }}
           </span>
-          <span *ngSwitchCase="'character-feed-name'">
+          <div *ngSwitchCase="'character-feed-name'"
+                (mouseenter)="onHover(d)">
             <span *ngIf="d.achievement">
             {{ d.achievement?.title }}
               <span *ngIf="d.achievement?.description">
@@ -27,9 +28,9 @@
             </span>
             <a *ngIf="d.itemId"
                href="https://www.wowhead.com/item={{ d.itemId }}"
-               rel="item={{ d.itemId }}, bonus={{ d.bonusLists | json }}">{{ d.itemId }}
+               rel="item={{ d.itemId }}, bonus={{ bonusList(d.bonusLists) }}">{{ d.itemId }}
 						</a>
-          </span>
+          </div>
           <span *ngSwitchCase="'criteria'">
             {{ d.criteria?.description }}
             <span *ngIf="d.criteria?.max">

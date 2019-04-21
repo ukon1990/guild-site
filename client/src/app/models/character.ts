@@ -52,7 +52,7 @@ export interface Criteria {
   max: number;
 }
 
-export interface Feed {
+export class Feed {
   type: string;
   timestamp: any;
   achievement: Achievement;

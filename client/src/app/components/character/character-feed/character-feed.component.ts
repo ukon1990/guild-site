@@ -1,8 +1,9 @@
 import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
-import {Character} from '../../../models/character';
+import {Character, Feed, Item} from '../../../models/character';
 import {SubscriptionsUtil} from '../../../utils/subscriptions.util';
 import {CharacterService} from '../../../services/character.service';
 import {ColumnDescription} from '../../../models/column-description';
+import {ItemService} from '../../../services/item.service';
 
 @Component({
   selector: 'app-character-feed',
@@ -20,7 +21,7 @@ export class CharacterFeedComponent implements OnDestroy {
     {key: 'context', title: 'Context', dataType: 'string'}
   ];
 
-  constructor(private service: CharacterService) {
+  constructor(private service: CharacterService, private itemService: ItemService) {
     this.character = this.service.character;
     this.subscriptions.add(
       CharacterService.events,

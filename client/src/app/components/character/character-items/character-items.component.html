@@ -1,4 +1,9 @@
-<div class="clearfix" *ngIf="character && character.items">
+
+<div class="mt-5 clearfix" *ngIf="character && character.items">
+  <div class="col-md-12">
+    Average item level equipped: {{ character.items?.averageItemLevelEquipped | number }} <br>
+    Average item level total: {{ character.items?.averageItemLevel | number }} <br>
+  </div>
   <div class="col-md-5 float-left">
     <mat-list>
       <mat-list-item>
