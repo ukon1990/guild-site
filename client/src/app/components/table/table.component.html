@@ -8,7 +8,6 @@
 <table class="table table-hover table-bordered table-striped table-sm">
   <thead>
   <tr>
-    <td>#</td>
     <td *ngFor="let c of columns" (click)="sort(c.key)">
       <!--<wah-sort-icon [key]="sorter.getKey(c.key)"></wah-sort-icon>-->
       {{ c.title }}
@@ -17,13 +16,18 @@
   </thead>
   <tbody>
   <tr *ngFor="let d of data | slice:getFromValue():getToValue(); let i = index">
-    <td>{{ i + 1 }}</td>
     <td *ngFor="let c of columns;">
         <span [ngSwitch]="c.dataType">
           <span *ngSwitchCase="'name'">
             <mat-spinner *ngIf="d.downloading && (d.downloading.logs || d.downloading.character)"
                          class="float-left" [diameter]="12"></mat-spinner>
             {{ d[c.key] }}
+          </span>
+          <span *ngSwitchCase="'criteria'">
+            {{ d.criteria?.description }} x {{ d.criteria?.max }}
+          </span>
+          <span *ngSwitchCase="'achievement'">
+            {{ d.achievement?.title }} - {{ d.achievement?.description }}
           </span>
           <span *ngSwitchCase="'class'">
             {{ classes[d[c.key]] }}

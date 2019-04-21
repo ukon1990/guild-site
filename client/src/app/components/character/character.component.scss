@@ -1,6 +1,8 @@
 .character-card {
   background-repeat: no-repeat;
-  -webkit-background-size: contain;
-  background-size: contain;
+  -webkit-background-size: cover;
+  background-size: cover;
   background-position: center;
+  height: calc(100% - 116px);
+  overflow: scroll;
 }

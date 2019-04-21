@@ -4,16 +4,16 @@ export const classes = [
   'Warlock', 'Monk', 'Druid', 'Demon hunter'];
 
 export const classColors = {
-  1: '#1a0407', // Warrior
-  2: '#13040a', // Paladin
-  3: '#0f091b', // Hunter
-  4: '#160720"', // Rogue
-  5: '#15060e', // Priest
-  6: '#080812', // Death Knight
-  7: '#050414', // Shaman
-  8: '#110617', // Mage
-  9: '#080516', // Warlock
-  10: '#040b17', // Monk
-  11: '#04100a', // Druid
-  12: '#000900' // Demon hunter
+  1: '#C79C6E', // Warrior
+  2: '#F58CBA', // Paladin
+  3: '#ABD473', // Hunter
+  4: '#FFF569', // Rogue
+  5: '#FFFFFF', // Priest
+  6: '#C41F3B', // Death Knight
+  7: '#0070DE', // Shaman
+  8: '#40C7EB', // Mage
+  9: '#8787ED', // Warlock
+  10: '#00FF96', // Monk
+  11: '#FF7D0A', // Druid
+  12: '#A330C9' // Demon hunter
 };

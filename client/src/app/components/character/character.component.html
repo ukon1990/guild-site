@@ -6,7 +6,17 @@
       {{ character.level }} - {{ character.name }}
     </mat-card-title>
     <mat-card-subtitle>
-      Class: {{ classes[character.class] }}
+      <a [style.color]="colors.font"
+        routerLink="/{{urlParams?.region}}/{{character.guild.realm}}/{{character.guild.name}}/guild">
+        {{ character.guild.name }}
+      </a>
+    </mat-card-subtitle>
+    <mat-card-subtitle>
+      Class:
+      <ng-container *ngFor="let talent of character.talents">
+        <span *ngIf="talent.selected">{{ talent.spec.name }}</span>
+      </ng-container>
+      {{ classes[character.class] }}
     </mat-card-subtitle>
     <mat-card-subtitle>
       Last modified: {{ character.lastModified | date: 'dd.MMM yyyy HH:mm:ss' }}
