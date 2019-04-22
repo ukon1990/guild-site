@@ -1,8 +1,9 @@
-<div *ngIf="item" [ngClass]="{'transmogged': item?.apperance}">
+<div class="tooltip-trigger" *ngIf="item" [ngClass]="{'transmogged': item?.apperance}">
   <a href="https://www.wowhead.com/item={{ item.id }}" target="_blank"
      [rel]="itemRel()">
     <app-item-icon
       [icon]="item.icon"
+      [item]="item"
       [qualityId]="item.quality">
       {{ item.itemLevel }} - {{ item.name }}
       <span *ngIf="item.azeriteItem && item.azeriteItem.azeriteLevel > 0">

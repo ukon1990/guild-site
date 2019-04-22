@@ -19,6 +19,7 @@ export class CharacterItemsComponent implements AfterViewInit, OnDestroy {
 
   constructor(private service: CharacterService, private itemService: ItemService) {
     this.character = this.service.character;
+    this.getTooltipData();
     this.subscriptions.add(
       CharacterService.events,
       (character: Character) => {
@@ -38,8 +39,9 @@ export class CharacterItemsComponent implements AfterViewInit, OnDestroy {
   private getTooltipData(): void {
     Object.keys(this.character.items).forEach((slot: string) => {
       const item: Item = this.character.items[slot];
-      if (!item.tooltip) {
-        this.itemService.getTooltip(item);
+      if (!item.tooltip && item.id) {
+        this.itemService.getTooltip(item)
+          .then((tip) => console.log(tip));
       }
 
     });

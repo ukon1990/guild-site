@@ -1,5 +1,7 @@
 import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
 import {DomSanitizer, SafeResourceUrl} from '@angular/platform-browser';
+import {Feed, Item} from '../../models/character';
+import {News} from '../../models/guild.model';
 
 @Component({
   selector: 'app-item-icon',
@@ -10,6 +12,8 @@ export class ItemIconComponent implements OnChanges {
   @Input() size = 22;
   @Input() icon = 'inv_scroll_03';
   @Input() qualityId = 2;
+  @Input() item: Item | Feed | News;
+
   readonly iconBase = 'https://render-eu.worldofwarcraft.com/icons/56/';
   readonly hexColorMap = [
     '#9d9d9d', '#ffffff', '#1eff00', '#0070dd', '#a335ee', '#ff8000', '#e6cc80', '#00ccff', '#00ccff'
@@ -30,5 +34,9 @@ export class ItemIconComponent implements OnChanges {
       `url('https://render-eu.worldofwarcraft.com/icons/56/${
         icon
         }.jpg')`);
+  }
+
+  onMouseEnter() {
+    console.log('Item', this.item)
   }
 }

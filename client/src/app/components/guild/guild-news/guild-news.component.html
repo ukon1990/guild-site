@@ -27,6 +27,7 @@
               <app-item-icon
                 [icon]="news.tooltip?.icon"
                 [qualityId]="news.tooltip?.quality">
+                [item]="news"
               {{ news.name ? news.name : news.itemId }}
               </app-item-icon>
 						</a>
@@ -35,6 +36,7 @@
                target="_blank"
                rel="item={{ news.itemId }}, bonus={{ bonusList(news.bonusLists) }}">
               <app-item-icon
+                [item]="news"
                 [icon]="news.tooltip?.icon"
                 [qualityId]="news.tooltip?.quality">
               {{ news.name ? news.name : news.itemId }}
@@ -45,6 +47,7 @@
                target="_blank"
                rel="item={{ news.itemId }}, bonus={{ bonusList(news.bonusLists) }}">
               <app-item-icon
+                [item]="news"
                 [icon]="news.tooltip?.icon"
                 [qualityId]="news.tooltip?.quality">
               {{ news.name ? news.name : news.itemId }}

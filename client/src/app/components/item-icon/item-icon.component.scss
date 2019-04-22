@@ -5,3 +5,15 @@
 .projected {
   overflow: overlay;
 }
+
+.tooltip-trigger {
+  .tooltip {
+    z-index: 9000;
+    display: none;
+    position: absolute;
+  }
+
+  &:hover .tooltip {
+    display: block;
+  }
+}

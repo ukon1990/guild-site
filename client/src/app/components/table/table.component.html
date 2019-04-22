@@ -30,6 +30,7 @@
                href="https://www.wowhead.com/item={{ d.itemId }}"
                target="_blank">
               <app-item-icon
+                [item]="d"
                 [icon]="d.tooltip?.icon"
                 [qualityId]="d.tooltip?.quality">
               {{ d.name ? d.name : d.itemId }}
