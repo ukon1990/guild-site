@@ -22,6 +22,12 @@
         "LogGroupName": "/aws/lambda/guild-site-api-prod-auth"
       }
     },
+    "VerifyAuthLogGroup": {
+      "Type": "AWS::Logs::LogGroup",
+      "Properties": {
+        "LogGroupName": "/aws/lambda/guild-site-api-prod-verifyAuth"
+      }
+    },
     "IamRoleLambdaExecution": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -64,6 +70,9 @@
                   "Resource": [
                     {
                       "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/guild-site-api-prod-auth:*"
+                    },
+                    {
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/guild-site-api-prod-verifyAuth:*"
                     }
                   ]
                 },
@@ -75,6 +84,9 @@
                   "Resource": [
                     {
                       "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/guild-site-api-prod-auth:*:*"
+                    },
+                    {
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/guild-site-api-prod-verifyAuth:*:*"
                     }
                   ]
                 }
@@ -103,7 +115,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/guild-site-api/prod/1555768886739-2019-04-20T14:01:26.739Z/guild-site-api.zip"
+          "S3Key": "serverless/guild-site-api/prod/1555935766874-2019-04-22T12:22:46.874Z/guild-site-api.zip"
         },
         "FunctionName": "guild-site-api-prod-auth",
         "Handler": "controllers/auth.handler",
@@ -122,14 +134,50 @@
         "IamRoleLambdaExecution"
       ]
     },
-    "AuthLambdaVersionz8ZJ4impxQpToJVLOI8EvPPALZRQgMlSTpfbNF7qsw": {
+    "AuthLambdaVersions3PPcADTk9SFg88ukYTdEdpSZ6xjp3Hii95Ezrjit0I": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "AuthLambdaFunction"
         },
-        "CodeSha256": "R8uYxp+2qfe+OZu8eSatgMt7k781abXFbqBiSrs+jSo="
+        "CodeSha256": "O3lRllw6NNWmgL2WzaEZ5OKKbEhYvpI/aGpcTi26iSI="
+      }
+    },
+    "VerifyAuthLambdaFunction": {
+      "Type": "AWS::Lambda::Function",
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
+            "Ref": "ServerlessDeploymentBucket"
+          },
+          "S3Key": "serverless/guild-site-api/prod/1555935766874-2019-04-22T12:22:46.874Z/guild-site-api.zip"
+        },
+        "FunctionName": "guild-site-api-prod-verifyAuth",
+        "Handler": "controllers/auth.checkTokenHandler",
+        "MemorySize": 128,
+        "Role": {
+          "Fn::GetAtt": [
+            "IamRoleLambdaExecution",
+            "Arn"
+          ]
+        },
+        "Runtime": "nodejs8.10",
+        "Timeout": 900
+      },
+      "DependsOn": [
+        "VerifyAuthLogGroup",
+        "IamRoleLambdaExecution"
+      ]
+    },
+    "VerifyAuthLambdaVersionq5ERIMWDenCkUbahJSqVLbyokinmzShkdo0KuOX4z8": {
+      "Type": "AWS::Lambda::Version",
+      "DeletionPolicy": "Retain",
+      "Properties": {
+        "FunctionName": {
+          "Ref": "VerifyAuthLambdaFunction"
+        },
+        "CodeSha256": "O3lRllw6NNWmgL2WzaEZ5OKKbEhYvpI/aGpcTi26iSI="
       }
     },
     "ApiGatewayRestApi": {
@@ -153,6 +201,18 @@
           ]
         },
         "PathPart": "auth",
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
+    "ApiGatewayResourceAuthVerify": {
+      "Type": "AWS::ApiGateway::Resource",
+      "Properties": {
+        "ParentId": {
+          "Ref": "ApiGatewayResourceAuth"
+        },
+        "PathPart": "verify",
         "RestApiId": {
           "Ref": "ApiGatewayRestApi"
         }
@@ -205,6 +265,53 @@
         }
       }
     },
+    "ApiGatewayMethodAuthVerifyOptions": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "AuthorizationType": "NONE",
+        "HttpMethod": "OPTIONS",
+        "MethodResponses": [
+          {
+            "StatusCode": "200",
+            "ResponseParameters": {
+              "method.response.header.Access-Control-Allow-Origin": true,
+              "method.response.header.Access-Control-Allow-Headers": true,
+              "method.response.header.Access-Control-Allow-Methods": true,
+              "method.response.header.Access-Control-Allow-Credentials": true
+            },
+            "ResponseModels": {}
+          }
+        ],
+        "RequestParameters": {},
+        "Integration": {
+          "Type": "MOCK",
+          "RequestTemplates": {
+            "application/json": "{statusCode:200}"
+          },
+          "ContentHandling": "CONVERT_TO_TEXT",
+          "IntegrationResponses": [
+            {
+              "StatusCode": "200",
+              "ResponseParameters": {
+                "method.response.header.Access-Control-Allow-Origin": "'*'",
+                "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'",
+                "method.response.header.Access-Control-Allow-Credentials": "'false'"
+              },
+              "ResponseTemplates": {
+                "application/json": ""
+              }
+            }
+          ]
+        },
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceAuthVerify"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        }
+      }
+    },
     "ApiGatewayMethodAuthPost": {
       "Type": "AWS::ApiGateway::Method",
       "Properties": {
@@ -248,7 +355,50 @@
         "MethodResponses": []
       }
     },
-    "ApiGatewayDeployment1555768881300": {
+    "ApiGatewayMethodAuthVerifyPost": {
+      "Type": "AWS::ApiGateway::Method",
+      "Properties": {
+        "HttpMethod": "POST",
+        "RequestParameters": {},
+        "ResourceId": {
+          "Ref": "ApiGatewayResourceAuthVerify"
+        },
+        "RestApiId": {
+          "Ref": "ApiGatewayRestApi"
+        },
+        "ApiKeyRequired": false,
+        "AuthorizationType": "NONE",
+        "Integration": {
+          "IntegrationHttpMethod": "POST",
+          "Type": "AWS_PROXY",
+          "Uri": {
+            "Fn::Join": [
+              "",
+              [
+                "arn:",
+                {
+                  "Ref": "AWS::Partition"
+                },
+                ":apigateway:",
+                {
+                  "Ref": "AWS::Region"
+                },
+                ":lambda:path/2015-03-31/functions/",
+                {
+                  "Fn::GetAtt": [
+                    "VerifyAuthLambdaFunction",
+                    "Arn"
+                  ]
+                },
+                "/invocations"
+              ]
+            ]
+          }
+        },
+        "MethodResponses": []
+      }
+    },
+    "ApiGatewayDeployment1555935760512": {
       "Type": "AWS::ApiGateway::Deployment",
       "Properties": {
         "RestApiId": {
@@ -258,7 +408,9 @@
       },
       "DependsOn": [
         "ApiGatewayMethodAuthOptions",
-        "ApiGatewayMethodAuthPost"
+        "ApiGatewayMethodAuthVerifyOptions",
+        "ApiGatewayMethodAuthPost",
+        "ApiGatewayMethodAuthVerifyPost"
       ]
     },
     "AuthLambdaPermissionApiGateway": {
@@ -267,6 +419,53 @@
         "FunctionName": {
           "Fn::GetAtt": [
             "AuthLambdaFunction",
+            "Arn"
+          ]
+        },
+        "Action": "lambda:InvokeFunction",
+        "Principal": {
+          "Fn::Join": [
+            "",
+            [
+              "apigateway.",
+              {
+                "Ref": "AWS::URLSuffix"
+              }
+            ]
+          ]
+        },
+        "SourceArn": {
+          "Fn::Join": [
+            "",
+            [
+              "arn:",
+              {
+                "Ref": "AWS::Partition"
+              },
+              ":execute-api:",
+              {
+                "Ref": "AWS::Region"
+              },
+              ":",
+              {
+                "Ref": "AWS::AccountId"
+              },
+              ":",
+              {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "/*/*"
+            ]
+          ]
+        }
+      }
+    },
+    "VerifyAuthLambdaPermissionApiGateway": {
+      "Type": "AWS::Lambda::Permission",
+      "Properties": {
+        "FunctionName": {
+          "Fn::GetAtt": [
+            "VerifyAuthLambdaFunction",
             "Arn"
           ]
         },
@@ -318,7 +517,13 @@
     "AuthLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "AuthLambdaVersionz8ZJ4impxQpToJVLOI8EvPPALZRQgMlSTpfbNF7qsw"
+        "Ref": "AuthLambdaVersions3PPcADTk9SFg88ukYTdEdpSZ6xjp3Hii95Ezrjit0I"
+      }
+    },
+    "VerifyAuthLambdaFunctionQualifiedArn": {
+      "Description": "Current Lambda function version",
+      "Value": {
+        "Ref": "VerifyAuthLambdaVersionq5ERIMWDenCkUbahJSqVLbyokinmzShkdo0KuOX4z8"
       }
     },
     "ServiceEndpoint": {

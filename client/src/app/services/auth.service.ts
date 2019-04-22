@@ -11,8 +11,10 @@ export class AuthService {
   private authorizationTab;
 
   constructor(private http: HttpClient) {
+    console.log('Auth service');
 
     this.setAuthCodeSubscriptionEvent();
+    this.checkToken();
   }
 
   private setAuthCodeSubscriptionEvent() {
@@ -54,9 +56,12 @@ export class AuthService {
 
   checkToken() {
     const region = 'eu';
-    return this.http.post(`https://${region}.battle.net/oauth/check_token `, {
-      token: this.getAccessToken()
-    }).toPromise();
+    this.http.post('https://w6f8vikqy3.execute-api.eu-west-1.amazonaws.com/prod/auth/verify', {
+      token: this.getAccessToken(),
+      region
+    }).toPromise()
+      .then(console.log)
+      .catch(console.error);
   }
 
   authRequest() {

@@ -12,12 +12,19 @@ provider:
   timeout: 900
 
 functions:
-
   auth:
     handler: controllers/auth.handler
     events:
       - http:
           method: post
           path: auth
+          cors:
+            origin: '*'
+  verifyAuth:
+    handler: controllers/auth.checkTokenHandler
+    events:
+      - http:
+          method: post
+          path: auth/verify
           cors:
             origin: '*'
