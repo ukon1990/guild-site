@@ -1,4 +1,3 @@
-import {Character} from './character';
 import {UserRealmRoot} from './user-realm.model';
 
 export class User {
