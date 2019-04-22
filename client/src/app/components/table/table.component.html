@@ -20,57 +20,53 @@
           </span>
           <div *ngSwitchCase="'character-feed-name'"
                (mouseenter)="onHover(d, $event)">
-            <span *ngIf="d.achievement">
+            <ng-container *ngIf="d.achievement">
             {{ d.achievement?.title }}
               <span *ngIf="d.achievement?.description">
                  - {{ d.achievement.description }}
               </span>
-            </span>
-            <a *ngIf="d.itemId"
-               href="https://www.wowhead.com/item={{ d.itemId }}"
-               target="_blank">
-              <app-item-icon
-                [item]="d"
-                [icon]="d.tooltip?.icon"
-                [qualityId]="d.tooltip?.quality">
+            </ng-container>
+            <app-item-icon
+              [item]="d"
+              [icon]="d.tooltip?.icon"
+              [qualityId]="d.tooltip?.quality">
               {{ d.name ? d.name : d.itemId }}
               </app-item-icon>
-						</a>
           </div>
-          <span *ngSwitchCase="'criteria'">
+          <ng-container *ngSwitchCase="'criteria'">
             {{ d.criteria?.description }}
             <span *ngIf="d.criteria?.max">
              x {{ d.criteria?.max }}
             </span>
-          </span>
-          <span *ngSwitchCase="'achievement'">
+          </ng-container>
+          <ng-container *ngSwitchCase="'achievement'">
             {{ d.achievement?.title }} - {{ d.achievement?.description }}
-          </span>
-          <span *ngSwitchCase="'class'">
+          </ng-container>
+          <ng-container *ngSwitchCase="'class'">
             {{ classes[d[c.key]] }}
-          </span>
-          <span *ngSwitchCase="'spec'">
+          </ng-container>
+          <ng-container *ngSwitchCase="'spec'">
             {{ d.spec.name }} ({{ d.spec.role }})
-          </span>
-          <span *ngSwitchCase="'raider-profile'">
+          </ng-container>
+          <ng-container *ngSwitchCase="'raider-profile'">
             <a [routerLink]="'/roster/' + d.realm + '/' + d.name">
               <span class="mr-2"><i class="fas fa-eye"></i></span>
               View
             </a>
-          </span>
-          <span *ngSwitchCase="'percent'">
+          </ng-container>
+          <ng-container *ngSwitchCase="'percent'">
             {{ d[c.key] | number:'1.0-0' }}%
-          </span>
-          <span *ngSwitchCase="'number'">
+          </ng-container>
+          <ng-container *ngSwitchCase="'number'">
             {{ d[c.key] ? d[c.key] : 1 | number }}
-          </span>
-          <span *ngSwitchCase="'date'">
+          </ng-container>
+          <ng-container *ngSwitchCase="'date'">
             {{ d[c.key] | date: 'dd.MMM yyyy HH:mm:ss' }}
-          </span>
-          <span *ngSwitchCase="'time'">
+          </ng-container>
+          <ng-container *ngSwitchCase="'time'">
             {{ timeToMinutesAndSeconds(d[c.key]) }}
-          </span>
-          <span *ngSwitchDefault>{{ d[c.key] }}</span>
+          </ng-container>
+          <ng-container *ngSwitchDefault>{{ d[c.key] }}</ng-container>
         </span>
     </td>
   </ng-container>

@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Item} from '../models/character';
+import {AzeritePower, Item} from '../models/character';
 import {HttpClient} from '@angular/common/http';
 
 export class WowheadTooltip {
@@ -24,7 +24,23 @@ export class ItemService {
       url += '&bonus=' + item.bonusLists.join(':');
     }
 
-    if (item.azeriteEmpoweredItem && item.azeriteEmpoweredItem) {
+    if (item.azeriteEmpoweredItem && item.azeriteEmpoweredItem.azeritePowers.length > 0) {
+      url += '&azerite-powers=' + item.azeriteEmpoweredItem.azeritePowers
+        .map((power: AzeritePower) =>
+          power.id)
+        .join(':');
+    }
+
+    if (item.tooltipParams && item.tooltipParams.gem0) {
+      url += '&gems=' + item.tooltipParams.gem0;
+    }
+
+    if (item.tooltipParams && item.tooltipParams.enchant) {
+      url += '&ench=' + item.tooltipParams.enchant;
+    }
+
+    if (item.tooltipParams && item.tooltipParams.set) {
+      url += '&pcs=' + item.tooltipParams.set.join(':');
     }
 
     return this.http.get(url + '&json&power')

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {WowheadTooltip} from '../../services/item.service';
 
 @Component({
@@ -6,12 +6,6 @@ import {WowheadTooltip} from '../../services/item.service';
   templateUrl: './tooltip.component.html',
   styleUrls: ['./tooltip.component.scss']
 })
-export class TooltipComponent implements OnInit {
+export class TooltipComponent {
   @Input() tooltip: WowheadTooltip;
-
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
 }

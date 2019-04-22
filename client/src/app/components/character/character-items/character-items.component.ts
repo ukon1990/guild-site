@@ -41,7 +41,7 @@ export class CharacterItemsComponent implements AfterViewInit, OnDestroy {
       const item: Item = this.character.items[slot];
       if (!item.tooltip && item.id) {
         this.itemService.getTooltip(item)
-          .then((tip) => console.log(tip));
+          .then(() => {});
       }
 
     });
