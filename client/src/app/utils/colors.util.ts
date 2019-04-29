@@ -8,8 +8,8 @@ export class Colors {
   static font: string;
 
   static setFromGuild(guild: Guild): void {
-    Colors.background = '#' + guild.emblem.backgroundColor;
-    Colors.font = '#' + guild.emblem.iconColor;
+    Colors.background = '#' + guild.emblem.borderColor;
+    Colors.font = invert('#' + guild.emblem.borderColor);
   }
 
   static setColorFromClass(character: Character): void {

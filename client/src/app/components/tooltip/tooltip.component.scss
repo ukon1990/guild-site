@@ -1,3 +1,1118 @@
 .tooltip-body {
   background-color: rgba(0, 0, 0, 0.84);
+  padding: .5em;
+  max-width: 20em;
+}
+
+
+
+
+:host ::ng-deep {
+  .tooltip {
+    color: white;
+  }
+
+
+  .q0 {
+    color: #9d9d9d;
+  }
+
+  .q1 {
+    color: #ffffff;
+  }
+
+  .q2 {
+    color: #1eff00;
+  }
+
+  .q3 {
+    color: #0070dd;
+  }
+
+  .q4 {
+    color: #a335ee;
+  }
+
+  .q5 {
+    color: #ff8000;
+  }
+
+  .q6 {
+    color: #e6cc80;
+  }
+
+  .q7, .q8 {
+    color: #00ccff;
+  }
+
+  .moneygold {
+    color: #f1ff86;
+  }
+
+  .moneysilver {
+    color: #c5c1c4;
+  }
+
+  .moneycopper {
+    color: #ff7700;
+  }
+
+  a {
+    &.moneyitem, &.moneyachievement, &.moneysocketmeta, &.moneysocketred, &.moneysocketyellow, &.moneysocketblue, &.moneysocketprismatic {
+      border-bottom: 1px solid transparent;
+      color: #fff !important;
+      text-decoration: none !important;
+    }
+  }
+
+  .wowhead-tooltip a {
+    &.moneyitem, &.moneyachievement, &.moneysocketmeta, &.moneysocketred, &.moneysocketyellow, &.moneysocketblue, &.moneysocketprismatic {
+      color: #fff !important;
+    }
+
+    &.moneyitem:hover, &.moneyachievement:hover, &.moneysocketmeta:hover, &.moneysocketred:hover, &.moneysocketyellow:hover, &.moneysocketblue:hover, &.moneysocketprismatic:hover {
+      border-bottom: 1px solid #fff;
+    }
+  }
+
+  a {
+    &.moneyitem:hover, &.moneyachievement:hover, &.moneysocketmeta:hover, &.moneysocketred:hover, &.moneysocketyellow:hover, &.moneysocketblue:hover, &.moneysocketprismatic:hover {
+      border-bottom: 1px solid #fff;
+    }
+
+    span {
+      &.moneyitem, &.moneyachievement, &.moneysocketmeta, &.moneysocketred, &.moneysocketyellow, &.moneysocketblue, &.moneysocketprismatic {
+        color: #fff;
+      }
+    }
+  }
+
+  .wowhead-tooltip a span {
+    &.moneyitem, &.moneyachievement, &.moneysocketmeta, &.moneysocketred, &.moneysocketyellow, &.moneysocketblue, &.moneysocketprismatic {
+      color: #fff;
+    }
+  }
+
+  .blizzard-blue {
+    color: #00c0ff !important;
+  }
+
+  .fanbyte-apricot {
+    color: #ea4c41 !important;
+  }
+
+  .wowhead-red {
+    color: #a71a19 !important;
+  }
+
+  .ex7 {
+    color: #7194d1 !important;
+
+    a {
+      color: #7194d1 !important;
+    }
+  }
+
+  .q {
+    color: #ffd100 !important;
+
+    a {
+      color: #ffd100 !important;
+    }
+  }
+
+  .color-q, .wowhead-tooltip .q a {
+    color: #ffd100 !important;
+  }
+
+  .q-alt {
+    color: #ffd100 !important;
+
+    a {
+      color: #ffd100 !important;
+    }
+  }
+
+  .has-content {
+    .q-alt, &.q-alt {
+      color: #e5c017 !important;
+    }
+  }
+
+  .q0 {
+    color: #9d9d9d !important;
+
+    a {
+      color: #9d9d9d !important;
+    }
+  }
+
+  .color-q0, .wowhead-tooltip .q0 a {
+    color: #9d9d9d !important;
+  }
+
+  .q0-alt {
+    color: #9d9d9d !important;
+
+    a {
+      color: #9d9d9d !important;
+    }
+  }
+
+  .has-content {
+    .q0-alt, &.q0-alt {
+      color: #777 !important;
+    }
+  }
+
+  .q1 {
+    color: #fff !important;
+
+    a {
+      color: #fff !important;
+    }
+  }
+
+  .color-q1, .wowhead-tooltip .q1 a {
+    color: #fff !important;
+  }
+
+  .q1-alt {
+    color: #fff !important;
+
+    a {
+      color: #fff !important;
+    }
+  }
+
+  .has-content {
+    .q1-alt, &.q1-alt {
+      color: #000 !important;
+    }
+  }
+
+  .q2 {
+    color: #1eff00 !important;
+
+    a {
+      color: #1eff00 !important;
+    }
+  }
+
+  .color-q2, .wowhead-tooltip .q2 a {
+    color: #1eff00 !important;
+  }
+
+  .q2-alt {
+    color: #1eff00 !important;
+
+    a {
+      color: #1eff00 !important;
+    }
+  }
+
+  .has-content {
+    .q2-alt, &.q2-alt {
+      color: #0b0 !important;
+    }
+  }
+
+  .q3 {
+    color: #0070dd !important;
+
+    a {
+      color: #0070dd !important;
+    }
+  }
+
+  .color-q3, .wowhead-tooltip .q3 a {
+    color: #0070dd !important;
+  }
+
+  .q3-alt {
+    color: #0070dd !important;
+
+    a {
+      color: #0070dd !important;
+    }
+  }
+
+  .has-content {
+    .q3-alt, &.q3-alt {
+      color: #0070dd !important;
+    }
+  }
+
+  .q4 {
+    color: #a335ee !important;
+
+    a {
+      color: #a335ee !important;
+    }
+  }
+
+  .color-q4, .wowhead-tooltip .q4 a {
+    color: #a335ee !important;
+  }
+
+  .q4-alt {
+    color: #9345ff !important;
+
+    a {
+      color: #9345ff !important;
+    }
+  }
+
+  .has-content {
+    .q4-alt, &.q4-alt {
+      color: #a335ee !important;
+    }
+  }
+
+  .q5 {
+    color: #ff8000 !important;
+
+    a {
+      color: #ff8000 !important;
+    }
+  }
+
+  .color-q5, .wowhead-tooltip .q5 a {
+    color: #ff8000 !important;
+  }
+
+  .q5-alt {
+    color: #ff8000 !important;
+
+    a {
+      color: #ff8000 !important;
+    }
+  }
+
+  .has-content {
+    .q5-alt, &.q5-alt {
+      color: #ff8000 !important;
+    }
+  }
+
+  .q6 {
+    color: #e5cc80 !important;
+
+    a {
+      color: #e5cc80 !important;
+    }
+  }
+
+  .color-q6, .wowhead-tooltip .q6 a {
+    color: #e5cc80 !important;
+  }
+
+  .q6-alt {
+    color: #e5cc80 !important;
+
+    a {
+      color: #e5cc80 !important;
+    }
+  }
+
+  .has-content {
+    .q6-alt, &.q6-alt {
+      color: #998856 !important;
+    }
+  }
+
+  .q7 {
+    color: #0cf !important;
+
+    a {
+      color: #0cf !important;
+    }
+  }
+
+  .color-q7, .wowhead-tooltip .q7 a {
+    color: #0cf !important;
+  }
+
+  .q7-alt {
+    color: #0cf !important;
+
+    a {
+      color: #0cf !important;
+    }
+  }
+
+  .has-content {
+    .q7-alt, &.q7-alt {
+      color: #079 !important;
+    }
+  }
+
+  .q8 {
+    color: #0cf !important;
+
+    a {
+      color: #0cf !important;
+    }
+  }
+
+  .color-q8, .wowhead-tooltip .q8 a {
+    color: #0cf !important;
+  }
+
+  .q8-alt {
+    color: #0cf !important;
+
+    a {
+      color: #0cf !important;
+    }
+  }
+
+  .has-content {
+    .q8-alt, &.q8-alt {
+      color: #079 !important;
+    }
+  }
+
+  .q9 {
+    color: #71d5ff !important;
+
+    a {
+      color: #71d5ff !important;
+    }
+  }
+
+  .color-q9, .wowhead-tooltip .q9 a {
+    color: #71d5ff !important;
+  }
+
+  .q9-alt {
+    color: #71d5ff !important;
+
+    a {
+      color: #71d5ff !important;
+    }
+  }
+
+  .has-content {
+    .q9-alt, &.q9-alt {
+      color: #4f95b3 !important;
+    }
+  }
+
+  .q10 {
+    color: #ff4040 !important;
+
+    a {
+      color: #ff4040 !important;
+    }
+  }
+
+  .color-q10, .wowhead-tooltip .q10 a {
+    color: #ff4040 !important;
+  }
+
+  .q10-alt {
+    color: #ff4040 !important;
+
+    a {
+      color: #ff4040 !important;
+    }
+  }
+
+  .has-content {
+    .q10-alt, &.q10-alt {
+      color: #ff4040 !important;
+    }
+  }
+
+  .q13 {
+    color: #ffff98 !important;
+
+    a {
+      color: #ffff98 !important;
+    }
+  }
+
+  .color-q13, .wowhead-tooltip .q13 a {
+    color: #ffff98 !important;
+  }
+
+  .q13-alt {
+    color: #ffff98 !important;
+
+    a {
+      color: #ffff98 !important;
+    }
+  }
+
+  .has-content {
+    .q13-alt, &.q13-alt {
+      color: #99995c !important;
+    }
+  }
+
+  .wowhead-tooltip {
+    .q {
+      color: #ffd100 !important;
+
+      a {
+        color: #ffd100 !important;
+      }
+    }
+
+    .color-q, .wowhead-tooltip .q a {
+      color: #ffd100 !important;
+    }
+
+    .q-alt {
+      color: #ffd100 !important;
+
+      a {
+        color: #ffd100 !important;
+      }
+    }
+
+    .q0 {
+      color: #9d9d9d !important;
+
+      a {
+        color: #9d9d9d !important;
+      }
+    }
+
+    .color-q0, .wowhead-tooltip .q0 a {
+      color: #9d9d9d !important;
+    }
+
+    .q0-alt {
+      color: #9d9d9d !important;
+
+      a {
+        color: #9d9d9d !important;
+      }
+    }
+
+    .q1 {
+      color: #fff !important;
+
+      a {
+        color: #fff !important;
+      }
+    }
+
+    .color-q1, .wowhead-tooltip .q1 a {
+      color: #fff !important;
+    }
+
+    .q1-alt {
+      color: #fff !important;
+
+      a {
+        color: #fff !important;
+      }
+    }
+
+    .q2 {
+      color: #1eff00 !important;
+
+      a {
+        color: #1eff00 !important;
+      }
+    }
+
+    .color-q2, .wowhead-tooltip .q2 a {
+      color: #1eff00 !important;
+    }
+
+    .q2-alt {
+      color: #1eff00 !important;
+
+      a {
+        color: #1eff00 !important;
+      }
+    }
+
+    .q3 {
+      color: #0070dd !important;
+
+      a {
+        color: #0070dd !important;
+      }
+    }
+
+    .color-q3, .wowhead-tooltip .q3 a {
+      color: #0070dd !important;
+    }
+
+    .q3-alt {
+      color: #0070dd !important;
+
+      a {
+        color: #0070dd !important;
+      }
+    }
+
+    .q4 {
+      color: #a335ee !important;
+
+      a {
+        color: #a335ee !important;
+      }
+    }
+
+    .color-q4, .wowhead-tooltip .q4 a {
+      color: #a335ee !important;
+    }
+
+    .q4-alt {
+      color: #9345ff !important;
+
+      a {
+        color: #9345ff !important;
+      }
+    }
+
+    .q5 {
+      color: #ff8000 !important;
+
+      a {
+        color: #ff8000 !important;
+      }
+    }
+
+    .color-q5, .wowhead-tooltip .q5 a {
+      color: #ff8000 !important;
+    }
+
+    .q5-alt {
+      color: #ff8000 !important;
+
+      a {
+        color: #ff8000 !important;
+      }
+    }
+
+    .q6 {
+      color: #e5cc80 !important;
+
+      a {
+        color: #e5cc80 !important;
+      }
+    }
+
+    .color-q6, .wowhead-tooltip .q6 a {
+      color: #e5cc80 !important;
+    }
+
+    .q6-alt {
+      color: #e5cc80 !important;
+
+      a {
+        color: #e5cc80 !important;
+      }
+    }
+
+    .q7 {
+      color: #0cf !important;
+
+      a {
+        color: #0cf !important;
+      }
+    }
+
+    .color-q7, .wowhead-tooltip .q7 a {
+      color: #0cf !important;
+    }
+
+    .q7-alt, .q8 {
+      color: #0cf !important;
+
+      a {
+        color: #0cf !important;
+      }
+    }
+
+    .color-q8, .wowhead-tooltip .q8 a {
+      color: #0cf !important;
+    }
+
+    .q8-alt {
+      color: #0cf !important;
+
+      a {
+        color: #0cf !important;
+      }
+    }
+
+    .q9 {
+      color: #71d5ff !important;
+
+      a {
+        color: #71d5ff !important;
+      }
+    }
+
+    .color-q9, .wowhead-tooltip .q9 a {
+      color: #71d5ff !important;
+    }
+
+    .q9-alt {
+      color: #71d5ff !important;
+
+      a {
+        color: #71d5ff !important;
+      }
+    }
+
+    .q10 {
+      color: #ff4040 !important;
+
+      a {
+        color: #ff4040 !important;
+      }
+    }
+
+    .color-q10, .wowhead-tooltip .q10 a {
+      color: #ff4040 !important;
+    }
+
+    .q10-alt {
+      color: #ff4040 !important;
+
+      a {
+        color: #ff4040 !important;
+      }
+    }
+
+    .q13 {
+      color: #ffff98 !important;
+
+      a {
+        color: #ffff98 !important;
+      }
+    }
+
+    .color-q13, .wowhead-tooltip .q13 a {
+      color: #ffff98 !important;
+    }
+
+    .q13-alt {
+      color: #ffff98 !important;
+
+      a {
+        color: #ffff98 !important;
+      }
+    }
+  }
+
+  .q12 {
+    color: #bd5f00 !important;
+  }
+
+  .r1 {
+    color: #ff8040 !important;
+  }
+
+  .r2 {
+    color: #ff0 !important;
+  }
+
+  .r3 {
+    color: #40bf40 !important;
+  }
+
+  .r4 {
+    color: gray !important;
+  }
+
+  .c1, .c1-alt {
+    color: #c69b6d !important;
+
+    a {
+      color: #c69b6d !important;
+    }
+  }
+
+  .has-content {
+    .c1-alt, &.c1-alt {
+      color: #997854 !important;
+    }
+  }
+
+  .c2, .c2-alt {
+    color: #f48cba !important;
+
+    a {
+      color: #f48cba !important;
+    }
+  }
+
+  .has-content {
+    .c2-alt, &.c2-alt {
+      color: #cc749c !important;
+    }
+  }
+
+  .c3, .c3-alt {
+    color: #aad372 !important;
+
+    a {
+      color: #aad372 !important;
+    }
+  }
+
+  .has-content {
+    .c3-alt, &.c3-alt {
+      color: #7c9953 !important;
+    }
+  }
+
+  .c4, .c4-alt {
+    color: #fff468 !important;
+
+    a {
+      color: #fff468 !important;
+    }
+  }
+
+  .has-content {
+    .c4-alt, &.c4-alt {
+      color: #99933f !important;
+    }
+  }
+
+  .c5, .c5-alt {
+    color: #fff !important;
+
+    a {
+      color: #fff !important;
+    }
+  }
+
+  .has-content {
+    .c5-alt, &.c5-alt {
+      color: gray !important;
+    }
+  }
+
+  .c6 {
+    color: #c41e3b !important;
+
+    a {
+      color: #c41e3b !important;
+    }
+  }
+
+  .c6-alt {
+    color: #f46 !important;
+
+    a {
+      color: #f46 !important;
+    }
+  }
+
+  .has-content {
+    .c6-alt, &.c6-alt {
+      color: #c41e3b !important;
+    }
+  }
+
+  .c7 {
+    color: #2359ff !important;
+
+    a {
+      color: #2359ff !important;
+    }
+  }
+
+  .c7-alt {
+    color: #36f !important;
+
+    a {
+      color: #36f !important;
+    }
+  }
+
+  .has-content {
+    .c7-alt, &.c7-alt {
+      color: #2359ff !important;
+    }
+  }
+
+  .c8, .c8-alt {
+    color: #68ccef !important;
+
+    a {
+      color: #68ccef !important;
+    }
+  }
+
+  .has-content {
+    .c8-alt, &.c8-alt {
+      color: #4f98b3 !important;
+    }
+  }
+
+  .c9, .c9-alt {
+    color: #9382c9 !important;
+
+    a {
+      color: #9382c9 !important;
+    }
+  }
+
+  .has-content {
+    .c9-alt, &.c9-alt {
+      color: #9382c9 !important;
+    }
+  }
+
+  .c10, .c10-alt {
+    color: #008467 !important;
+
+    a {
+      color: #008467 !important;
+    }
+  }
+
+  .has-content {
+    .c10-alt, &.c10-alt {
+      color: #008467 !important;
+    }
+  }
+
+  .c11, .c11-alt {
+    color: #ff7c0a !important;
+
+    a {
+      color: #ff7c0a !important;
+    }
+  }
+
+  .has-content {
+    .c11-alt, &.c11-alt {
+      color: #ff7c0a !important;
+    }
+  }
+
+  .c12, .c12-alt {
+    color: #a330c9 !important;
+
+    a {
+      color: #a330c9 !important;
+    }
+  }
+
+  .has-content {
+    .c12-alt, &.c12-alt {
+      color: #a330c9 !important;
+    }
+  }
+
+  .wowhead-tooltip {
+    .c1, .c1-alt {
+      color: #c69b6d !important;
+
+      a {
+        color: #c69b6d !important;
+      }
+    }
+
+    .c2, .c2-alt {
+      color: #f48cba !important;
+
+      a {
+        color: #f48cba !important;
+      }
+    }
+
+    .c3, .c3-alt {
+      color: #aad372 !important;
+
+      a {
+        color: #aad372 !important;
+      }
+    }
+
+    .c4, .c4-alt {
+      color: #fff468 !important;
+
+      a {
+        color: #fff468 !important;
+      }
+    }
+
+    .c5, .c5-alt {
+      color: #fff !important;
+
+      a {
+        color: #fff !important;
+      }
+    }
+
+    .c6, .c6-alt {
+      color: #c41e3b !important;
+
+      a {
+        color: #c41e3b !important;
+      }
+    }
+
+    .c7, .c7-alt {
+      color: #2359ff !important;
+
+      a {
+        color: #2359ff !important;
+      }
+    }
+
+    .c8, .c8-alt {
+      color: #68ccef !important;
+
+      a {
+        color: #68ccef !important;
+      }
+    }
+
+    .c9, .c9-alt {
+      color: #9382c9 !important;
+
+      a {
+        color: #9382c9 !important;
+      }
+    }
+
+    .c10, .c10-alt {
+      color: #008467 !important;
+
+      a {
+        color: #008467 !important;
+      }
+    }
+
+    .c11, .c11-alt {
+      color: #ff7c0a !important;
+
+      a {
+        color: #ff7c0a !important;
+      }
+    }
+
+    .c12, .c12-alt {
+      color: #a330c9 !important;
+
+      a {
+        color: #a330c9 !important;
+      }
+    }
+  }
+
+  .gem1 {
+    color: #9d9d9d !important;
+  }
+
+  .gem2 {
+    color: #e60c0b !important;
+  }
+
+  .gem4 {
+    color: #ffff35 !important;
+  }
+
+  .gem6 {
+    color: #f48905 !important;
+  }
+
+  .gem8 {
+    color: #295df1 !important;
+  }
+
+  .gem10 {
+    color: #b957fc !important;
+  }
+
+  .gem12 {
+    color: #22c516 !important;
+  }
+
+  .gem14 {
+    color: #fff !important;
+  }
+
+  .s1 {
+    color: #ff3f40 !important;
+  }
+
+  .s2 {
+    color: #fffb9f !important;
+  }
+
+  .s3 {
+    color: #ffb2eb !important;
+  }
+
+  hr.tooltip-pet-hr {
+    background: #2d2928 !important;
+    border: 0 !important;
+    height: 3px !important;
+    margin: 6px 0 !important;
+    position: relative;
+    z-index: 1;
+  }
+
+  td.tooltip-pet-header {
+    padding-bottom: 4px !important;
+  }
+
+  div.tooltip-pettype-icon {
+    width: 39px;
+    height: 39px;
+    vertical-align: middle;
+    display: inline-block;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: contain !important;
+  }
+
+  span {
+    &.tooltip-pettype-icon {
+      width: 39px;
+      height: 39px;
+      vertical-align: middle;
+      display: inline-block;
+      background-position: center !important;
+      background-repeat: no-repeat !important;
+      background-size: contain !important;
+    }
+
+    &.tooltip-pet-locationicons {
+      height: 15px;
+      width: 15px;
+      display: inline-block;
+      vertical-align: -24%;
+      margin-left: 3px;
+    }
+
+    &.tooltip-pet-locationicons-money {
+      height: 13px;
+      width: 13px;
+      display: inline-block;
+      vertical-align: -25%;
+      margin-left: 3px;
+    }
+  }
+
+  .listmanager-mode1 {
+    color: #00c2e1;
+  }
+
+  .listmanager-mode2 {
+    color: #ebb800;
+  }
+
+  .moneyitem {
+    padding-right: 18px;
+  }
+
+
 }

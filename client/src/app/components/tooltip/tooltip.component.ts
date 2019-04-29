@@ -8,4 +8,12 @@ import {WowheadTooltip} from '../../services/item.service';
 })
 export class TooltipComponent {
   @Input() tooltip: WowheadTooltip;
+/*
+  constructor(private sanitizer: DOMSanetizer) {
+
+  }
+
+  sanitizeHtml(): void {
+    this.tooltip.tooltip = this.sanitizer.bypassSecurityTrustHtml(this.tooltip.tooltip)
+  }*/
 }

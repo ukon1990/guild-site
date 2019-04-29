@@ -5,7 +5,7 @@
     class="icon float-left ml-2 mr-2"
     [style.background-image]="styleIcon"></div>
   <div class="projected">
-    <a *ngIf="item.itemId || item.id; else plainTemplate"
+    <a *ngIf="item && (item.itemId || item.id); else plainTemplate"
        href="https://www.wowhead.com/item={{ item.itemId || item.id }}"
        target="_blank">
       <ng-container [ngTemplateOutlet]="plainTemplate"></ng-container>

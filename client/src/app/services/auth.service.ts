@@ -14,7 +14,7 @@ export class AuthService {
     console.log('Auth service');
 
     this.setAuthCodeSubscriptionEvent();
-    this.checkToken();
+    // this.checkToken();
   }
 
   private setAuthCodeSubscriptionEvent() {
@@ -85,8 +85,10 @@ export class AuthService {
       .toPromise()
       .then((response: any) => {
         if (response.error) {
+          /*
           localStorage.removeItem('authorization_code');
           localStorage.removeItem('access_token');
+          */
         } else {
           this.setAccessToken(response);
           AuthService.authTokenEvent.emit();

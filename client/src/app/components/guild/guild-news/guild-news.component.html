@@ -15,46 +15,31 @@
 			pageEvent.pageSize * (pageEvent.pageIndex + 1)">
     {{ news.timestamp | date: 'dd.MMM yyyy HH:mm:ss' }}: {{ news.character }} got
     <span [ngSwitch]="news.type">
-						<a *ngSwitchCase="'playerAchievement'"
-               href="https://www.wowhead.com/achievement={{ news.achievement.id }}"
-               target="_blank"
-               rel="achievement={{ news.achievement.id }}">{{ news.achievement.title }}
-						</a>
-						<a *ngSwitchCase="'itemLoot'"
-               href="https://www.wowhead.com/item={{ news.itemId }}"
-               target="_blank"
-               rel="item={{ news.itemId }}, bonus={{ bonusList(news.bonusLists) }}">
-              <app-item-icon
-                [icon]="news.tooltip?.icon"
-                [qualityId]="news.tooltip?.quality">
-                [item]="news"
-              {{ news.name ? news.name : news.itemId }}
-              </app-item-icon>
-						</a>
-						<a *ngSwitchCase="'itemPurchase'"
-               href="https://www.wowhead.com/item={{ news.itemId }}"
-               target="_blank"
-               rel="item={{ news.itemId }}, bonus={{ bonusList(news.bonusLists) }}">
-              <app-item-icon
-                [item]="news"
-                [icon]="news.tooltip?.icon"
-                [qualityId]="news.tooltip?.quality">
-              {{ news.name ? news.name : news.itemId }}
-              </app-item-icon>
-						</a>
-						<a *ngSwitchCase="'itemCraft'"
-               href="https://www.wowhead.com/item={{ news.itemId }}"
-               target="_blank"
-               rel="item={{ news.itemId }}, bonus={{ bonusList(news.bonusLists) }}">
-              <app-item-icon
-                [item]="news"
-                [icon]="news.tooltip?.icon"
-                [qualityId]="news.tooltip?.quality">
-              {{ news.name ? news.name : news.itemId }}
-              </app-item-icon>
-						</a>
-						<p *ngSwitchDefault>{{ news.type }}</p>
-        </span>
+      <a *ngSwitchCase="'playerAchievement'"
+         href="https://www.wowhead.com/achievement={{ news.achievement.id }}"
+         target="_blank"
+         rel="achievement={{ news.achievement.id }}">{{ news.achievement.title }}
+      </a>
+      <app-item-icon *ngSwitchCase="'itemLoot'"
+                     [icon]="news.tooltip?.icon"
+                     [item]="news"
+                     [qualityId]="news.tooltip?.quality">
+       {{ news.name ? news.name : news.itemId }}
+      </app-item-icon>
+      <app-item-icon *ngSwitchCase="'itemPurchase'"
+                     [item]="news"
+                     [icon]="news.tooltip?.icon"
+                     [qualityId]="news.tooltip?.quality">
+        {{ news.name ? news.name : news.itemId }}
+      </app-item-icon>
+      <app-item-icon *ngSwitchCase="'itemCraft'"
+                     [item]="news"
+                     [icon]="news.tooltip?.icon"
+                     [qualityId]="news.tooltip?.quality">
+        {{ news.name ? news.name : news.itemId }}
+      </app-item-icon>
+      <p *ngSwitchDefault>{{ news.type }}</p>
+    </span>
   </mat-list-item>
   <div class="col-md-12">
     <mat-paginator
