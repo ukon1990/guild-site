@@ -1,10 +1,25 @@
 {
-  "name": "api",
+  "name": "guild-site-api",
   "version": "1.0.0",
   "description": "Serverless aws-nodejs-typescript template",
   "main": "serverless.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "sls offline start --region eu-west-1",
+    "build": "sls package",
+    "package": "sls package",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:watchAll": "jest --watchAll",
+    "test:coverage": "jest --coverage",
+    "deploy-dev-eu": "sls deploy -r eu-west-1 -s dev --verbose",
+    "deploy-dev-us": "sls deploy -r us-west-1 -s dev --verbose",
+    "deploy-dev-kr": "sls deploy -r ap-northeast-2 -s dev --verbose",
+    "deploy-dev": "npm run deploy-dev-us && npm run deploy-dev-eu && npm run deploy-dev-kr",
+    "deploy-eu": "sls deploy -r eu-west-1 -s prod --verbose",
+    "deploy-se": "sls deploy -r eu-north-1 -s prod --verbose",
+    "deploy-us": "sls deploy -r us-west-1 -s prod --verbose",
+    "deploy-kr": "sls deploy -r ap-northeast-2 -s prod --verbose",
+    "deploy": "npm run deploy-eu && npm run deploy-us && npm run deploy-kr"
   },
   "engines": {
     "node": ">=14.15.0"
