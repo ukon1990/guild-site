@@ -15,6 +15,7 @@ export class BlizzardApiAuthService {
             const tokenResponse = body;
             // BLIZZARD.ACCESS_TOKEN = tokenResponse.access_token;
             this.token = tokenResponse.access_token;
+            console.log('SHITFACE', tokenResponse)
             resolve(tokenResponse.access_token);
           })
           .catch(error => {

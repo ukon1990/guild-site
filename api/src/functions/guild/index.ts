@@ -1,14 +1,20 @@
-import { handlerPath } from '@libs/handler-resolver';
+import {handlerPath} from '@libs/handler-resolver';
 
 export default {
-  handler: `${handlerPath(__dirname)}/handler.main`,
-  events: [
-    {
-      http: {
-        method: 'get',
-        path: 'guild/:region/$realm/$guild',
-        request: {},
-      },
+  getGuild: {
+    handler: `${handlerPath(__dirname)}/handler.getGuild`,
+    tags: {
+      Function: 'guild-site-getGuild',
+      Project: 'WAH',
     },
-  ],
+    events: [
+      {
+        http: {
+          method: 'get',
+          path: 'guild/{region}/{realm}/{guild}',
+          request: {},
+        },
+      },
+    ],
+  }
 };
