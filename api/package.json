@@ -26,7 +26,9 @@
   },
   "dependencies": {
     "@middy/core": "^3.4.0",
-    "@middy/http-json-body-parser": "^3.4.0"
+    "@middy/http-json-body-parser": "^3.4.0",
+    "aws-jwt-verify": "^3.3.0",
+    "node-fetch": "^3.3.0"
   },
   "devDependencies": {
     "@serverless/typescript": "^3.0.0",
