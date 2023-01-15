@@ -34,7 +34,10 @@ export class BlizzardService<T> {
     }
     await BlizzardApiAuthService.getToken();
     return new Promise<T>((resolve, reject) => {
-      this.http.get<T>(`${url}&access_token=${BlizzardApiAuthService.token}`).then(({body}) => resolve(body)).catch(reject);
+      this.http.get<T>(`${url}&access_token=${BlizzardApiAuthService.token}`).then(({body}) => {
+        delete (body as any)._links;
+        resolve(body);
+      }).catch(reject);
     });
   }
 }

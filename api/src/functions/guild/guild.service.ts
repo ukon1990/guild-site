@@ -16,15 +16,18 @@ export class GuildService extends BlizzardService<Guild.Guild> {
       this.get(`${realm}/${guild}`)
         .then(async result => {
           if (result) {
+            const promises: Promise<void>[] = [];
             if (result.roster) {
-              await this.get(`${realm}/${guild}/roster`)
+              promises.push(
+                this.getFollowLink(result.roster)
                 .then(({members}: any) => {
                   result.roster = {members};
                 })
-                .catch(console.error);
+                .catch(console.error)
+              );
             }
             if (result.achievements) {
-              await this.get(`${realm}/${guild}/achievements`)
+              promises.push(this.getFollowLink(result.achievements)
                 .then(({
                          total_quantity,
                          total_points,
@@ -40,16 +43,17 @@ export class GuildService extends BlizzardService<Guild.Guild> {
                     recent_events
                   };
                 })
-                .catch(console.error);
+                .catch(console.error));
             }
-            if (result.activity) {
-              await this.get(`${realm}/${guild}/activity`)
+            if ((result as any).activity) {
+              promises.push(this.getFollowLink((result as any).activity)
                 .then(({activities}) => {
-                  delete result.activity;
+                  delete (result as any).activity;
                   result.activities = activities;
                 })
-                .catch(console.error);
+                .catch(console.error));
             }
+            await Promise.all(promises);
           }
           resolve(cleanGuildData(result));
         })

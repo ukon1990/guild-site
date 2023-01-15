@@ -18,7 +18,6 @@ export class CharacterService extends BlizzardService<any> {
             promises.push(
               this.getFollowLink(result.statistics)
                 .then(statistics => {
-                  delete statistics._links;
                   result.statistics = statistics;
                 }).catch(console.error)
             );
@@ -40,7 +39,6 @@ export class CharacterService extends BlizzardService<any> {
               this.getFollowLink(result.media)
                 .then(media => {
                   delete media.character;
-                  delete media._links;
                   result.media = media;
                 }).catch(console.error)
             );
@@ -48,10 +46,7 @@ export class CharacterService extends BlizzardService<any> {
           if (result.mythic_keystone_profile) {
             promises.push(
               this.getFollowLink(result.mythic_keystone_profile)
-                .then(mythicKeyProfile => {
-                  delete mythicKeyProfile._links;
-                  result.mythic_keystone_profile = mythicKeyProfile;
-                }).catch(console.error)
+                .then(mythicKeyProfile => result.mythic_keystone_profile = mythicKeyProfile).catch(console.error)
             );
           }
           if (result.equipment) {
