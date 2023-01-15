@@ -1,5 +1,5 @@
 import type { AWS } from '@serverless/typescript';
-import {guild} from "@functions/index";
+import {guild, character} from "@functions/index";
 
 
 const serverlessConfiguration: AWS = {
@@ -21,6 +21,7 @@ const serverlessConfiguration: AWS = {
   // import the function via paths
   functions: {
     ...guild,
+    ...character
   },
   package: { individually: true },
   custom: {

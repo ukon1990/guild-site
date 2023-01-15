@@ -16,6 +16,7 @@ export class HttpClientUtil {
   get<T = any>(url: string, expectJSON: boolean = true, headers?: Headers): Promise<HttpResponse<T>> {
     return new Promise<HttpResponse<T>>((resolve, reject) => {
       // timeout: this.timeout || undefined,
+      console.log('get.url', url);
       fetch(url, {
         headers: headers || {
           'User-Agent': 'Mozilla/5.0',

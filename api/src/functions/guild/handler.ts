@@ -1,7 +1,6 @@
 import type { ValidatedEventAPIGatewayProxyEvent } from '@libs/api-gateway';
 import { formatJSONResponse } from '@libs/api-gateway';
 import { middyfy } from '@libs/lambda';
-
 import {GuildService} from "@functions/guild/guild.service";
 
 export const getGuild = middyfy(async ({pathParameters}): Promise<ValidatedEventAPIGatewayProxyEvent<any>> => {
@@ -12,7 +11,7 @@ export const getGuild = middyfy(async ({pathParameters}): Promise<ValidatedEvent
   } = pathParameters;
   let result;
   await new GuildService(region).getGuild(realm, guild)
-    .then(res => result = formatJSONResponse(res))
+    .then(res => result = formatJSONResponse(res as any))
     .catch(err => result = formatJSONResponse(err))
   return result;
 });
