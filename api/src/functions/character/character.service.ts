@@ -52,20 +52,23 @@ export class CharacterService extends BlizzardService<any> {
           if (result.equipment) {
             promises.push(
               this.getFollowLink(result.equipment)
-                .then(equipment => result.equipment = equipment).catch(console.error)
+                .then(({equipped_items, equipped_item_sets}) => {
+                  result.equipment = {equipped_items, equipped_item_sets};
+                }).catch(console.error)
             );
           }
           if (result.reputations) {
             promises.push(
               this.getFollowLink(result.reputations)
-                .then(reputations => result.reputations = reputations).catch(console.error)
+                .then(({reputations}) => result.reputations = reputations).catch(console.error)
             );
           }
           if (result.professions) {
-            result.professions = {};
             promises.push(
               this.getFollowLink(result.professions)
-                .then(professions => result.professions = professions).catch(console.error)
+                .then(({primaries, secondaries}) => {
+                    result.professions = {primaries, secondaries};
+                  }).catch(console.error)
             );
           }
           await Promise.all(promises).catch(console.error);
