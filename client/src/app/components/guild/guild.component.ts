@@ -8,6 +8,8 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./guild.component.scss']
 })
 export class GuildComponent implements OnInit {
+  guild: any;
+
   constructor(
     private service: GuildService,
     private route: ActivatedRoute,
@@ -22,7 +24,10 @@ export class GuildComponent implements OnInit {
     } = this.route.snapshot.params;
     console.log('this.route.snapshot', this.route.snapshot);
     this.service.getGuild(region, realm, slug)
-      .then(console.log)
+      .then(guild => {
+        console.log('Guild', guild);
+        this.guild = guild;
+      })
       .catch(console.error);
   }
 }

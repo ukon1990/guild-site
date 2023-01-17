@@ -1,0 +1,77 @@
+<div class="fixed-menu">
+  <header class="menu">
+    <nav>
+      <mat-toolbar color="primary" role="heading">
+        <mat-toolbar-row class="mat-elevation-z2">
+          <ng-container
+                  *ngTemplateOutlet="brandingTemplate">
+          </ng-container>
+
+          <ng-container *ngIf="!isSmallScreen()" >
+            <ng-container
+                    *ngTemplateOutlet="navElementsTemplate">
+            </ng-container>
+          </ng-container>
+
+
+          <ng-container *ngTemplateOutlet="mobileMenuTemplate"></ng-container>
+        </mat-toolbar-row>
+      </mat-toolbar>
+    </nav>
+  </header>
+</div>
+
+<ng-template #brandingTemplate>
+  <div id="app-branding" class="mr-3" routerLink="about/changelog">
+    <h1>Guild site</h1>
+    <small>sub-title</small>
+  </div>
+</ng-template>
+
+<ng-template #mobileMenuTemplate>
+  <ng-container *ngIf="isSmallScreen()">
+
+    <div class="flex-spacer"></div>
+
+    <button type="button"
+            mat-button
+            [matMenuTriggerFor]="mobileMenuDropdown">
+      <fa-icon [icon]="faBars" aria-label="Menu"></fa-icon>
+    </button>
+
+    <ng-container *ngTemplateOutlet="extraMenuTemplate"></ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #navElementsTemplate>
+  <app-menu-item *ngFor="let menuItem of menuItems"
+          [item]="menuItem"></app-menu-item>
+
+  <ng-container *ngIf="displayExtraMenu()">
+    <ng-container *ngTemplateOutlet="extraMenuTemplate"></ng-container>
+  </ng-container>
+</ng-template>
+
+<ng-template #extraMenuTemplate>
+  <ng-container *ngIf="isUserSet">
+    <button mat-icon-button [matMenuTriggerFor]="menu"
+            aria-label="Display the extra menu"
+            matTooltip="Display the extra menu">
+      <fa-icon [icon]="faEllipsisV"></fa-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <ng-container></ng-container>
+      <div class="p-3">
+        Add stuff here?
+      </div>
+    </mat-menu>
+  </ng-container>
+</ng-template>
+
+
+<!-- Material Menu item templates -->
+<mat-menu #mobileMenuDropdown="matMenu">
+  <app-menu-item *ngFor="let menuItem of menuItems"
+          (click)="doNotClose($event)"
+          [item]="menuItem"></app-menu-item>
+</mat-menu>

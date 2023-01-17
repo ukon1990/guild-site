@@ -1,0 +1,24 @@
+<button mat-stroked-button [matMenuTriggerFor]="menu">
+  <ng-content></ng-content>
+</button>
+<mat-menu
+    #menu="matMenu"
+        yPosition="below"
+        xPosition="after"
+        (click)="doNotClose($event)">
+  <ng-container
+          *ngFor="let i of items">
+    <a *ngIf="!i.children.length; else dropdownTemplate"
+            mat-menu-item
+            [routerLink]="i.routerLinkFull">
+      {{ i.text }} {{i.onlyInDevelop ? '(Dev)' : ''}}
+    </a>
+
+    <ng-template #dropdownTemplate>
+      <app-menu-dropdown [items]="i.children"
+              (click)="doNotClose($event)">
+        {{ i.text }} {{i.onlyInDevelop ? '(Dev)' : ''}}
+      </app-menu-dropdown>
+    </ng-template>
+  </ng-container>
+</mat-menu>

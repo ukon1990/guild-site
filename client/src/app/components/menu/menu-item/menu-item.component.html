@@ -1,0 +1,17 @@
+<a *ngIf="!item.children.length; else dropdownTemplate"
+  mat-stroked-button
+  [routerLink]="item.routerLink"
+  routerLinkActive="mat-accent">
+  <span class="button-color">
+  {{ item.text }} {{item.onlyInDevelop ? '(Dev)' : ''}}
+  </span>
+</a>
+<ng-template #dropdownTemplate>
+  <app-menu-dropdown
+    [parentPath]="item.routerLink"
+    [items]="item.children">
+    <span class="button-color">
+      {{ item.text }} {{item.onlyInDevelop ? '(Dev)' : ''}}
+    </span>
+  </app-menu-dropdown>
+</ng-template>
