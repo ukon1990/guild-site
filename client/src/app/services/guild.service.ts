@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import {BaseService} from "./base.service";
 import {HttpClient} from "@angular/common/http";
 import {firstValueFrom} from "rxjs";
+import {Guild} from "../models/guild.model";
 
 @Injectable({
   providedIn: 'root'
 })
-export class GuildService extends BaseService {
+export class GuildService extends BaseService<Guild> {
   constructor(http: HttpClient) {
     super('guild', http);
   }

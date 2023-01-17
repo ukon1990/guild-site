@@ -21,6 +21,11 @@ import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatCardModule} from "@angular/material/card";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatTabsModule} from "@angular/material/tabs";
+import { GuildRosterComponent } from './components/guild/guild-roster/guild-roster.component';
+import {MatListModule} from "@angular/material/list";
+import {MatLineModule} from "@angular/material/core";
+import { GuildAchievementsComponent } from './components/guild/guild-achievements/guild-achievements.component';
+import { GuildActivityComponent } from './components/guild/guild-activity/guild-activity.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +35,10 @@ import {MatTabsModule} from "@angular/material/tabs";
     CharacterComponent,
     MenuComponent,
     MenuDropdownComponent,
-    MenuItemComponent
+    MenuItemComponent,
+    GuildRosterComponent,
+    GuildAchievementsComponent,
+    GuildActivityComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +58,9 @@ import {MatTabsModule} from "@angular/material/tabs";
     MatToolbarModule,
     MatCardModule,
     MatProgressSpinnerModule,
-    MatTabsModule
+    MatTabsModule,
+    MatListModule,
+    MatLineModule
   ],
   providers: [],
   bootstrap: [AppComponent]

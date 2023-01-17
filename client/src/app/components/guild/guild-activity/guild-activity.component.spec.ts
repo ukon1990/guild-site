@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GuildComponent } from './guild.component';
+import { GuildActivityComponent } from './guild-activity.component';
 
-describe('GuildComponent', () => {
-  let component: GuildComponent;
-  let fixture: ComponentFixture<GuildComponent>;
+describe('GuildActivityComponent', () => {
+  let component: GuildActivityComponent;
+  let fixture: ComponentFixture<GuildActivityComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GuildComponent ]
+      declarations: [ GuildActivityComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(GuildComponent);
+    fixture = TestBed.createComponent(GuildActivityComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

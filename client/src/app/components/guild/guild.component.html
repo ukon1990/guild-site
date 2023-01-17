@@ -6,11 +6,18 @@
   </mat-card-header>
 
   <mat-card-content>
-    <mat-tab-group>
-      <mat-tab label="Roster">
-        <!-- ASD -->
-      </mat-tab>
-    </mat-tab-group>
+    <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+      <a mat-tab-link *ngFor="let tab of tabs"
+         (click)="activeTab = tab"
+         [routerLink]="tab.path"
+         [active]="activeTab == tab"
+      >
+        {{tab.title}}
+      </a>
+    </nav>
+    <mat-tab-nav-panel #tabPanel>
+      <router-outlet></router-outlet>
+    </mat-tab-nav-panel>
   </mat-card-content>
 </ng-container>
 <ng-template #loadingTemplate>

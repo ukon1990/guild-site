@@ -1,7 +1,7 @@
 import {RoutingUtil} from './routing.util';
 import {MenuItem} from '../models/menu-item.model';
-import {RouteHiddenFlag} from "../app-routing.module";
 import {TitledRoutes} from "../models/route/titled-routes.model";
+import {RouteHiddenFlag} from "../enums";
 
 describe('RoutingUtil', () => {
   let routes: TitledRoutes;

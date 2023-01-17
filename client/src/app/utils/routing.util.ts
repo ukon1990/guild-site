@@ -1,7 +1,8 @@
 import {MenuItem} from "../models/menu-item.model";
 import {TitledRoutes} from "../models/route/titled-routes.model";
-import {appRoutes, RouteHiddenFlag} from "../app-routing.module";
+import {appRoutes} from "../app-routing.module";
 import {TitledRoute} from "../models/route/titled-route.model";
+import {RouteHiddenFlag} from "../enums";
 
 export class RoutingUtil {
   private static map: Map<string, MenuItem> = new Map<string, MenuItem>();

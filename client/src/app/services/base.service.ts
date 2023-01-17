@@ -2,8 +2,9 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {BehaviorSubject, Observable, tap} from "rxjs";
 
-export abstract class BaseService<T = any>{
-  data: BehaviorSubject<Map<string, any>> = new BehaviorSubject<Map<string, any>>(new Map<string, any>);
+export abstract class BaseService<T = any, ID = string>{
+  data: BehaviorSubject<Map<ID, T>> = new BehaviorSubject<Map<ID, T>>(new Map<ID, T>);
+  active: BehaviorSubject<T | undefined> = new BehaviorSubject<T | undefined>(undefined);
   protected baseUrl = 'http://localhost:3000/dev/';
 
   protected constructor(

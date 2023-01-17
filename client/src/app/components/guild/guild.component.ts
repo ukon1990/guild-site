@@ -1,18 +1,23 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {GuildService} from "../../services/guild.service";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
+import {guildRoutes} from "./guild.routes";
+import {TitledRoute} from "../../models/route/titled-route.model";
 
 @Component({
   selector: 'app-guild',
   templateUrl: './guild.component.html',
   styleUrls: ['./guild.component.scss']
 })
-export class GuildComponent implements OnInit {
+export class GuildComponent implements OnInit, OnDestroy {
+  tabs = guildRoutes.children || [];
+  activeTab: TitledRoute = this.tabs[0];
   guild: any;
 
   constructor(
     private service: GuildService,
     private route: ActivatedRoute,
+    private router: Router,
   ) {
   }
 
@@ -27,7 +32,12 @@ export class GuildComponent implements OnInit {
       .then(guild => {
         console.log('Guild', guild);
         this.guild = guild;
+        this.service.active.next(guild);
       })
       .catch(console.error);
+  }
+
+  ngOnDestroy() {
+    this.service.active.next(undefined);
   }
 }
