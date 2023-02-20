@@ -1,0 +1,102 @@
+<ng-container *ngIf="column">
+  <ng-container [ngSwitch]="column.type">
+    <ng-container *ngSwitchCase="ColumnType.NUMBER">
+      {{row[column.key] | number: column.pipeValue}}
+    </ng-container>
+    <ng-container *ngSwitchCase="ColumnType.CHECKBOX">
+      <mat-checkbox [checked]="row[column.key]" disabled></mat-checkbox>
+    </ng-container>
+    <ng-container *ngSwitchCase="ColumnType.DATE">
+      {{row[column.key] | date: column.pipeValue || 'dd/MM - yyyy'}}
+    </ng-container>
+    <ng-container *ngSwitchCase="ColumnType.TIME_AND_DATE">
+      {{row[column.key] | date: column.pipeValue || 'dd/MM - yyyy hh:mm'}}
+    </ng-container>
+    <ng-container *ngSwitchCase="ColumnType.CURRENCY">
+      {{row[column.key] | currency: column.pipeValue}}
+    </ng-container>
+    <ng-container *ngSwitchCase="ColumnType.BUTTON">
+      {{row[column.key] | currency: column.pipeValue}}
+      <button
+        mat-stroked-button
+        (click)="handleColumnButtonClick($event)"
+        [color]="column.extraData?.buttonColor || undefined"
+      >
+        <mat-icon *ngIf="column?.extraData?.buttonIcon">
+          {{column?.extraData?.buttonIcon}}
+        </mat-icon>
+        {{column.title}}
+      </button>
+    </ng-container>
+    <ng-container *ngSwitchCase="ColumnType.FORM_CONTROL_INPUT">
+      <mat-form-field>
+        <input
+          matInput
+          [formControl]="row.controls[column.key]"
+          [disabled]="column?.extraData?.disabled || false"
+        />
+      </mat-form-field>
+    </ng-container>
+    <ng-container *ngSwitchCase="ColumnType.FORM_CONTROL_SELECT">
+      <ng-container *ngIf="column.extraData">
+        <mat-form-field>
+          <mat-select
+            [formControl]="row.controls[column.key]"
+            (selectionChange)="onSelectionChange($event)"
+            [disabled]="column?.extraData?.disabled || false"
+          >
+            <mat-option *ngFor="let option of column.extraData.data" [value]="option.id">
+              {{column.extraData.key && option[column.extraData.key]}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="ColumnType.FORM_CONTROL_SELECT_MULTI">
+      <ng-container *ngIf="column.extraData">
+        <mat-form-field>
+          <mat-select
+            multiple
+            [formControl]="row.controls[column.key]"
+            (selectionChange)="onSelectionChange($event)"
+            [disabled]="column?.extraData?.disabled || false"
+          >
+            <mat-option *ngFor="let option of column.extraData.data" [value]="option.id">
+              {{column.extraData.key && option[column.extraData.key]}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="ColumnType.SELECT">
+      <ng-container *ngIf="column.extraData">
+        <mat-select [disabled]="column.extraData.disabled"
+                    [value]="row[column.key] && row[column.key].id && column.extraData.useIdColumn ?
+            row[column.key].id : row[column.key]"
+                    (selectionChange)="onSelectionChange($event)"
+        >
+          <mat-option *ngFor="let option of column.extraData.data" [value]="option.id">
+            {{column.extraData.key && option[column.extraData.key]}}
+          </mat-option>
+        </mat-select>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="ColumnType.SELECT_MULTI">
+      <ng-container *ngIf="column.extraData">
+        <mat-select [disabled]="column.extraData.disabled"
+                    [value]="row[column.key] && row[column.key].id && column.extraData.useIdColumn ?
+                      row[column.key].id : row[column.key]"
+                    (selectionChange)="onSelectionChange($event)"
+                    multiple
+        >
+          <mat-option *ngFor="let option of column.extraData.data" [value]="option.id">
+            {{column.extraData.key && option[column.extraData.key]}}
+          </mat-option>
+        </mat-select>
+      </ng-container>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      {{row[column.key]}}
+    </ng-container>
+  </ng-container>
+</ng-container>

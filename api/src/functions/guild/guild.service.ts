@@ -7,7 +7,8 @@ export class GuildService extends BlizzardService<Guild.Guild> {
     super(
       region,
       'data',
-      'guild'
+      'guild',
+      'profile'
     );
   }
 

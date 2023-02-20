@@ -4,6 +4,23 @@
   "compilerOptions": {
     "baseUrl": "./",
     "outDir": "./dist/out-tsc",
+    "paths": {
+      "@components/*": [
+        "./src/app/components/*"
+      ],
+      "@models/*": [
+        "./src/app/models/*"
+      ],
+      "@utils/*": [
+        "./src/app/utils/*"
+      ],
+      "@enums/*": [
+        "./src/app/enums/*"
+      ],
+      "@services/*": [
+        "./src/app/services/*"
+      ],
+    },
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,

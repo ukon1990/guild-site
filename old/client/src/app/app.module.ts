@@ -66,7 +66,7 @@ import { ItemIconComponent } from './components/item-icon/item-icon.component';
     HttpClientModule,
     BrowserAnimationsModule,
     OAuthModule.forRoot(),
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     MaterialModule
   ],
   providers: [
@@ -76,6 +76,9 @@ import { ItemIconComponent } from './components/item-icon/item-icon.component';
       useClass: AuthenticationInterceptor,
       multi: true
     }
+  ],
+  exports: [
+    TableComponent
   ],
   bootstrap: [AppComponent]
 })

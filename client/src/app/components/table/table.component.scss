@@ -1,0 +1,16 @@
+.table-container {
+  overflow: auto;
+}
+
+.table-container, table {
+  width: 100%;
+}
+
+.mat-mdc-table-sticky:first-child {
+  border-right: 1px solid rgba(197, 193, 196, 0.51);
+}
+
+.mat-mdc-table-sticky:last-child {
+  padding: 0.5em;
+  border-left: 1px solid rgba(197, 193, 196, 0.51);
+}

@@ -1,6 +1,27 @@
-<mat-list>
-  <mat-list-item *ngFor="let member of roster?.members">
-    <p matListItemLine>{{member.character.name}}</p>
-    <small matListItemLine>{{member.rank}}</small>
-  </mat-list-item>
-</mat-list>
+<form [formGroup]="form">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput formControlName="name" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Minimum level</mat-label>
+    <input matInput formControlName="minimumLevel" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Class</mat-label>
+    <input matInput formControlName="playableClass" />
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Guild rank</mat-label>
+    <mat-select formControlName="rank">
+      <mat-option [value]="null">All</mat-option>
+      <mat-option *ngFor="let option of guildRanks" [value]="option.id">
+        {{option.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>
+<app-table
+  [columns]="columns"
+  [data]="tableData"
+></app-table>

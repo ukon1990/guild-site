@@ -10,6 +10,7 @@ export class BlizzardService<T> {
     private region: string,
     private api: string,
     private basePath: string,
+    private namespace?: string,
   ) {
     this.http = new HttpClientUtil();
   }
@@ -17,7 +18,7 @@ export class BlizzardService<T> {
   protected async get(path: string) {
     await BlizzardApiAuthService.getToken();
     const url = `${this.getBaseEndpoint()}/${this.basePath}/${
-      path}?namespace=profile-eu&locale=en_GB&access_token=${BlizzardApiAuthService.token}`;
+      path}?namespace=${this.getNameSpace()}&locale=en_GB&access_token=${BlizzardApiAuthService.token}`;
     return new Promise<T>((resolve, reject) => {
       this.http.get<T>(url).then(({body}) => resolve(body)).catch(reject);
     });
@@ -39,5 +40,10 @@ export class BlizzardService<T> {
         resolve(body);
       }).catch(reject);
     });
+  }
+
+  private getNameSpace() {
+    console.log('API is', this.api);
+    return `${this.namespace || (this.api === 'profile' ? 'profile' : 'static')}-${this.region}`;
   }
 }
